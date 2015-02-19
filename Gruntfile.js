@@ -53,7 +53,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          "www/views/index.html": ["assets/views/*.jade"]
+          "www/index.html": ["assets/views/*.jade"]
         }
       }
     },
