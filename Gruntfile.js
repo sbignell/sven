@@ -46,7 +46,8 @@ module.exports = function(grunt) {
       },
       backboneapp: {
         files: [
-          { expand: true, cwd: 'assets/views/', src: ['index.min.js'], dest: 'www/' },
+          { expand: true, cwd: 'assets/views/', src: ['favicon.ico'], dest: 'www/' },
+          { expand: true, cwd: 'assets/views/', src: ['index.min.js'], dest: 'www/scripts/' },
           { expand: true, cwd: 'assets/views/about/', src: ['*.jade'], dest: 'www/views/about/' },
           { expand: true, cwd: 'assets/views/account/', src: ['*.jade'], dest: 'www/views/account/' },
           { expand: true, cwd: 'assets/views/account/settings/', src: ['*.jade'], dest: 'www/views/account/settings/' },
@@ -88,7 +89,7 @@ module.exports = function(grunt) {
       },
       layouts: {
         files: {
-          'assets/layouts/core.min.js': [
+          'www/scripts/core.min.js': [
             'assets/vendor/jquery/jquery.js',
             'assets/vendor/jquery.cookie/jquery.cookie.js',
             'assets/vendor/underscore/underscore.js',
@@ -108,12 +109,12 @@ module.exports = function(grunt) {
             'assets/vendor/momentjs/moment.js',
             'assets/layouts/core.js'
           ],
-          'assets/layouts/ie-sucks.min.js': [
+          'www/scripts/ie-sucks.min.js': [
             'assets/vendor/html5shiv/html5shiv.js',
             'assets/vendor/respond/respond.js',
             'assets/layouts/ie-sucks.js'
           ],
-          'assets/layouts/admin.min.js': ['assets/layouts/admin.js']
+          'www/scripts/admin.min.js': ['assets/layouts/admin.js']
         }
       },
       views: {
@@ -147,12 +148,13 @@ module.exports = function(grunt) {
       },
       layouts: {
         files: {
-          'assets/layouts/core.min.css': [
+          'www/styles/core.min.css': [
             'assets/less/bootstrap-build.less',
             'assets/less/font-awesome-build.less',
             'assets/layouts/core.less'
           ],
-          'assets/layouts/admin.min.css': ['assets/layouts/admin.less']
+          'www/styles/admin.min.css': ['assets/layouts/admin.less'],
+          'www/styles/index.min.css': ['assets/views/index.less']
         }
       },
       views: {
