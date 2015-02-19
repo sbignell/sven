@@ -47,12 +47,12 @@ module.exports = function(grunt) {
       backboneapp: {
         files: [
           {
-            expand: true, cwd: 'assets/views/',
-            src: ['index.min.js'], dest: 'www/'
+            expand: true, 
+            src: ['assets/views/index.min.js'], dest: 'www/'
           },
           {
-            expand: true, cwd: 'assets/views/about/',
-            src: ['*.jade'], dest: 'www/views/about/'
+            expand: true,
+            src: ['assets/views/**/*.jade'], dest: 'www/views/'
           },
           {
             expand: true, cwd: 'assets/views/account/**/',
