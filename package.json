@@ -13,6 +13,7 @@
     "grunt-contrib-less": "^1.0.0",
     "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-jade": "^0.14.0",
     "grunt-newer": "^1.1.0",
     "grunt-nodemon": "^0.4.0",
     "html5shiv": "^3.7.2",
