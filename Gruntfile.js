@@ -43,6 +43,14 @@ module.exports = function(grunt) {
             src: ['underscore.js'], dest: 'assets/vendor/underscore/'
           }
         ]
+      },
+      backboneapp: {
+        files: [
+          {
+            cwd: 'assets/views',
+            src: ['index.js'], dest: 'www'
+          },
+        ]
       }
     },
     jade: {
@@ -200,6 +208,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-newer');
 
   //grunt.registerTask('default', ['copy:vendor', 'newer:uglify', 'newer:less', 'concurrent']);
-  grunt.registerTask('build', ['copy:vendor', 'jade', 'uglify', 'less']);
+  grunt.registerTask('build', ['copy:vendor', 'jade', 'uglify', 'less', 'copy:backboneapp']);
   grunt.registerTask('lint', ['jshint']);
 };
