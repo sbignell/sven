@@ -55,8 +55,20 @@ module.exports = function(grunt) {
             src: ['*.jade'], dest: 'www/views/about/'
           },
           {
+            expand: true, cwd: 'assets/views/admin/',
+            src: ['*.jade'], dest: 'www/views/admin/'
+          },
+          {
             expand: true, cwd: 'assets/views/contact/',
             src: ['*.jade'], dest: 'www/views/contact/'
+          },
+          {
+            expand: true, cwd: 'assets/views/http/',
+            src: ['*.jade'], dest: 'www/views/http/'
+          },
+          {
+            expand: true, cwd: 'assets/views/login/',
+            src: ['*.jade'], dest: 'www/views/login/'
           },
           {
             expand: true, cwd: 'assets/views/signup/',
