@@ -47,7 +47,7 @@ module.exports = function(grunt) {
       backboneapp: {
         files: [
           {
-            cwd: 'assets/views/',
+            expand: true, cwd: 'assets/views/',
             src: ['index.js'], dest: 'www/'
           },
         ]
