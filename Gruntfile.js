@@ -46,38 +46,24 @@ module.exports = function(grunt) {
       },
       backboneapp: {
         files: [
-          {
-            expand: true, 
-            src: ['assets/views/index.min.js'], dest: 'www/'
-          },
-          {
-            expand: true,
-            src: ['assets/views/**/*.jade'], dest: 'www/views/'
-          },
-          {
-            expand: true,
-            src: ['assets/views/account/**/*.jade'], dest: 'www/views/account/**/'
-          },
-          {
-            expand: true, cwd: 'assets/views/admin/**/',
-            src: ['*.jade'], dest: 'www/views/admin/**/'
-          },
-          {
-            expand: true, cwd: 'assets/views/contact/',
-            src: ['*.jade'], dest: 'www/views/contact/'
-          },
-          {
-            expand: true, cwd: 'assets/views/http/',
-            src: ['*.jade'], dest: 'www/views/http/'
-          },
-          {
-            expand: true, cwd: 'assets/views/login/**/',
-            src: ['*.jade'], dest: 'www/views/login/**/'
-          },
-          {
-            expand: true, cwd: 'assets/views/signup/',
-            src: ['*.jade'], dest: 'www/views/signup/'
-          },
+          { expand: true, src: ['assets/views/index.min.js'], dest: 'www/' },
+          { expand: true, src: ['assets/views/about/*.jade'], dest: 'www/views/about/' },
+          { expand: true, src: ['assets/views/account/*.jade'], dest: 'www/views/account/' },
+          { expand: true, src: ['assets/views/account/settings/*.jade'], dest: 'www/views/account/settings/' },
+          { expand: true, src: ['assets/views/account/verification/*.jade'], dest: 'www/views/account/verification/' },
+          { expand: true, src: ['assets/views/admin/*.jade'], dest: 'www/views/admin/' },
+          { expand: true, src: ['assets/views/admin/accounts/*.jade'], dest: 'www/views/admin/accounts/' },
+          { expand: true, src: ['assets/views/admin/admin-groups/*.jade'], dest: 'www/views/admin/admin-groups/' },
+          { expand: true, src: ['assets/views/admin/administrators/*.jade'], dest: 'www/views/admin/administrators/' },
+          { expand: true, src: ['assets/views/admin/categories/*.jade'], dest: 'www/views/admin/categories/' },
+          { expand: true, src: ['assets/views/admin/statuses/*.jade'], dest: 'www/views/admin/statuses/' },
+          { expand: true, src: ['assets/views/admin/users/*.jade'], dest: 'www/views/admin/users/' },
+          { expand: true, src: ['assets/views/contact/*.jade'], dest: 'www/views/contact/' },
+          { expand: true, src: ['assets/views/http/*.jade'], dest: 'www/views/http/' },
+          { expand: true, src: ['assets/views/login/*.jade'], dest: 'www/views/login/' },
+          { expand: true, src: ['assets/views/login/forgot/*.jade'], dest: 'www/views/login/forgot/' },
+          { expand: true, src: ['assets/views/login/reset/*.jade'], dest: 'www/views/login/reset/' },
+          { expand: true, src: ['assets/views/signup/*.jade'], dest: 'www/views/signup/' },
         ]
       }
     },
