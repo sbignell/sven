@@ -48,7 +48,19 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true, cwd: 'assets/views/',
-            src: ['index.js'], dest: 'www/'
+            src: ['index.min.js'], dest: 'www/'
+          },
+          {
+            expand: true, cwd: 'assets/views/about/',
+            src: ['*.jade'], dest: 'www/views/about/'
+          },
+          {
+            expand: true, cwd: 'assets/views/contact/',
+            src: ['*.jade'], dest: 'www/views/contact/'
+          },
+          {
+            expand: true, cwd: 'assets/views/signup/',
+            src: ['*.jade'], dest: 'www/views/signup/'
           },
         ]
       }
@@ -63,30 +75,6 @@ module.exports = function(grunt) {
         files: {
           "www/index.html": ["assets/views/*.jade"]
         }
-      }
-    },
-    watch: {
-      assetsJS: {
-         files: [
-          'assets/layouts/**/*.js', '!assets/layouts/**/*.min.js',
-          'assets/views/**/*.js', '!assets/views/**/*.min.js'
-         ],
-         tasks: ['newer:uglify', 'newer:jshint:assets']
-      },
-      assetsLess: {
-         files: [
-          'assets/layouts/**/*.less',
-          'assets/views/**/*.less',
-          'assets/less/**/*.less'
-         ],
-         tasks: ['newer:less']
-      },
-      layoutLess: {
-        files: [
-          'assets/layouts/**/*.less',
-          'assets/less/**/*.less'
-        ],
-        tasks: ['less:layouts']
       }
     },
     uglify: {
@@ -170,7 +158,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'assets/views/',
           src: ['**/*.less'],
-          dest: 'assets/views/',
+          dest: 'www/views/',
           ext: '.min.css'
         }]
       }
@@ -180,14 +168,14 @@ module.exports = function(grunt) {
         src: [
           'assets/layouts/**/*.min.js',
           'assets/layouts/**/*.min.js.map',
-          'assets/views/**/*.min.js',
-          'assets/views/**/*.min.js.map'
+          'www/views/**/*.min.js',
+          'www/views/**/*.min.js.map'
         ]
       },
       css: {
         src: [
           'assets/layouts/**/*.min.css',
-          'assets/views/**/*.min.css'
+          'www/views/**/*.min.css'
         ]
       },
       vendor: {
