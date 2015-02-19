@@ -46,7 +46,7 @@ module.exports = function(grunt) {
       },
       backboneapp: {
         files: [
-          { expand: true, cwd: 'assets/views/', src: ['favicon.ico'], dest: 'www/' },
+          { expand: true, cwd: 'assets/', src: ['favicon.ico'], dest: 'www/' },
           { expand: true, cwd: 'assets/views/', src: ['index.min.js'], dest: 'www/scripts/' },
           { expand: true, cwd: 'assets/views/about/', src: ['*.jade'], dest: 'www/views/about/' },
           { expand: true, cwd: 'assets/views/account/', src: ['*.jade'], dest: 'www/views/account/' },
@@ -162,7 +162,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'assets/views/',
           src: ['**/*.less'],
-          dest: 'www/views/',
+          dest: 'assets/views/',
           ext: '.min.css'
         }]
       }
@@ -172,14 +172,14 @@ module.exports = function(grunt) {
         src: [
           'assets/layouts/**/*.min.js',
           'assets/layouts/**/*.min.js.map',
-          'www/views/**/*.min.js',
-          'www/views/**/*.min.js.map'
+          'www/scripts/**/*.min.js',
+          'www/scripts/**/*.min.js.map'
         ]
       },
       css: {
         src: [
           'assets/layouts/**/*.min.css',
-          'www/views/**/*.min.css'
+          'www/styles/**/*.min.css'
         ]
       },
       vendor: {
