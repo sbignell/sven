@@ -156,6 +156,7 @@ module.exports = function(grunt) {
             'assets/layouts/core.less'
           ],
           'www/styles/admin.min.css': ['assets/layouts/admin.less'],
+          'www/styles/public.min.css': ['assets/layouts/public.less'],
           'www/styles/index.min.css': ['assets/views/index.less']
         }
       },

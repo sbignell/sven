@@ -2,9 +2,10 @@ doctype html
 html
   head
     block head
-      title #{title}
+      title Simon is awake.
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='styles/core.min.css')
+    link(rel='stylesheet', href='styles/public.min.css')
     block neck
   body
     div.navbar.navbar-default.navbar-fixed-top
@@ -12,7 +13,7 @@ html
         div.navbar-header
           a.navbar-brand(href='/')
             img.navbar-logo(src='media/logo-symbol-64x64.png')
-            span.navbar-brand-label #{projectName}
+            span.navbar-brand-label Simon
           button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
             span.icon-bar
             span.icon-bar
@@ -24,14 +25,9 @@ html
             li: a(href='/signup/') Sign Up
             li: a(href='/contact/') Contact
           ul.nav.navbar-nav.navbar-right
-            if user && user.username
-              li: a(href='#{user.defaultReturnUrl}')
-                i.fa.fa-user
-                |  #{user.username}
-            else
-              li: a(href='/login/')
-                i.fa.fa-user
-                |  Sign In
+            li: a(href='/login/')
+              i.fa.fa-user
+              |  Sign In
 
     div.page
       div.container
@@ -40,7 +36,6 @@ html
     div.footer
       div.container
         span.copyright.pull-right
-          |&#169; #{copyrightYear} #{copyrightName}
         ul.links
           li: a(href='/') Home
           li: a(href='/contact/') Contact
