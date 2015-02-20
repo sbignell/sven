@@ -4,14 +4,14 @@ html
     block head
       title #{title}
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='/styles/core.min.css')
+    link(rel='stylesheet', href='styles/core.min.css')
     block neck
   body
     div.navbar.navbar-default.navbar-fixed-top
       div.container
         div.navbar-header
           a.navbar-brand(href='/')
-            img.navbar-logo(src='/media/logo-symbol-64x64.png')
+            img.navbar-logo(src='media/logo-symbol-64x64.png')
             span.navbar-brand-label #{projectName}
           button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
             span.icon-bar
@@ -47,10 +47,10 @@ html
         div.clearfix
 
     div.ajax-spinner
-      img(src='/media/ajax-pulse.gif')
+      img(src='media/ajax-pulse.gif')
 
     //if lte IE 9
-      script(src='/scripts/ie-sucks.min.js')
-    script(src='/scripts/core.min.js')
+      script(src='scripts/ie-sucks.min.js')
+    script(src='scripts/core.min.js')
 
     block feet
