@@ -250,8 +250,9 @@
       '': 'default',
       'q/:params': 'query',
       '#about': 'about',
-      'about': 'about2',
-      'about/': 'about3'
+      '#contact': 'contact',
+      '#signup': 'signup',
+      '#login': 'login'
     },
     initialize: function() {
       app.mainView = new app.MainView();
@@ -267,17 +268,17 @@
       app.resultsView.collection.fetch({ data: params, reset: true });
       app.firstLoad = false;
     },
-    about: function(e) {
-      e.preventDefault();
+    about: function() {
       console.log('router: about');
     },
-    about2: function(e) {
-      e.preventDefault();
-      console.log('router: about2');
+    contact: function() {
+      console.log('router: contact');
     },
-    about3: function(e) {
-      e.preventDefault();
-      console.log('router: about3');
+    signup: function() {
+      console.log('router: signup');
+    },
+    login: function() {
+      console.log('router: login');
     }
   });
 
