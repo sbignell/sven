@@ -49,7 +49,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'assets/', src: ['media/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/vendor/font-awesome', src: ['fonts/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/', src: ['favicon.ico'], dest: 'www/' },
-          { expand: true, cwd: 'assets/views/', src: ['index.min.js'], dest: 'www/scripts/' },
+          { expand: true, cwd: 'assets/views/', src: ['index.min.js*'], dest: 'www/scripts/' },
           { expand: true, cwd: 'assets/views/about/', src: ['*.jade'], dest: 'www/views/about/' },
           { expand: true, cwd: 'assets/views/account/', src: ['*.jade'], dest: 'www/views/account/' },
           { expand: true, cwd: 'assets/views/account/settings/', src: ['*.jade'], dest: 'www/views/account/settings/' },
