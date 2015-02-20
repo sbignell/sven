@@ -267,13 +267,16 @@
       app.resultsView.collection.fetch({ data: params, reset: true });
       app.firstLoad = false;
     },
-    about: function() {
+    about: function(e) {
+      e.preventDefault();
       console.log('router: about');
     },
-    about2: function() {
+    about2: function(e) {
+      e.preventDefault();
       console.log('router: about2');
     },
-    about3: function() {
+    about3: function(e) {
+      e.preventDefault();
       console.log('router: about3');
     }
   });
