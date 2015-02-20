@@ -247,7 +247,8 @@
   });
 
   app.MainView = Backbone.View.extend({
-    el: '.page .container',
+    el: 'body',
+    //el: '.page .container',
     initialize: function() {
       app.mainView = this;
       //this.results = JSON.parse( unescape($('#data-results').html()) );
