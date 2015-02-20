@@ -236,12 +236,12 @@
     el: '.page .container',
     initialize: function() {
       app.mainView = this;
-      this.results = JSON.parse( unescape($('#data-results').html()) );
+      //this.results = JSON.parse( unescape($('#data-results').html()) );
 
-      app.headerView = new app.HeaderView();
-      app.resultsView = new app.ResultsView();
-      app.filterView = new app.FilterView();
-      app.pagingView = new app.PagingView();
+      //app.headerView = new app.HeaderView();
+      //app.resultsView = new app.ResultsView();
+      //app.filterView = new app.FilterView();
+      //app.pagingView = new app.PagingView();
     }
   });
 
