@@ -5,6 +5,21 @@
 
   app = app || {};
 
+  app.Project = Backbone.Model.extend({
+    idAttribute: '_id',
+    defaults: {
+      _id: undefined,
+      name: '',
+      slogan: '',
+      company: '',
+      companySlogan: '',
+      copyrightYear: '',
+    },
+    url: function() {
+      return '/admin/accounts/'+ (this.isNew() ? '' : this.id +'/');
+    }
+  });
+
   app.Record = Backbone.Model.extend({
     idAttribute: '_id',
     defaults: {
@@ -233,7 +248,8 @@
   app.Router = Backbone.Router.extend({
     routes: {
       '': 'default',
-      'q/:params': 'query'
+      'q/:params': 'query',
+      'about/': 'about'
     },
     initialize: function() {
       app.mainView = new app.MainView();
@@ -248,6 +264,9 @@
     query: function(params) {
       app.resultsView.collection.fetch({ data: params, reset: true });
       app.firstLoad = false;
+    },
+    about: function() {
+      console.log('router: about');
     }
   });
 
