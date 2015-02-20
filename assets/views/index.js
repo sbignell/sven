@@ -249,7 +249,7 @@
     routes: {
       '': 'default',
       'q/:params': 'query',
-      '/about/': 'about',
+      '#about': 'about',
       'about': 'about2',
       'about/': 'about3'
     },
