@@ -49,7 +49,6 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'assets/', src: ['media/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/vendor/font-awesome', src: ['fonts/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/', src: ['favicon.ico'], dest: 'www/' },
-          { expand: true, cwd: 'assets/views/', src: ['index.min.js*'], dest: 'www/scripts/' },
           { expand: true, cwd: 'assets/views/about/', src: ['*.jade'], dest: 'www/views/about/' },
           { expand: true, cwd: 'assets/views/account/', src: ['*.jade'], dest: 'www/views/account/' },
           { expand: true, cwd: 'assets/views/account/settings/', src: ['*.jade'], dest: 'www/views/account/settings/' },
@@ -116,7 +115,9 @@ module.exports = function(grunt) {
             'assets/layouts/ie-sucks.js'
           ],
           'www/scripts/admin.min.js': ['assets/layouts/admin.js'],
-          'www/scripts/account.min.js': ['assets/layouts/account.js']
+          'www/scripts/account.min.js': ['assets/layouts/account.js'],
+          'www/scripts/public.min.js': ['assets/layouts/public.js'],
+          'www/scripts/index.min.js': ['assets/views/index.js']
         }
       },
       views: {
@@ -150,12 +151,12 @@ module.exports = function(grunt) {
       },
       layouts: {
         files: {
-          'www/styles/core.min.css': [
+          'www/styles/vendor.min.css': [
             'assets/less/bootstrap-build.less',
-            'assets/less/font-awesome-build.less',
-            'assets/layouts/core.less'
+            'assets/less/font-awesome-build.less'
           ],
           'www/styles/admin.min.css': ['assets/layouts/admin.less'],
+          'www/styles/account.min.css': ['assets/layouts/account.less'],
           'www/styles/public.min.css': ['assets/layouts/public.less'],
           'www/styles/index.min.css': ['assets/views/index.less']
         }
