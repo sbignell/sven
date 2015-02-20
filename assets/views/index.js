@@ -69,6 +69,18 @@
     }
   });
 
+
+  app.PublicMenuView = Backbone.View.extend({
+    el: '#public-menu', 
+    events: {
+      'click #about': 'processAbout'
+    },
+    processAbout: function(e){
+      e.preventDefault();
+      app.router.navigate('about', {trigger: true});
+    }
+  }); 
+
   app.HeaderView = Backbone.View.extend({
     el: '#header',
     //template: _.template( $('#tmpl-header').html() ),
@@ -238,6 +250,7 @@
       app.mainView = this;
       //this.results = JSON.parse( unescape($('#data-results').html()) );
 
+      app.publicMenuView = new app.PublicMenuView();
       //app.headerView = new app.HeaderView();
       //app.resultsView = new app.ResultsView();
       //app.filterView = new app.FilterView();
