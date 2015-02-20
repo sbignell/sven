@@ -78,7 +78,7 @@
     processAbout: function(e){
       e.preventDefault();
       console.log('view: #about clicked');
-      Backbone.history.navigate('#about', {trigger: true});
+      Backbone.history.navigate('about', {trigger: true});
       //app.router.navigate('#about', {trigger: true});
     }
   }); 
