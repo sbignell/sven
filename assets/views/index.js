@@ -249,7 +249,8 @@
     routes: {
       '': 'default',
       'q/:params': 'query',
-      'about/': 'about'
+      '/about/': 'about',
+      'about': 'about2'
     },
     initialize: function() {
       app.mainView = new app.MainView();
@@ -267,6 +268,9 @@
     },
     about: function() {
       console.log('router: about');
+    },
+    about2: function() {
+      console.log('router: about2');
     }
   });
 
