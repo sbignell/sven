@@ -250,7 +250,8 @@
       '': 'default',
       'q/:params': 'query',
       '/about/': 'about',
-      'about': 'about2'
+      'about': 'about2',
+      'about/': 'about3'
     },
     initialize: function() {
       app.mainView = new app.MainView();
@@ -271,6 +272,9 @@
     },
     about2: function() {
       console.log('router: about2');
+    },
+    about3: function() {
+      console.log('router: about3');
     }
   });
 
