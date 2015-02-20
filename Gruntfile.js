@@ -91,7 +91,7 @@ module.exports = function(grunt) {
       },
       layouts: {
         files: {
-          'www/scripts/core.min.js': [
+          'www/scripts/vendor.min.js': [
             'assets/vendor/jquery/jquery.js',
             'assets/vendor/jquery.cookie/jquery.cookie.js',
             'assets/vendor/underscore/underscore.js',
@@ -108,15 +108,15 @@ module.exports = function(grunt) {
             'assets/vendor/bootstrap/js/scrollspy.js',
             'assets/vendor/bootstrap/js/tab.js',
             'assets/vendor/bootstrap/js/transition.js',
-            'assets/vendor/momentjs/moment.js',
-            'assets/layouts/core.js'
+            'assets/vendor/momentjs/moment.js'
           ],
           'www/scripts/ie-sucks.min.js': [
             'assets/vendor/html5shiv/html5shiv.js',
             'assets/vendor/respond/respond.js',
             'assets/layouts/ie-sucks.js'
           ],
-          'www/scripts/admin.min.js': ['assets/layouts/admin.js']
+          'www/scripts/admin.min.js': ['assets/layouts/admin.js'],
+          'www/scripts/account.min.js': ['assets/layouts/account.js']
         }
       },
       views: {
