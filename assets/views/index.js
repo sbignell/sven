@@ -71,7 +71,7 @@
 
   app.HeaderView = Backbone.View.extend({
     el: '#header',
-    template: _.template( $('#tmpl-header').html() ),
+    //template: _.template( $('#tmpl-header').html() ),
     events: {
       'submit form': 'preventSubmit',
       'keypress input[type="text"]': 'addNewOnEnter',
@@ -117,7 +117,7 @@
 
   app.ResultsView = Backbone.View.extend({
     el: '#results-table',
-    template: _.template( $('#tmpl-results-table').html() ),
+    //template: _.template( $('#tmpl-results-table').html() ),
     initialize: function() {
       this.collection = new app.RecordCollection( app.mainView.results.data );
       this.listenTo(this.collection, 'reset', this.render);
@@ -141,7 +141,7 @@
 
   app.ResultsRowView = Backbone.View.extend({
     tagName: 'tr',
-    template: _.template( $('#tmpl-results-row').html() ),
+    //template: _.template( $('#tmpl-results-row').html() ),
     events: {
       'click .btn-details': 'viewDetails'
     },
@@ -165,7 +165,7 @@
 
   app.FilterView = Backbone.View.extend({
     el: '#filters',
-    template: _.template( $('#tmpl-filters').html() ),
+    //template: _.template( $('#tmpl-filters').html() ),
     events: {
       'submit form': 'preventSubmit',
       'keypress input[type="text"]': 'filterOnEnter',
@@ -200,7 +200,7 @@
 
   app.PagingView = Backbone.View.extend({
     el: '#results-paging',
-    template: _.template( $('#tmpl-results-paging').html() ),
+    //template: _.template( $('#tmpl-results-paging').html() ),
     events: {
       'click .btn-page': 'goToPage'
     },
