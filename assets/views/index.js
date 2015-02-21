@@ -79,12 +79,31 @@
       'click #signup': 'processSignup',
       'click #login': 'processLogin'
     },
+    processHome: function(e){
+      e.preventDefault();
+      console.log('view: #home clicked');
+      Backbone.history.navigate('#home', {trigger: true});
+    },
     processAbout: function(e){
       e.preventDefault();
       console.log('view: #about clicked');
-      //Backbone.history.navigate('about', {trigger: true});
-      app.router.navigate('#about', {trigger: true});
-    }
+      Backbone.history.navigate('#about', {trigger: true});
+    },
+    processContact: function(e){
+      e.preventDefault();
+      console.log('view: #contact clicked');
+      Backbone.history.navigate('#contact', {trigger: true});
+    },
+    processSignup: function(e){
+      e.preventDefault();
+      console.log('view: #signup clicked');
+      Backbone.history.navigate('#signup', {trigger: true});
+    },
+    processLogin: function(e){
+      e.preventDefault();
+      console.log('view: #login clicked');
+      Backbone.history.navigate('#login', {trigger: true});
+    },
   }); 
 
   app.HeaderView = Backbone.View.extend({
@@ -269,6 +288,7 @@
     routes: {
       '': 'default',
       'q/:params': 'query',
+      '#home': 'home',
       '#about': 'about',
       '#contact': 'contact',
       '#signup': 'signup',
@@ -287,6 +307,9 @@
     query: function(params) {
       app.resultsView.collection.fetch({ data: params, reset: true });
       app.firstLoad = false;
+    },
+    home: function() {
+      console.log('router: home');
     },
     about: function() {
       console.log('router: about');
