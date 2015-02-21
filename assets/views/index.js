@@ -82,12 +82,12 @@
     processHome: function(e){
       e.preventDefault();
       console.log('view: #home clicked');
-      Backbone.history.navigate('#home', {trigger: true});
+      Backbone.history.navigate('home', {trigger: true});
     },
     processAbout: function(e){
       e.preventDefault();
       console.log('view: #about clicked');
-      Backbone.history.navigate('#about', {trigger: true});
+      Backbone.history.navigate('about', {trigger: true});
     },
     processContact: function(e){
       e.preventDefault();
@@ -288,8 +288,8 @@
     routes: {
       '': 'default',
       'q/:params': 'query',
-      '#home': 'home',
-      '#about': 'about',
+      'home': 'home',
+      'about': 'about',
       '#contact': 'contact',
       '#signup': 'signup',
       '#login': 'login'
