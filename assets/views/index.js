@@ -83,23 +83,23 @@
       e.preventDefault();
       console.log('view: #gotoHome clicked');
       //Backbone.history.navigate('home', {trigger: true});
-      app.router.navigate('v/app.views.homeView', {trigger: true});
+      app.router.navigate('v/' + app.views.homeView, {trigger: true});
     },
     processAbout: function(e){
       e.preventDefault();
       console.log('view: #gotoAbout clicked');
       //Backbone.history.navigate('about', {trigger: true});
-      app.router.navigate('v/app.views.aboutView', {trigger: true});
+      app.router.navigate('v/' + app.views.aboutView, {trigger: true});
     },
     processContact: function(e){
       e.preventDefault();
       console.log('view: #gotoContact clicked');
-      Backbone.history.navigate('v/app.views.contactView', {trigger: true});
+      Backbone.history.navigate('v/' + app.views.contactView, {trigger: true});
     },
     processSignup: function(e){
       e.preventDefault();
       console.log('view: #gotoSignup clicked');
-      Backbone.history.navigate('v/app.views.signupView', {trigger: true});
+      Backbone.history.navigate('v/' + app.views.signupView, {trigger: true});
     },
     processLogin: function(e){
       e.preventDefault();
