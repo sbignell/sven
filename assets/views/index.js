@@ -5,6 +5,16 @@
 
   app = app || {};
 
+  app.showView(view){
+    console.log('showView: ');
+    console.dir(view.el);
+    if(app.views.current != undefined){
+        $(app.views.current.el).hide();
+    }
+    app.views.current = view;
+    $(app.views.current.el).show();
+  }
+
   app.Project = Backbone.Model.extend({
     idAttribute: '_id',
     defaults: {
@@ -83,28 +93,33 @@
       e.preventDefault();
       console.log('view: #gotoHome clicked');
       //Backbone.history.navigate('home', {trigger: true});
-      app.router.navigate('v/' + app.views.homeView, {trigger: true});
+      //app.router.navigate('v/' + app.views.homeView, {trigger: true});
+      app.showView(app.views.homeView);
     },
     processAbout: function(e){
       e.preventDefault();
       console.log('view: #gotoAbout clicked');
       //Backbone.history.navigate('about', {trigger: true});
-      app.router.navigate('v/' + app.views.aboutView, {trigger: true});
+      //app.router.navigate('v/' + app.views.aboutView, {trigger: true});
+      app.showView(app.views.aboutView);
     },
     processContact: function(e){
       e.preventDefault();
       console.log('view: #gotoContact clicked');
-      Backbone.history.navigate('v/' + app.views.contactView, {trigger: true});
+      //Backbone.history.navigate('v/' + app.views.contactView, {trigger: true});
+      app.showView(app.views.contactView);
     },
     processSignup: function(e){
       e.preventDefault();
       console.log('view: #gotoSignup clicked');
-      Backbone.history.navigate('v/' + app.views.signupView, {trigger: true});
+      //Backbone.history.navigate('v/' + app.views.signupView, {trigger: true});
+      app.showView(app.views.signupView);
     },
     processLogin: function(e){
       e.preventDefault();
       console.log('view: gotoLogin clicked');
-      Backbone.history.navigate('#login', {trigger: true});
+      //Backbone.history.navigate('#login', {trigger: true});
+      app.showView(app.views.loginView);
     },
   }); 
 
@@ -364,14 +379,14 @@ app.SignupView = Backbone.View.extend({
       //this.home(); turn this on when we remove index.html
 
 
-      this.showView(app.views.homeView);
+      //app.showView(app.views.homeView);
 
       app.firstLoad = false;
     },
     query: function(params) {
       app.resultsView.collection.fetch({ data: params, reset: true });
       app.firstLoad = false;
-    },
+    }/*,
     showView: function(view){
       console.log('showView: ');
       console.dir(view.el);
@@ -380,7 +395,7 @@ app.SignupView = Backbone.View.extend({
       }
       app.views.current = view;
       $(app.views.current.el).show();
-    }
+    }*/
   });
 
   $(document).ready(function() {
