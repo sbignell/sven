@@ -82,12 +82,14 @@
     processHome: function(e){
       e.preventDefault();
       console.log('view: #gotoHome clicked');
-      Backbone.history.navigate('home', {trigger: true});
+      //Backbone.history.navigate('home', {trigger: true});
+      app.router.navigate('home', {trigger: true});
     },
     processAbout: function(e){
       e.preventDefault();
       console.log('view: #gotoAbout clicked');
-      Backbone.history.navigate('about', {trigger: true});
+      //Backbone.history.navigate('about', {trigger: true});
+      app.router.navigate('about', {trigger: true});
     },
     processContact: function(e){
       e.preventDefault();
@@ -335,9 +337,9 @@ app.SignupView = Backbone.View.extend({
       '': 'default',
       'q/:params': 'query',
       'home': 'showView(app.views.homeView)',
-      'about': 'this.showView(app.views.aboutView)',
-      'contact/': 'showView(app.views.contactView)',
-      'signup/': 'this.showView(app.views.signupView)',
+      'about': 'showView(app.views.aboutView)',
+      'contact': 'showView(app.views.contactView)',
+      'signup': 'showView(app.views.signupView)',
       'login': 'showView(app.views.loginView)'
     },
     initialize: function() {
