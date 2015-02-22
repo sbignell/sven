@@ -5,7 +5,7 @@
 
   app = app || {};
 
-  app.showView(view){
+  app.showView = function (view){
     console.log('showView: ');
     console.dir(view.el);
     if(app.views.current != undefined){
@@ -13,7 +13,7 @@
     }
     app.views.current = view;
     $(app.views.current.el).show();
-  }
+  };
 
   app.Project = Backbone.Model.extend({
     idAttribute: '_id',
