@@ -371,7 +371,8 @@ app.SignupView = Backbone.View.extend({
       app.firstLoad = false;
     },
     showView: function(view){
-      console.log('showView: ' + view.el);
+      console.log('showView: ');
+      console.dir(view.el);
       if(app.views.current != undefined){
           $(app.views.current.el).hide();
       }
