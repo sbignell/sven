@@ -107,7 +107,7 @@
   }); 
 
   app.HomeView = Backbone.View.extend({
-    el: '#content',
+    el: '#home',
     template: _.template(JST["assets/views/home/tmpl-home.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('homeView loaded.');
@@ -158,7 +158,7 @@
   });
 
 app.AboutView = Backbone.View.extend({
-    el: '#content',
+    el: '#about',
     template: _.template(JST["assets/views/about/tmpl-about.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('aboutView loaded.');
@@ -172,7 +172,7 @@ app.AboutView = Backbone.View.extend({
   });
 
 app.ContactView = Backbone.View.extend({
-    el: '#content',
+    el: '#contact',
     template: _.template(JST["assets/views/contact/tmpl-contact.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('contactView loaded.');
@@ -185,11 +185,11 @@ app.ContactView = Backbone.View.extend({
     }
   });
 
-app.SignupView = Backbone.View.extend({
-    el: '#content',
-    template: _.template(JST["assets/views/signup/tmpl-signup.html"]()), //We need to jade this and pass data
+app.LoginView = Backbone.View.extend({
+    el: '#login',
+    template: _.template(JST["assets/views/login/tmpl-login.html"]()), //We need to jade this and pass data
     initialize: function() {
-      console.log('signupView loaded.');
+      console.log('loginView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
       //this.render();
@@ -199,11 +199,11 @@ app.SignupView = Backbone.View.extend({
     }
   });
 
-app.LoginView = Backbone.View.extend({
-    el: '#content',
-    template: _.template(JST["assets/views/login/tmpl-login.html"]()), //We need to jade this and pass data
+app.SignupView = Backbone.View.extend({
+    el: '#signup',
+    template: _.template(JST["assets/views/signup/tmpl-signup.html"]()), //We need to jade this and pass data
     initialize: function() {
-      console.log('loginView loaded.');
+      console.log('signupView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
       //this.render();
