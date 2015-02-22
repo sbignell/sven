@@ -334,11 +334,11 @@ app.SignupView = Backbone.View.extend({
     routes: {
       '': 'default',
       'q/:params': 'query',
-      'home': 'showView("home")',
-      'about': 'showView("about")',
-      'contact': 'contact',
-      'signup': 'signup',
-      'login': 'login'
+      'home': 'showView("app.views.homeView")',
+      'about': 'showView("app.views.aboutView")',
+      'contact': 'showView("app.views.contactView")',
+      'signup': 'showView("app.views.signupView")',
+      'login': 'showView("app.views.loginView")'
     },
     initialize: function() {
 
@@ -367,40 +367,12 @@ app.SignupView = Backbone.View.extend({
       app.firstLoad = false;
     },
     showView: function(view){
-        if(app.views.current != undefined){
-            $(app.views.current.el).hide();
-        }
-        app.views.current = view;
-        $(app.views.current.el).show();
-    },
-    home: function() {
-      console.log('router: home');
-      currentView.remove();
-
-      $('#content').html()
-
-      currentView = app.homeView; 
-    },
-    about: function() {
-      console.log('router: about');
-      app.contentView.template = _.template(JST["assets/views/index/tmpl-about.html"]());
-
-      currentView = app.aboutView;
-    },
-    contact: function() {
-      console.log('router: contact');
-
-      currentView = app.contactView;
-    },
-    signup: function() {
-      console.log('router: signup');
-
-      currentView = app.signupView;
-    },
-    login: function() {
-      console.log('router: login');
-
-      currentView = app.loginView;
+      console.log('showView: ' + view);
+      if(app.views.current != undefined){
+          $(app.views.current.el).hide();
+      }
+      app.views.current = view;
+      $(app.views.current.el).show();
     }
   });
 
