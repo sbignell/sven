@@ -88,7 +88,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          "www/index.html": ["assets/views/*.jade"],
+          "www/index.html": ["assets/views/index/*.jade"],
           "assets/views/index/tmpl-index.html": ["assets/views/index/*.jade"]
         }
       }
@@ -217,6 +217,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-newer');
 
   //grunt.registerTask('default', ['copy:vendor', 'newer:uglify', 'newer:less', 'concurrent']);
-  grunt.registerTask('build', ['copy:vendor', 'jst', 'jade', 'uglify', 'less', 'copy:backboneapp']);
+  grunt.registerTask('build', ['copy:vendor', 'jade', 'jst', 'uglify', 'less', 'copy:backboneapp']);
   grunt.registerTask('lint', ['jshint']);
 };
