@@ -106,11 +106,11 @@
     },
   }); 
 
-  app.ContentView = Backbone.View.extend({
+  app.HomeView = Backbone.View.extend({
     el: '#content',
-    template: _.template(JST["assets/views/index/tmpl-index.html"]()), //We need to jade this and pass data
+    template: _.template(JST["assets/views/home/tmpl-home.html"]()), //We need to jade this and pass data
     initialize: function() {
-      console.log('contentView loaded.');
+      console.log('homeView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
       //this.render();
@@ -155,6 +155,62 @@
         });
       }
     }*/
+  });
+
+app.AboutView = Backbone.View.extend({
+    el: '#content',
+    template: _.template(JST["assets/views/index/tmpl-about.html"]()), //We need to jade this and pass data
+    initialize: function() {
+      console.log('aboutView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      //this.render();
+    },
+    render: function() {
+      this.$el.html(this.template( 'hello' ));
+    }
+  });
+
+app.ContactView = Backbone.View.extend({
+    el: '#content',
+    template: _.template(JST["assets/views/index/tmpl-contact.html"]()), //We need to jade this and pass data
+    initialize: function() {
+      console.log('contactView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      //this.render();
+    },
+    render: function() {
+      this.$el.html(this.template( 'hello' ));
+    }
+  });
+
+app.SignupView = Backbone.View.extend({
+    el: '#content',
+    template: _.template(JST["assets/views/index/tmpl-signup.html"]()), //We need to jade this and pass data
+    initialize: function() {
+      console.log('signupView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      //this.render();
+    },
+    render: function() {
+      this.$el.html(this.template( 'hello' ));
+    }
+  });
+
+app.LoginView = Backbone.View.extend({
+    el: '#content',
+    template: _.template(JST["assets/views/index/tmpl-login.html"]()), //We need to jade this and pass data
+    initialize: function() {
+      console.log('loginView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      //this.render();
+    },
+    render: function() {
+      this.$el.html(this.template( 'hello' ));
+    }
   });
 
   app.ResultsView = Backbone.View.extend({
@@ -278,20 +334,31 @@
     routes: {
       '': 'default',
       'q/:params': 'query',
-      'home': 'home',
-      'about': 'about',
+      'home': 'showView("home")',
+      'about': 'showView("about")',
       'contact': 'contact',
       'signup': 'signup',
       'login': 'login'
     },
     initialize: function() {
-      app.headerView = new app.HeaderView();
-      app.contentView = new app.ContentView();
+
+      app.views = {};
+
+      app.views.headerView = new app.HeaderView();
+      app.views.homeView = new app.HomeView();
+      app.views.aboutView = new app.AboutView();
+      app.views.contactView = new app.ContactView();
+      app.views.signupView = new app.SignupView();
+      app.views.loginView = new app.LoginView();
+
+      this.showView(app.views.homeView);
     },
     default: function() {
       if (!app.firstLoad) {
         app.resultsView.collection.fetch({ reset: true });
       }
+
+      //this.home(); turn this on when we remove index.html
 
       app.firstLoad = false;
     },
@@ -299,22 +366,41 @@
       app.resultsView.collection.fetch({ data: params, reset: true });
       app.firstLoad = false;
     },
+    showView: function(view){
+        if(app.views.current != undefined){
+            $(app.views.current.el).hide();
+        }
+        app.views.current = view;
+        $(app.views.current.el).show();
+    },
     home: function() {
       console.log('router: home');
-      app.contentView.template = _.template(JST["assets/views/index/tmpl-index.html"]());
+      currentView.remove();
+
+      $('#content').html()
+
+      currentView = app.homeView; 
     },
     about: function() {
       console.log('router: about');
       app.contentView.template = _.template(JST["assets/views/index/tmpl-about.html"]());
+
+      currentView = app.aboutView;
     },
     contact: function() {
       console.log('router: contact');
+
+      currentView = app.contactView;
     },
     signup: function() {
       console.log('router: signup');
+
+      currentView = app.signupView;
     },
     login: function() {
       console.log('router: login');
+
+      currentView = app.loginView;
     }
   });
 
