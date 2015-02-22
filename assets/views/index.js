@@ -351,7 +351,7 @@ app.SignupView = Backbone.View.extend({
       app.views.signupView = new app.SignupView();
       app.views.loginView = new app.LoginView();
 
-      this.showView(app.views.homeView);
+      //this.showView(app.views.homeView);
 
     },
     default: function() {
