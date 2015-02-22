@@ -113,7 +113,7 @@
       console.log('homeView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
-      this.render();
+      //this.render();
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
@@ -164,7 +164,7 @@ app.AboutView = Backbone.View.extend({
       console.log('aboutView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
-      this.render();
+      //this.render();
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
@@ -341,7 +341,7 @@ app.SignupView = Backbone.View.extend({
       'login': 'showView(app.views.loginView)'
     },
     initialize: function() {
-
+      console.log('router: init');
       app.views = {};
 
       app.views.headerView = new app.HeaderView();
@@ -352,6 +352,7 @@ app.SignupView = Backbone.View.extend({
       app.views.loginView = new app.LoginView();
 
       this.showView(app.views.homeView);
+
     },
     default: function() {
       //if (!app.firstLoad) {
