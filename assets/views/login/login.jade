@@ -48,10 +48,10 @@ block body
   script(type='text/template', id='tmpl-login')
     form
       div.alert
-      div.form-group(class!='<%- errfor.username ? "has-error" : "" %>')
+      div.form-group
         label Username or Email:
         input.form-control(type='text', name='username', value!='<%= username %>')
-      div.form-group(class!='<%- errfor.password ? "has-error" : "" %>')
+      div.form-group
         label Password:
         input.form-control(type='password', name='password', value!='<%= password %>')
       div.form-actions

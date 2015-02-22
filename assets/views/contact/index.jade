@@ -24,13 +24,13 @@ block body
 
   script(type='text/template', id='tmpl-contact')
     form
-      div.form-group(class!='<%- errfor.name ? "has-error" : "" %>')
+      div.form-group
         label Your Name:
         input.form-control(type='text', name='name', value!='<%= name %>')
-      div.form-group(class!='<%- errfor.email ? "has-error" : "" %>')
+      div.form-group
         label Your Email:
         input.form-control(type='text', name='email', value!='<%= email %>')
-      div.form-group(class!='<%- errfor.message ? "has-error" : "" %>')
+      div.form-group
         label Message:
         textarea.form-control(name='message', rows='5') <%= message %>
       div.form-group
