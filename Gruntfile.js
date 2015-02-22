@@ -218,6 +218,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-newer');
 
   //grunt.registerTask('default', ['copy:vendor', 'newer:uglify', 'newer:less', 'concurrent']);
-  grunt.registerTask('build', ['copy:vendor', 'jade', 'jst', 'uglify', 'less', 'copy:backboneapp']);
+  grunt.registerTask('build', ['copy:vendor', 'jade', 'jst', 'uglify', 'less', 'copy:fred']);
   grunt.registerTask('lint', ['jshint']);
 };
