@@ -73,35 +73,35 @@
   app.HeaderView = Backbone.View.extend({
     el: '.navbar', 
     events: {
-      'click #home': 'processHome',
-      'click #about': 'processAbout',
-      'click #contact': 'processContact',
-      'click #signup': 'processSignup',
-      'click #login': 'processLogin'
+      'click #gotoHome': 'processHome',
+      'click #gotoAbout': 'processAbout',
+      'click #gotoContact': 'processContact',
+      'click #gotoSignup': 'processSignup',
+      'click #gotoLogin': 'processLogin'
     },
     processHome: function(e){
       e.preventDefault();
-      console.log('view: #home clicked');
+      console.log('view: #gotoHome clicked');
       Backbone.history.navigate('home', {trigger: true});
     },
     processAbout: function(e){
       e.preventDefault();
-      console.log('view: #about clicked');
+      console.log('view: #gotoAbout clicked');
       Backbone.history.navigate('about', {trigger: true});
     },
     processContact: function(e){
       e.preventDefault();
-      console.log('view: #contact clicked');
+      console.log('view: #gotoContact clicked');
       Backbone.history.navigate('contact', {trigger: true});
     },
     processSignup: function(e){
       e.preventDefault();
-      console.log('view: #signup clicked');
+      console.log('view: #gotoSignup clicked');
       Backbone.history.navigate('signup', {trigger: true});
     },
     processLogin: function(e){
       e.preventDefault();
-      console.log('view: login clicked');
+      console.log('view: gotoLogin clicked');
       Backbone.history.navigate('#login', {trigger: true});
     },
   }); 
