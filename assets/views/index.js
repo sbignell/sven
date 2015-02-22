@@ -181,7 +181,7 @@ app.AboutView = Backbone.View.extend({
       console.log('aboutView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
-      //this.render();
+      this.render();
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
@@ -376,26 +376,12 @@ app.SignupView = Backbone.View.extend({
         //app.resultsView.collection.fetch({ reset: true });
       //}
 
-      //this.home(); turn this on when we remove index.html
-
-
-      //app.showView(app.views.homeView);
-
       app.firstLoad = false;
     },
     query: function(params) {
       app.resultsView.collection.fetch({ data: params, reset: true });
       app.firstLoad = false;
-    }/*,
-    showView: function(view){
-      console.log('showView: ');
-      console.dir(view.el);
-      if(app.views.current != undefined){
-          $(app.views.current.el).hide();
-      }
-      app.views.current = view;
-      $(app.views.current.el).show();
-    }*/
+    }
   });
 
   $(document).ready(function() {
