@@ -108,6 +108,7 @@
 
   app.ContentView = Backbone.View.extend({
     el: '#content',
+    template: _.template(views["assets/views/index/tmpl-index.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('contentView loaded.');
       //this.model = new app.Record();

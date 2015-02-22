@@ -49,6 +49,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'assets/', src: ['media/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/vendor/font-awesome', src: ['fonts/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/', src: ['favicon.ico'], dest: 'www/' },
+          { expand: true, cwd: 'assets/views', src: ['templates.js'], dest: 'www/views/' },
           { expand: true, cwd: 'assets/views/about/', src: ['*.jade'], dest: 'www/views/about/' },
           { expand: true, cwd: 'assets/views/account/', src: ['*.jade'], dest: 'www/views/account/' },
           { expand: true, cwd: 'assets/views/account/settings/', src: ['*.jade'], dest: 'www/views/account/settings/' },
@@ -69,6 +70,16 @@ module.exports = function(grunt) {
         ]
       }
     },
+    jst: {
+      options: {
+        amd: true
+      },
+      compile: {
+        files: {
+          "assets/views/templates.js": ["assets/views/**/*.html"]
+        }
+      }
+    },
     jade: {
       compile: {
         options: {
@@ -77,7 +88,8 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          "www/index.html": ["assets/views/*.jade"]
+          "www/index.html": ["assets/views/*.jade"],
+          "assets/views/index/tmpl-index.html": ["assets/views/index/*.jade"]
         }
       }
     },
@@ -193,17 +205,18 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-jst');
+  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-newer');
 
   //grunt.registerTask('default', ['copy:vendor', 'newer:uglify', 'newer:less', 'concurrent']);
-  grunt.registerTask('build', ['copy:vendor', 'jade', 'uglify', 'less', 'copy:backboneapp']);
+  grunt.registerTask('build', ['copy:vendor', 'jst', 'jade', 'uglify', 'less', 'copy:backboneapp']);
   grunt.registerTask('lint', ['jshint']);
 };
