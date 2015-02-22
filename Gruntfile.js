@@ -44,7 +44,7 @@ module.exports = function(grunt) {
           }
         ]
       },
-      backboneapp: {
+      fred: {
         files: [
           { expand: true, cwd: 'assets/', src: ['media/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/vendor/font-awesome', src: ['fonts/*'], dest: 'www/' },
