@@ -71,9 +71,6 @@ module.exports = function(grunt) {
       }
     },
     jst: {
-      options: {
-        amd: true
-      },
       compile: {
         files: {
           "assets/views/templates.js": ["assets/views/**/*.html"]
