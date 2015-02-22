@@ -159,7 +159,7 @@
 
 app.AboutView = Backbone.View.extend({
     el: '#content',
-    template: _.template(JST["assets/views/index/tmpl-about.html"]()), //We need to jade this and pass data
+    template: _.template(JST["assets/views/about/tmpl-about.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('aboutView loaded.');
       //this.model = new app.Record();
@@ -173,7 +173,7 @@ app.AboutView = Backbone.View.extend({
 
 app.ContactView = Backbone.View.extend({
     el: '#content',
-    template: _.template(JST["assets/views/index/tmpl-contact.html"]()), //We need to jade this and pass data
+    template: _.template(JST["assets/views/contact/tmpl-contact.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('contactView loaded.');
       //this.model = new app.Record();
@@ -187,7 +187,7 @@ app.ContactView = Backbone.View.extend({
 
 app.SignupView = Backbone.View.extend({
     el: '#content',
-    template: _.template(JST["assets/views/index/tmpl-signup.html"]()), //We need to jade this and pass data
+    template: _.template(JST["assets/views/signup/tmpl-signup.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('signupView loaded.');
       //this.model = new app.Record();
@@ -201,7 +201,7 @@ app.SignupView = Backbone.View.extend({
 
 app.LoginView = Backbone.View.extend({
     el: '#content',
-    template: _.template(JST["assets/views/index/tmpl-login.html"]()), //We need to jade this and pass data
+    template: _.template(JST["assets/views/login/tmpl-login.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('loginView loaded.');
       //this.model = new app.Record();
