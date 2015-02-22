@@ -335,9 +335,9 @@ app.SignupView = Backbone.View.extend({
       '': 'default',
       'q/:params': 'query',
       'home': 'showView(app.views.homeView)',
-      'about': 'showView(app.views.aboutView)',
-      'contact': 'showView(app.views.contactView)',
-      'signup': 'showView(app.views.signupView)',
+      'about': 'this.showView(app.views.aboutView)',
+      'contact/': 'showView(app.views.contactView)',
+      'signup/': 'this.showView(app.views.signupView)',
       'login': 'showView(app.views.loginView)'
     },
     initialize: function() {
