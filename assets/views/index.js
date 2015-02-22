@@ -83,23 +83,23 @@
       e.preventDefault();
       console.log('view: #gotoHome clicked');
       //Backbone.history.navigate('home', {trigger: true});
-      app.router.navigate('home', {trigger: true});
+      app.router.navigate('v/app.views.homeView', {trigger: true});
     },
     processAbout: function(e){
       e.preventDefault();
       console.log('view: #gotoAbout clicked');
       //Backbone.history.navigate('about', {trigger: true});
-      app.router.navigate('about', {trigger: true});
+      app.router.navigate('v/app.views.aboutView', {trigger: true});
     },
     processContact: function(e){
       e.preventDefault();
       console.log('view: #gotoContact clicked');
-      Backbone.history.navigate('contact', {trigger: true});
+      Backbone.history.navigate('v/app.views.contactView', {trigger: true});
     },
     processSignup: function(e){
       e.preventDefault();
       console.log('view: #gotoSignup clicked');
-      Backbone.history.navigate('signup', {trigger: true});
+      Backbone.history.navigate('v/app.views.signupView', {trigger: true});
     },
     processLogin: function(e){
       e.preventDefault();
@@ -336,7 +336,7 @@ app.SignupView = Backbone.View.extend({
     routes: {
       '': 'default',
       'q/:params': 'query',
-      'home': 'showView(app.views.homeView)',
+      'v/:view': 'showView',
       'about': 'showView(app.views.aboutView)',
       'contact': 'showView(app.views.contactView)',
       'signup': 'showView(app.views.signupView)',
