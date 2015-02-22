@@ -130,7 +130,7 @@
       console.log('homeView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
-      //this.render();
+      this.render();
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
@@ -195,7 +195,7 @@ app.ContactView = Backbone.View.extend({
       console.log('contactView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
-      //this.render();
+      this.render();
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
@@ -209,7 +209,7 @@ app.LoginView = Backbone.View.extend({
       console.log('loginView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
-      //this.render();
+      this.render();
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
@@ -223,7 +223,7 @@ app.SignupView = Backbone.View.extend({
       console.log('signupView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
-      //this.render();
+      this.render();
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
