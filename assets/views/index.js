@@ -70,8 +70,8 @@
   });
 
 
-  app.PublicMenuView = Backbone.View.extend({
-    el: '#public-menu', 
+  app.HeaderView = Backbone.View.extend({
+    el: '.navbar', 
     events: {
       'click #home': 'processHome',
       'click #about': 'processAbout',
@@ -92,32 +92,33 @@
     processContact: function(e){
       e.preventDefault();
       console.log('view: #contact clicked');
-      Backbone.history.navigate('#contact', {trigger: true});
+      Backbone.history.navigate('contact', {trigger: true});
     },
     processSignup: function(e){
       e.preventDefault();
       console.log('view: #signup clicked');
-      Backbone.history.navigate('#signup', {trigger: true});
+      Backbone.history.navigate('signup', {trigger: true});
     },
     processLogin: function(e){
       e.preventDefault();
-      console.log('view: #login clicked');
+      console.log('view: login clicked');
       Backbone.history.navigate('#login', {trigger: true});
     },
   }); 
 
-  app.HeaderView = Backbone.View.extend({
-    el: '#header',
+  app.ContentView = Backbone.View.extend({
+    el: '#content',
+    initialize: function() {
+      console.log('contentView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      //this.render();
+    }//,
     //template: _.template( $('#tmpl-header').html() ),
-    events: {
+    /*events: {
       'submit form': 'preventSubmit',
       'keypress input[type="text"]': 'addNewOnEnter',
       'click .btn-add': 'addNew'
-    },
-    initialize: function() {
-      this.model = new app.Record();
-      this.listenTo(this.model, 'change', this.render);
-      this.render();
     },
     render: function() {
       this.$el.html(this.template( this.model.attributes ));
@@ -149,7 +150,7 @@
           }
         });
       }
-    }
+    }*/
   });
 
   app.ResultsView = Backbone.View.extend({
@@ -276,8 +277,9 @@
       app.mainView = this;
       //this.results = JSON.parse( unescape($('#data-results').html()) );
 
-      app.publicMenuView = new app.PublicMenuView();
-      //app.headerView = new app.HeaderView();
+      //app.publicMenuView = new app.PublicMenuView();
+      app.headerView = new app.HeaderView();
+      app.contentView = new app.ContentView();
       //app.resultsView = new app.ResultsView();
       //app.filterView = new app.FilterView();
       //app.pagingView = new app.PagingView();
@@ -290,12 +292,14 @@
       'q/:params': 'query',
       'home': 'home',
       'about': 'about',
-      '#contact': 'contact',
-      '#signup': 'signup',
-      '#login': 'login'
+      'contact': 'contact',
+      'signup': 'signup',
+      'login': 'login'
     },
     initialize: function() {
-      app.mainView = new app.MainView();
+      //app.mainView = new app.MainView();
+      app.headerView = new app.HeaderView();
+      app.contentView = new app.ContentView();
     },
     default: function() {
       if (!app.firstLoad) {
