@@ -114,6 +114,9 @@
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
       //this.render();
+    },
+    render: function() {
+      this.$el.html(this.template( 'hello' ));
     }//,
     //template: _.template( $('#tmpl-header').html() ),
     /*events: {
@@ -271,22 +274,6 @@
     }
   });
 
-  app.MainView = Backbone.View.extend({
-    //el: 'body',
-    el: '.page .container',
-    initialize: function() {
-      app.mainView = this;
-      //this.results = JSON.parse( unescape($('#data-results').html()) );
-
-      //app.publicMenuView = new app.PublicMenuView();
-      app.headerView = new app.HeaderView();
-      app.contentView = new app.ContentView();
-      //app.resultsView = new app.ResultsView();
-      //app.filterView = new app.FilterView();
-      //app.pagingView = new app.PagingView();
-    }
-  });
-
   app.Router = Backbone.Router.extend({
     routes: {
       '': 'default',
@@ -298,7 +285,6 @@
       'login': 'login'
     },
     initialize: function() {
-      //app.mainView = new app.MainView();
       app.headerView = new app.HeaderView();
       app.contentView = new app.ContentView();
     },
@@ -315,9 +301,11 @@
     },
     home: function() {
       console.log('router: home');
+      app.contentView.template = _.template(JST["assets/views/index/tmpl-index.html"]());
     },
     about: function() {
       console.log('router: about');
+      app.contentView.template = _.template(JST["assets/views/index/tmpl-about.html"]());
     },
     contact: function() {
       console.log('router: contact');
