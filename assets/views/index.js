@@ -113,7 +113,7 @@
       console.log('homeView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
-      //this.render();
+      this.render();
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
@@ -164,7 +164,7 @@ app.AboutView = Backbone.View.extend({
       console.log('aboutView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
-      //this.render();
+      this.render();
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
@@ -334,11 +334,11 @@ app.SignupView = Backbone.View.extend({
     routes: {
       '': 'default',
       'q/:params': 'query',
-      'home': 'showView("app.views.homeView")',
-      'about': 'showView("app.views.aboutView")',
-      'contact': 'showView("app.views.contactView")',
-      'signup': 'showView("app.views.signupView")',
-      'login': 'showView("app.views.loginView")'
+      'home': 'showView(app.views.homeView)',
+      'about': 'showView(app.views.aboutView)',
+      'contact': 'showView(app.views.contactView)',
+      'signup': 'showView(app.views.signupView)',
+      'login': 'showView(app.views.loginView)'
     },
     initialize: function() {
 
@@ -354,11 +354,14 @@ app.SignupView = Backbone.View.extend({
       this.showView(app.views.homeView);
     },
     default: function() {
-      if (!app.firstLoad) {
-        app.resultsView.collection.fetch({ reset: true });
-      }
+      //if (!app.firstLoad) {
+        //app.resultsView.collection.fetch({ reset: true });
+      //}
 
       //this.home(); turn this on when we remove index.html
+
+
+      this.showView(app.views.homeView);
 
       app.firstLoad = false;
     },
