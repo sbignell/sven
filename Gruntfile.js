@@ -89,7 +89,7 @@ module.exports = function(grunt) {
           "assets/views/home/tmpl-home.html": ["assets/views/home/*.jade"],
           "assets/views/about/tmpl-about.html": ["assets/views/about/*.jade"],
           "assets/views/contact/tmpl-contact.html": ["assets/views/contact/*.jade"],
-          "assets/views/signup/tmpl-signup.html": ["assets/views/signup/*.jade"],
+          "assets/views/signup/tmpl-signup.html": ["assets/views/signup/signup.jade"],
           "assets/views/login/tmpl-login.html": ["assets/views/login/login.jade"]
         }
       }
