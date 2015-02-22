@@ -4,12 +4,12 @@ block head
   title Contact Us
 
 block neck
-  link(rel='stylesheet', href='/views/contact/index.min.css?#{cacheBreaker}')
+  //link(rel='stylesheet', href='/views/contact/index.min.css?#{cacheBreaker}')
 
 block feet
-  script(src='/views/contact/index.min.js?#{cacheBreaker}')
+  //script(src='/views/contact/index.min.js?#{cacheBreaker}')
 
-block body
+block contact
   div.row
     div.col-sm-6
       div.page-header
@@ -24,30 +24,14 @@ block body
 
   script(type='text/template', id='tmpl-contact')
     form
-      div.alerts
-        |<% _.each(errors, function(err) { %>
-        div.alert.alert-danger.alert-dismissable
-          button.close(type='button', data-dismiss='alert') &times;
-          |<%- err %>
-        |<% }); %>
-        |<% if (success) { %>
-        div.alert.alert-info.alert-dismissable
-          button.close(type='button', data-dismiss='alert') &times;
-          | We have received your message. Thank you.
-        |<% } %>
-      |<% if (!success) { %>
-      div.form-group(class!='<%- errfor.name ? "has-error" : "" %>')
+      div.form-group
         label Your Name:
-        input.form-control(type='text', name='name', value!='<%= name %>')
-        span.help-block <%- errfor.name %>
-      div.form-group(class!='<%- errfor.email ? "has-error" : "" %>')
+        input.form-control(type='text', name='name')
+      div.form-group
         label Your Email:
-        input.form-control(type='text', name='email', value!='<%= email %>')
-        span.help-block <%- errfor.email %>
-      div.form-group(class!='<%- errfor.message ? "has-error" : "" %>')
+        input.form-control(type='text', name='email')
+      div.form-group
         label Message:
-        textarea.form-control(name='message', rows='5') <%= message %>
-        span.help-block <%- errfor.message %>
+        textarea.form-control(name='message', rows='5')
       div.form-group
         button.btn.btn-primary.btn-contact(type='button') Send Message
-      |<% } %>
