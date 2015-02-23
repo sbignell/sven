@@ -90,7 +90,7 @@
       'click #gotoLogin': 'processLogin'
     },
     initialize: function(){
-      //app.views.homeView = new app.HomeView();
+      
     },
     processHome: function(e){
       e.preventDefault();
@@ -137,7 +137,7 @@
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
-      return this;
+      //return this;
     }//,
     //template: _.template( $('#tmpl-header').html() ),
     /*events: {
@@ -388,6 +388,7 @@ app.SignupView = Backbone.View.extend({
     app.views = {};
 
     app.views.headerView = new app.HeaderView();
+    app.views.homeView = new app.HomeView();
     
     //app.views.aboutView = new app.AboutView();
     //app.views.contactView = new app.ContactView();
