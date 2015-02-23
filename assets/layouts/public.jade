@@ -22,17 +22,11 @@ html
             span.icon-bar
         div.navbar-collapse.my-navbar-collapse.collapse
           ul#public-menu.nav.navbar-nav
-            //li: a(href='#') Home
             li: a#gotoAbout(href='#') About
             li: a#gotoContact(href='#') Contact
-            li: a#gotoSignup(href='#') Sign Up
-          ul.nav.navbar-nav.navbar-right
-            li.pull-right: a#gotoLogin(href='#')
-              i.fa.fa-user
-              |  Sign In
-          div.dropdown
+          div.dropdown.pull-right
             button#signinupDropdown.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown" aria-expanded="true")
-              Sign In and Up
+              | Sign-In/Up
               span.caret
             ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="signinupDropdown")
               form
