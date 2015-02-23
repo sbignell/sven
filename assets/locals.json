@@ -1,6 +1,7 @@
 {
-    "project":{
-            "name":"Simon",
-            "company":"Progress Labs"
-        }
+	"project": {
+           "name": "Simon",
+           "company": "Progress Labs",
+           "companyURL": "http://www.progresslabs.io"
+        } 
 }
