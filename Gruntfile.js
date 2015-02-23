@@ -50,7 +50,6 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'assets/vendor/font-awesome', src: ['fonts/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/', src: ['favicon.ico'], dest: 'www/' },
           { expand: true, cwd: 'assets/views', src: ['templates.js'], dest: 'www/views/' },
-          //{ expand: true, cwd: 'assets/views/about/', src: ['*.jade'], dest: 'www/views/about/' },
           { expand: true, cwd: 'assets/views/account/', src: ['*.jade'], dest: 'www/views/account/' },
           { expand: true, cwd: 'assets/views/account/settings/', src: ['*.jade'], dest: 'www/views/account/settings/' },
           { expand: true, cwd: 'assets/views/account/verification/', src: ['*.jade'], dest: 'www/views/account/verification/' },
@@ -60,13 +59,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'assets/views/admin/administrators/', src: ['*.jade'], dest: 'www/views/admin/administrators/' },
           { expand: true, cwd: 'assets/views/admin/categories/', src: ['*.jade'], dest: 'www/views/admin/categories/' },
           { expand: true, cwd: 'assets/views/admin/statuses/', src: ['*.jade'], dest: 'www/views/admin/statuses/' },
-          { expand: true, cwd: 'assets/views/admin/users/', src: ['*.jade'], dest: 'www/views/admin/users/' },
-          //{ expand: true, cwd: 'assets/views/contact/', src: ['*.jade'], dest: 'www/views/contact/' },
-          //{ expand: true, cwd: 'assets/views/http/', src: ['*.jade'], dest: 'www/views/http/' },
-          //{ expand: true, cwd: 'assets/views/login/', src: ['*.jade'], dest: 'www/views/login/' },
-          { expand: true, cwd: 'assets/views/login/forgot/', src: ['*.jade'], dest: 'www/views/login/forgot/' },
-          { expand: true, cwd: 'assets/views/login/reset/', src: ['*.jade'], dest: 'www/views/login/reset/' },
-          { expand: true, cwd: 'assets/views/signup/', src: ['social.jade'], dest: 'www/views/signup/' },
+          { expand: true, cwd: 'assets/views/admin/users/', src: ['*.jade'], dest: 'www/views/admin/users/' }
         ]
       }
     },
@@ -82,9 +75,7 @@ module.exports = function(grunt) {
           "www/index.html": ["assets/layouts/public.jade"],
           "assets/views/home/tmpl-home.html": ["assets/views/home/*.jade"],
           "assets/views/about/tmpl-about.html": ["assets/views/about/*.jade"],
-          "assets/views/contact/tmpl-contact.html": ["assets/views/contact/*.jade"],
-          "assets/views/signup/tmpl-signup.html": ["assets/views/signup/signup.jade"],
-          "assets/views/login/tmpl-login.html": ["assets/views/login/login.jade"]
+          "assets/views/cellar/tmpl-cellar.html": ["assets/views/cellar/*.jade"]
         }
       }
     },

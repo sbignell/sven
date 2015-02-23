@@ -23,10 +23,10 @@ html
         div.navbar-collapse.my-navbar-collapse.collapse
           ul#public-menu.nav.navbar-nav
             li: a#gotoAbout(href='#') About
-            li: a#gotoContact(href='#') Contact
+            li: a#gotoCellar(href='#') Wine Cellar
           div.dropdown.pull-right
             button#signinupDropdown.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown" aria-expanded="true")
-              | Sign-In/Up
+              | Sign-In/Up 
               span.caret
             ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="signinupDropdown")
               form
@@ -44,12 +44,8 @@ html
           block home
         div#about
           block about
-        div#contact
-          block contact
-        div#login
-          block login
-        div#signup
-          block signup          
+        div#cellar
+          block cellar          
 
     div.footer
       div.container

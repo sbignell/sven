@@ -15,21 +15,6 @@
     $(app.views.current.el).show();
   };
 
-  app.Project = Backbone.Model.extend({
-    idAttribute: '_id',
-    defaults: {
-      _id: undefined,
-      name: '',
-      slogan: '',
-      company: '',
-      companySlogan: '',
-      copyrightYear: '',
-    },
-    url: function() {
-      return '/admin/accounts/'+ (this.isNew() ? '' : this.id +'/');
-    }
-  });
-
   app.Record = Backbone.Model.extend({
     idAttribute: '_id',
     defaults: {
@@ -85,9 +70,7 @@
     events: {
       'click #gotoHome': 'processHome',
       'click #gotoAbout': 'processAbout',
-      'click #gotoContact': 'processContact',
-      'click #gotoSignup': 'processSignup',
-      'click #gotoLogin': 'processLogin'
+      'click #gotoContact': 'processCellar'
     },
     initialize: function(){
       
@@ -102,21 +85,11 @@
       console.log('view: #gotoAbout clicked');
       app.showView(app.views.aboutView);
     },
-    processContact: function(e){
+    processCellar: function(e){
       e.preventDefault();
-      console.log('view: #gotoContact clicked');
-      app.showView(app.views.contactView);
-    },
-    processSignup: function(e){
-      e.preventDefault();
-      console.log('view: #gotoSignup clicked');
-      app.showView(app.views.signupView);
-    },
-    processLogin: function(e){
-      e.preventDefault();
-      console.log('view: gotoLogin clicked');
-      app.showView(app.views.loginView);
-    },
+      console.log('view: #gotoCellar clicked');
+      app.showView(app.views.cellarView);
+    }
   }); 
 
   app.HomeView = Backbone.View.extend({
@@ -149,41 +122,11 @@
     }
   });
 
-  app.ContactView = Backbone.View.extend({
-    el: '#contact',
-    template: _.template(JST["assets/views/contact/tmpl-contact.html"]()), //We need to jade this and pass data
+  app.CellarView = Backbone.View.extend({
+    el: '#cellar',
+    template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     initialize: function() {
-      console.log('contactView loaded.');
-      //this.model = new app.Record();
-      //this.listenTo(this.model, 'change', this.render);
-      this.render();
-    },
-    render: function() {
-      this.$el.html(this.template( 'hello' ));
-      return this;
-    }
-  });
-
-  app.LoginView = Backbone.View.extend({
-    el: '#login',
-    template: _.template(JST["assets/views/login/tmpl-login.html"]()), //We need to jade this and pass data
-    initialize: function() {
-      console.log('loginView loaded.');
-      //this.model = new app.Record();
-      //this.listenTo(this.model, 'change', this.render);
-      this.render();
-    },
-    render: function() {
-      this.$el.html(this.template( 'hello' ));
-      return this;
-    }
-  });
-
-  app.SignupView = Backbone.View.extend({
-    el: '#signup',
-    template: _.template(JST["assets/views/signup/tmpl-signup.html"]()), //We need to jade this and pass data
-    initialize: function() {
-      console.log('signupView loaded.');
+      console.log('cellarView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
       this.render();
@@ -344,9 +287,7 @@
     app.views.homeView = new app.HomeView();
     app.views.current = app.views.homeView;
     app.views.aboutView = new app.AboutView();
-    app.views.contactView = new app.ContactView();
-    app.views.signupView = new app.SignupView();
-    app.views.loginView = new app.LoginView();
+    app.views.cellarView = new app.CellarView();
     console.log('app loaded!');
   };
 
