@@ -95,33 +95,26 @@
     processHome: function(e){
       e.preventDefault();
       console.log('view: #gotoHome clicked');
-      //Backbone.history.navigate('home', {trigger: true});
-      //app.router.navigate('v/' + app.views.homeView, {trigger: true});
       app.showView(app.views.homeView);
     },
     processAbout: function(e){
       e.preventDefault();
       console.log('view: #gotoAbout clicked');
-      //Backbone.history.navigate('about', {trigger: true});
-      //app.router.navigate('v/' + app.views.aboutView, {trigger: true});
       app.showView(app.views.aboutView);
     },
     processContact: function(e){
       e.preventDefault();
       console.log('view: #gotoContact clicked');
-      //Backbone.history.navigate('v/' + app.views.contactView, {trigger: true});
       app.showView(app.views.contactView);
     },
     processSignup: function(e){
       e.preventDefault();
       console.log('view: #gotoSignup clicked');
-      //Backbone.history.navigate('v/' + app.views.signupView, {trigger: true});
       app.showView(app.views.signupView);
     },
     processLogin: function(e){
       e.preventDefault();
       console.log('view: gotoLogin clicked');
-      //Backbone.history.navigate('#login', {trigger: true});
       app.showView(app.views.loginView);
     },
   }); 
@@ -138,47 +131,10 @@
     render: function() {
       this.$el.html(this.template( 'hello' ));
       return this;
-    }//,
-    //template: _.template( $('#tmpl-header').html() ),
-    /*events: {
-      'submit form': 'preventSubmit',
-      'keypress input[type="text"]': 'addNewOnEnter',
-      'click .btn-add': 'addNew'
-    },
-    render: function() {
-      this.$el.html(this.template( this.model.attributes ));
-    },
-    preventSubmit: function(event) {
-      event.preventDefault();
-    },
-    addNewOnEnter: function(event) {
-      if (event.keyCode !== 13) { return; }
-      event.preventDefault();
-      this.addNew();
-    },
-    addNew: function() {
-      if (this.$el.find('[name="name"]').val() === '') {
-        alert('Please enter a name.');
-      }
-      else {
-        this.model.save({
-          'name.full': this.$el.find('[name="name"]').val()
-        },{
-          success: function(model, response) {
-            if (response.success) {
-              model.id = response.record._id;
-              location.href = model.url();
-            }
-            else {
-              alert(response.errors.join('\n'));
-            }
-          }
-        });
-      }
-    }*/
+    }
   });
 
-app.AboutView = Backbone.View.extend({
+  app.AboutView = Backbone.View.extend({
     el: '#about',
     template: _.template(JST["assets/views/about/tmpl-about.html"]()), //We need to jade this and pass data
     initialize: function() {
@@ -193,7 +149,7 @@ app.AboutView = Backbone.View.extend({
     }
   });
 
-app.ContactView = Backbone.View.extend({
+  app.ContactView = Backbone.View.extend({
     el: '#contact',
     template: _.template(JST["assets/views/contact/tmpl-contact.html"]()), //We need to jade this and pass data
     initialize: function() {
@@ -208,7 +164,7 @@ app.ContactView = Backbone.View.extend({
     }
   });
 
-app.LoginView = Backbone.View.extend({
+  app.LoginView = Backbone.View.extend({
     el: '#login',
     template: _.template(JST["assets/views/login/tmpl-login.html"]()), //We need to jade this and pass data
     initialize: function() {
@@ -223,7 +179,7 @@ app.LoginView = Backbone.View.extend({
     }
   });
 
-app.SignupView = Backbone.View.extend({
+  app.SignupView = Backbone.View.extend({
     el: '#signup',
     template: _.template(JST["assets/views/signup/tmpl-signup.html"]()), //We need to jade this and pass data
     initialize: function() {
@@ -355,17 +311,13 @@ app.SignupView = Backbone.View.extend({
     }
   });
 
-  app.Router = Backbone.Router.extend({
+  /*app.Router = Backbone.Router.extend({
     routes: {
       '': 'default',
       'q/:params': 'query'
     },
     initialize: function() {
       console.log('router: init');
-      
-
-      //this.showView(app.views.homeView);
-
     },
     default: function() {
       //if (!app.firstLoad) {
@@ -378,9 +330,9 @@ app.SignupView = Backbone.View.extend({
       app.resultsView.collection.fetch({ data: params, reset: true });
       app.firstLoad = false;
     }
-  });
+  });*/
 
-  //$(document).ready(function() {
+
   window.onload = function(){
     console.log('app loading...');
     app.firstLoad = true;
@@ -390,12 +342,12 @@ app.SignupView = Backbone.View.extend({
 
     app.views.headerView = new app.HeaderView();
     app.views.homeView = new app.HomeView();
-    
+    app.views.current = app.views.homeView;
     app.views.aboutView = new app.AboutView();
     app.views.contactView = new app.ContactView();
     app.views.signupView = new app.SignupView();
     app.views.loginView = new app.LoginView();
     console.log('app loaded!');
   };
-  //});
+
 }());
