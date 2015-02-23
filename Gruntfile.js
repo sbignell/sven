@@ -85,7 +85,7 @@ module.exports = function(grunt) {
             }
           },  
           files: {
-            "www/index.html", ["assets/layouts/public.jade"]
+            "www/index.html": ["assets/layouts/public.jade"]
           }
         },
         files: {
