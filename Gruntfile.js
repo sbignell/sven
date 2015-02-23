@@ -71,7 +71,7 @@ module.exports = function(grunt) {
       }
     },
     jade: {
-      compile:
+      compile: {
         options: {
           data: {
             debug: false
