@@ -66,15 +66,25 @@
 
 
   app.HeaderView = Backbone.View.extend({
-    el: '.navbar', 
+    el: '#header', 
+    template: _.template(JST["assets/views/header/tmpl-header.html"]()), //We need to jade this and pass data
     events: {
       'click #gotoHome': 'processHome',
       'click #gotoAbout': 'processAbout',
-      'click #gotoCellar': 'processCellar'
+      'click #gotoCellar': 'processCellar',
+      'click #doSignIn': 'processSignIn',
+      'click #doSignUp': 'processSignUp'
     },
-    initialize: function(){
-      
+    initialize: function() {
+      console.log('headerView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      this.render();
     },
+    render: function() {
+      this.$el.html(this.template( 'hello' ));
+      return this;
+    }
     processHome: function(e){
       e.preventDefault();
       console.log('view: #gotoHome clicked');
@@ -89,6 +99,16 @@
       e.preventDefault();
       console.log('view: #gotoCellar clicked');
       app.showView(app.views.cellarView);
+    },
+    processSignIn: function(e){
+      e.preventDefault();
+      console.log('view: #doSignIn clicked');
+      //app.showView(app.views.cellarView);
+    },
+    processSignUp: function(e){
+      e.preventDefault();
+      console.log('view: #doSignUp clicked');
+      //app.showView(app.views.cellarView);
     }
   }); 
 
