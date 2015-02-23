@@ -84,7 +84,7 @@
     render: function() {
       this.$el.html(this.template( 'hello' ));
       return this;
-    }
+    },
     processHome: function(e){
       e.preventDefault();
       console.log('view: #gotoHome clicked');
