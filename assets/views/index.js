@@ -125,7 +125,7 @@
 
   app.HomeView = Backbone.View.extend({
     el: '#home',
-    template: _.template(JST["assets/views/home/tmpl-home.html"]()), //We need to jade this and pass data
+    template: _.template(window['JST']["assets/views/home/tmpl-home.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('homeView loaded.');
       //this.model = new app.Record();
@@ -380,8 +380,8 @@ app.SignupView = Backbone.View.extend({
   $(document).ready(function() {
     console.log('app loading...');
     app.firstLoad = true;
-    app.router = new app.Router();
-    Backbone.history.start();
+    //app.router = new app.Router();
+    //Backbone.history.start();
     app.views = {};
 
     app.views.headerView = new app.HeaderView();
