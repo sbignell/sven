@@ -84,10 +84,11 @@ module.exports = function(grunt) {
               return require('../locals.json');
             }
           },  
-          src: "assets/layouts/public.jade",
-          dest: "www/index.html"
+          files: {
+            "www/index.html", ["assets/layouts/public.jade"]
+          }
         },
-        templates: {
+        files: {
           "assets/views/home/tmpl-home.html": ["assets/views/home/*.jade"],
           "assets/views/about/tmpl-about.html": ["assets/views/about/*.jade"],
           "assets/views/contact/tmpl-contact.html": ["assets/views/contact/*.jade"],
