@@ -73,22 +73,13 @@ module.exports = function(grunt) {
     jade: {
       compile: {
         options: {
-          data: {
-            debug: false
+          data: function(dest, src) {
+            // Return an object of data to pass to templates
+            return grunt.file.readJSON('assets/locals.json');
           }
-        },
-        index: {
-          options: {
-            data: function(dest, src) {
-              // Return an object of data to pass to templates
-              return require('../locals.json');
-            }
-          },  
-          files: {
-            "www/index.html": ["assets/layouts/public.jade"]
-          }
-        },
+        },  
         files: {
+          "www/index.html": ["assets/layouts/public.jade"],
           "assets/views/home/tmpl-home.html": ["assets/views/home/*.jade"],
           "assets/views/about/tmpl-about.html": ["assets/views/about/*.jade"],
           "assets/views/contact/tmpl-contact.html": ["assets/views/contact/*.jade"],
