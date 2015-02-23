@@ -70,7 +70,7 @@
     events: {
       'click #gotoHome': 'processHome',
       'click #gotoAbout': 'processAbout',
-      'click #gotoContact': 'processCellar'
+      'click #gotoCellar': 'processCellar'
     },
     initialize: function(){
       
