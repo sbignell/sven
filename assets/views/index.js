@@ -381,7 +381,7 @@ app.SignupView = Backbone.View.extend({
   });
 
   //$(document).ready(function() {
-  window.onload(){
+  window.onload = function(){
     console.log('app loading...');
     app.firstLoad = true;
     //app.router = new app.Router();
@@ -396,5 +396,6 @@ app.SignupView = Backbone.View.extend({
     //app.views.signupView = new app.SignupView();
     //app.views.loginView = new app.LoginView();
     console.log('app loaded!');
-  });
+  };
+  //});
 }());
