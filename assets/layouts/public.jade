@@ -13,7 +13,7 @@ html
     div.navbar.navbar-default.navbar-fixed-top
       div.container
         div.navbar-header
-          a.navbar-brand(href='#')
+          a#gotoHome.navbar-brand(href='#')
             img.navbar-logo(src='media/logo-symbol-64x64.png')
             span.navbar-brand-label=  project.name 
           button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
@@ -22,14 +22,27 @@ html
             span.icon-bar
         div.navbar-collapse.my-navbar-collapse.collapse
           ul#public-menu.nav.navbar-nav
-            li: a#gotoHome(href='#') Home
+            //li: a(href='#') Home
             li: a#gotoAbout(href='#') About
             li: a#gotoContact(href='#') Contact
             li: a#gotoSignup(href='#') Sign Up
-            //ul.nav.navbar-nav.navbar-right
+          ul.nav.navbar-nav.navbar-right
             li.pull-right: a#gotoLogin(href='#')
               i.fa.fa-user
               |  Sign In
+          div.dropdown
+            button#signinupDropdown.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown" aria-expanded="true")
+              Sign In and Up
+              span.caret
+            ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="signinupDropdown")
+              form
+                div.form-group
+                  label(for="inputEmail") Email address
+                  input#inputEmail.form-control(type="email" placeholder="Enter email")
+                div.form-group
+                  label(for="inputPassword") Password
+                  input#inputPassword(type="password" class="form-control" placeholder="Password")
+                button.btn.btn-default(type="submit") Submit
 
     div.page
       div.container
