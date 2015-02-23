@@ -89,6 +89,9 @@
       'click #gotoSignup': 'processSignup',
       'click #gotoLogin': 'processLogin'
     },
+    initialize: function(){
+      app.views.homeView = new app.HomeView();
+    },
     processHome: function(e){
       e.preventDefault();
       console.log('view: #gotoHome clicked');
@@ -385,7 +388,7 @@ app.SignupView = Backbone.View.extend({
     app.views = {};
 
     app.views.headerView = new app.HeaderView();
-    app.views.homeView = new app.HomeView();
+    
     //app.views.aboutView = new app.AboutView();
     //app.views.contactView = new app.ContactView();
     //app.views.signupView = new app.SignupView();
