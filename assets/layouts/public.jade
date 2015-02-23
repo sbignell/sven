@@ -2,7 +2,7 @@ doctype html
 html
   head
     block head
-      title Simon is awake.
+      title <%= project.name %> is awake.
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='styles/vendor.min.css')
     link(rel='stylesheet', href='styles/public.min.css')
@@ -14,7 +14,7 @@ html
         div.navbar-header
           a.navbar-brand(href='#')
             img.navbar-logo(src='media/logo-symbol-64x64.png')
-            span.navbar-brand-label Simon
+            span.navbar-brand-label <%= project.name %>
           button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
             span.icon-bar
             span.icon-bar
@@ -46,6 +46,7 @@ html
     div.footer
       div.container
         span.copyright.pull-right
+          | &copy; <%= project.company %> 2015.
         ul.links
           li: a(href='/') Home
           li: a(href='/contact/') Contact
