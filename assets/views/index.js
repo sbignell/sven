@@ -386,10 +386,10 @@ app.SignupView = Backbone.View.extend({
 
     app.views.headerView = new app.HeaderView();
     app.views.homeView = new app.HomeView();
-    app.views.aboutView = new app.AboutView();
-    app.views.contactView = new app.ContactView();
-    app.views.signupView = new app.SignupView();
-    app.views.loginView = new app.LoginView();
+    //app.views.aboutView = new app.AboutView();
+    //app.views.contactView = new app.ContactView();
+    //app.views.signupView = new app.SignupView();
+    //app.views.loginView = new app.LoginView();
     console.log('app loaded!');
   });
 }());
