@@ -128,7 +128,7 @@
 
   app.HomeView = Backbone.View.extend({
     el: '#home',
-    template: _.template(window['JST']["assets/views/home/tmpl-home.html"]()), //We need to jade this and pass data
+    template: _.template(JST["assets/views/home/tmpl-home.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('homeView loaded.');
       //this.model = new app.Record();
@@ -137,7 +137,7 @@
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
-      //return this;
+      return this;
     }//,
     //template: _.template( $('#tmpl-header').html() ),
     /*events: {
@@ -189,7 +189,7 @@ app.AboutView = Backbone.View.extend({
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
-      //return this;
+      return this;
     }
   });
 
@@ -204,7 +204,7 @@ app.ContactView = Backbone.View.extend({
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
-      //return this;
+      return this;
     }
   });
 
