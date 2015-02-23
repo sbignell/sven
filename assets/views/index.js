@@ -90,7 +90,7 @@
       'click #gotoLogin': 'processLogin'
     },
     initialize: function(){
-      app.views.homeView = new app.HomeView();
+      //app.views.homeView = new app.HomeView();
     },
     processHome: function(e){
       e.preventDefault();
