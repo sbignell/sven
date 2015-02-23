@@ -380,7 +380,8 @@ app.SignupView = Backbone.View.extend({
     }
   });
 
-  $(document).ready(function() {
+  //$(document).ready(function() {
+  window.onload(){
     console.log('app loading...');
     app.firstLoad = true;
     //app.router = new app.Router();
