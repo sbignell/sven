@@ -71,14 +71,23 @@ module.exports = function(grunt) {
       }
     },
     jade: {
-      compile: {
+      compile:
         options: {
           data: {
             debug: false
           }
         },
-        files: {
-          //"www/index.html": ["assets/views/home/*.jade"],
+        index: {
+          options: {
+            data: function(dest, src) {
+              // Return an object of data to pass to templates
+              return require('../locals.json');
+            }
+          },  
+          src: "assets/layouts/public.jade",
+          dest: "www/index.html"
+        },
+        templates: {
           "assets/views/home/tmpl-home.html": ["assets/views/home/*.jade"],
           "assets/views/about/tmpl-about.html": ["assets/views/about/*.jade"],
           "assets/views/contact/tmpl-contact.html": ["assets/views/contact/*.jade"],
