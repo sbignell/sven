@@ -134,6 +134,7 @@
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
+      return this;
     }//,
     //template: _.template( $('#tmpl-header').html() ),
     /*events: {
@@ -185,6 +186,7 @@ app.AboutView = Backbone.View.extend({
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
+      return this;
     }
   });
 
@@ -199,6 +201,7 @@ app.ContactView = Backbone.View.extend({
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
+      return this;
     }
   });
 
@@ -213,6 +216,7 @@ app.LoginView = Backbone.View.extend({
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
+      return this;
     }
   });
 
@@ -227,6 +231,7 @@ app.SignupView = Backbone.View.extend({
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
+      return this;
     }
   });
 
@@ -350,23 +355,11 @@ app.SignupView = Backbone.View.extend({
   app.Router = Backbone.Router.extend({
     routes: {
       '': 'default',
-      'q/:params': 'query',
-      'v/:view': 'showView',
-      'about': 'showView(app.views.aboutView)',
-      'contact': 'showView(app.views.contactView)',
-      'signup': 'showView(app.views.signupView)',
-      'login': 'showView(app.views.loginView)'
+      'q/:params': 'query'
     },
     initialize: function() {
       console.log('router: init');
-      app.views = {};
-
-      app.views.headerView = new app.HeaderView();
-      app.views.homeView = new app.HomeView();
-      app.views.aboutView = new app.AboutView();
-      app.views.contactView = new app.ContactView();
-      app.views.signupView = new app.SignupView();
-      app.views.loginView = new app.LoginView();
+      
 
       //this.showView(app.views.homeView);
 
@@ -389,6 +382,14 @@ app.SignupView = Backbone.View.extend({
     app.firstLoad = true;
     app.router = new app.Router();
     Backbone.history.start();
+    app.views = {};
+
+    app.views.headerView = new app.HeaderView();
+    app.views.homeView = new app.HomeView();
+    app.views.aboutView = new app.AboutView();
+    app.views.contactView = new app.ContactView();
+    app.views.signupView = new app.SignupView();
+    app.views.loginView = new app.LoginView();
     console.log('app loaded!');
   });
 }());
