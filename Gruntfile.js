@@ -50,7 +50,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'assets/vendor/font-awesome', src: ['fonts/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/', src: ['favicon.ico'], dest: 'www/' },
           { expand: true, cwd: 'assets/views', src: ['templates.js'], dest: 'www/views/' },
-          { expand: true, cwd: 'assets/views/about/', src: ['*.jade'], dest: 'www/views/about/' },
+          //{ expand: true, cwd: 'assets/views/about/', src: ['*.jade'], dest: 'www/views/about/' },
           { expand: true, cwd: 'assets/views/account/', src: ['*.jade'], dest: 'www/views/account/' },
           { expand: true, cwd: 'assets/views/account/settings/', src: ['*.jade'], dest: 'www/views/account/settings/' },
           { expand: true, cwd: 'assets/views/account/verification/', src: ['*.jade'], dest: 'www/views/account/verification/' },
@@ -61,20 +61,13 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'assets/views/admin/categories/', src: ['*.jade'], dest: 'www/views/admin/categories/' },
           { expand: true, cwd: 'assets/views/admin/statuses/', src: ['*.jade'], dest: 'www/views/admin/statuses/' },
           { expand: true, cwd: 'assets/views/admin/users/', src: ['*.jade'], dest: 'www/views/admin/users/' },
-          { expand: true, cwd: 'assets/views/contact/', src: ['*.jade'], dest: 'www/views/contact/' },
-          { expand: true, cwd: 'assets/views/http/', src: ['*.jade'], dest: 'www/views/http/' },
-          { expand: true, cwd: 'assets/views/login/', src: ['*.jade'], dest: 'www/views/login/' },
+          //{ expand: true, cwd: 'assets/views/contact/', src: ['*.jade'], dest: 'www/views/contact/' },
+          //{ expand: true, cwd: 'assets/views/http/', src: ['*.jade'], dest: 'www/views/http/' },
+          //{ expand: true, cwd: 'assets/views/login/', src: ['*.jade'], dest: 'www/views/login/' },
           { expand: true, cwd: 'assets/views/login/forgot/', src: ['*.jade'], dest: 'www/views/login/forgot/' },
           { expand: true, cwd: 'assets/views/login/reset/', src: ['*.jade'], dest: 'www/views/login/reset/' },
-          { expand: true, cwd: 'assets/views/signup/', src: ['*.jade'], dest: 'www/views/signup/' },
+          { expand: true, cwd: 'assets/views/signup/', src: ['social.jade'], dest: 'www/views/signup/' },
         ]
-      }
-    },
-    jst: {
-      compile: {
-        files: {
-          "assets/views/templates.js": ["assets/views/**/*.html"]
-        }
       }
     },
     jade: {
@@ -94,13 +87,20 @@ module.exports = function(grunt) {
         }
       }
     },
+    jst: {
+      compile: {
+        files: {
+          "assets/views/templates.js": ["assets/views/**/*.html"]
+        }
+      }
+    },
     uglify: {
-      options: {
+      /*options: {
         sourceMap: true,
         sourceMapName: function(filePath) {
           return filePath + '.map';
         }
-      },
+      },*/
       layouts: {
         files: {
           'www/scripts/vendor.min.js': [
@@ -108,19 +108,19 @@ module.exports = function(grunt) {
             'assets/vendor/jquery.cookie/jquery.cookie.js',
             'assets/vendor/underscore/underscore.js',
             'assets/vendor/backbone/backbone.js',
-            'assets/vendor/bootstrap/js/affix.js',
-            'assets/vendor/bootstrap/js/alert.js',
+            //'assets/vendor/bootstrap/js/affix.js',
+            //'assets/vendor/bootstrap/js/alert.js',
             'assets/vendor/bootstrap/js/button.js',
             'assets/vendor/bootstrap/js/carousel.js',
-            'assets/vendor/bootstrap/js/collapse.js',
-            'assets/vendor/bootstrap/js/dropdown.js',
-            'assets/vendor/bootstrap/js/modal.js',
-            'assets/vendor/bootstrap/js/tooltip.js',
-            'assets/vendor/bootstrap/js/popover.js',
-            'assets/vendor/bootstrap/js/scrollspy.js',
-            'assets/vendor/bootstrap/js/tab.js',
-            'assets/vendor/bootstrap/js/transition.js',
-            'assets/vendor/momentjs/moment.js'
+            //'assets/vendor/bootstrap/js/collapse.js',
+            //'assets/vendor/bootstrap/js/dropdown.js',
+            //'assets/vendor/bootstrap/js/modal.js',
+            //'assets/vendor/bootstrap/js/tooltip.js',
+            //'assets/vendor/bootstrap/js/popover.js',
+            //'assets/vendor/bootstrap/js/scrollspy.js',
+            //'assets/vendor/bootstrap/js/tab.js',
+            //'assets/vendor/bootstrap/js/transition.js',
+            //'assets/vendor/momentjs/moment.js'
           ],
           'www/scripts/ie-sucks.min.js': [
             'assets/vendor/html5shiv/html5shiv.js',
@@ -188,9 +188,9 @@ module.exports = function(grunt) {
       js: {
         src: [
           'assets/layouts/**/*.min.js',
-          'assets/layouts/**/*.min.js.map',
+          //'assets/layouts/**/*.min.js.map',
           'www/scripts/**/*.min.js',
-          'www/scripts/**/*.min.js.map'
+          //'www/scripts/**/*.min.js.map'
         ]
       },
       css: {

@@ -36,17 +36,17 @@ notable changes.
 ### Added
 - "Why should I care?" section mentioning The Changelog podcast.
 
-## [0.0.2] - 2014-07-10
+## [0.2.0] - 2015-02-23
 ### Added
-- Explanation of the recommended reverse chronological release ordering.
+- When used in conjunction with Simon, Fred correctly displays. This is a milestone.
 
-## 0.0.1 - 2014-05-31
+## 0.1.0 - 2015-02-16
 ### Added
-- This CHANGELOG file to hopefully serve as an evolving example of a standardized open source project CHANGELOG.
-- CNAME file to enable GitHub Pages custom domain
-- README now contains answers to common questions about CHANGELOGs
-- Good examples and basic guidelines, including proper date formatting.
-- Counter-examples: "What makes unicorns cry?"
+- This CHANGELOG file to log versioning.
+- The client files from the Simon project to create the Fred project.
+- README which is still incorrect.
+- Package.json.
+
 
 [unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.6...HEAD
 [0.0.6]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.5...v0.0.6

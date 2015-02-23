@@ -3,22 +3,11 @@ Fred
 
 Fred is a front-end.
 
-A website and user system for Node.js. What you create with Drywall is more important than Drywall. [See a bird's eye view.](http://jedireza.github.io/drywall/)
+A simple front end to show the workings of Simon, the server. Fred is built using javascript, grunt, JST templates, and backbone. [See a bird's eye view.](http://jedireza.github.io/drywall/)
 
 [![Dependency Status](https://david-dm.org/jedireza/drywall.svg?theme=shields.io)](https://david-dm.org/jedireza/drywall)
 [![devDependency Status](https://david-dm.org/jedireza/drywall/dev-status.svg?theme=shields.io)](https://david-dm.org/jedireza/drywall#info=devDependencies)
 
-Technology
-------------
-
-| On The Server | On The Client  | Development |
-| ------------- | -------------- | ----------- |
-| Express       | Bootstrap      | Grunt       |
-| Jade          | Backbone.js    |             |
-| Mongoose      | jQuery         |             |
-| Passport      | Underscore.js  |             |
-| Async         | Font-Awesome   |             |
-| EmailJS       | Moment.js      |             |
 
 Live Demos
 ------------
@@ -33,7 +22,7 @@ __Note:__ The live demos have been modified so you cannot change the root user, 
 Requirements
 ------------
 
-You need [Node.js](http://nodejs.org/download/) and [MongoDB](http://www.mongodb.org/downloads) installed and running.
+You need Simon, [Node.js](http://nodejs.org/download/) and [MongoDB](http://www.mongodb.org/downloads) installed and running.
 
 We use [Grunt](http://gruntjs.com/) as our task runner. Get the CLI (command line interface).
 
