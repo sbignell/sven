@@ -104,11 +104,15 @@
       e.preventDefault();
       console.log('view: #doSignIn clicked');
       //app.showView(app.views.cellarView);
+
+      $('#signStatus').show();
     },
     processSignUp: function(e){
       e.preventDefault();
       console.log('view: #doSignUp clicked');
       //app.showView(app.views.cellarView);
+
+      $('#signStatus').show();
     }
   }); 
 

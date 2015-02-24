@@ -12,18 +12,21 @@ block header
       ul#public-menu.nav.navbar-nav
         li: a#gotoAbout(href='#') About
         li: a#gotoCellar(href='#') Wine Cellar
-      div.dropdown.pull-right
-        button#signinupDropdown.btn.btn-primary.dropdown-toggle(type="button" data-toggle="dropdown" aria-expanded="true")
-          | Sign-In/Up 
-          span.caret
-        ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="signinupDropdown")
-          form#signForm
-            div.form-group
-              label(for="inputEmail") Email address
-              input#inputEmail.form-control(type="email" placeholder="Enter email")
-            div.form-group
-              label(for="inputPassword") Password
-              input#inputPassword(type="password" class="form-control" placeholder="Password")
-            hr    
-            button#doSignIn.btn.btn-default Sign In
-            button#doSignUp.btn.btn-default Sign Up
+      div.pull-right
+        div.dropdown
+          button#signinupDropdown.btn.btn-primary.dropdown-toggle(type="button" data-toggle="dropdown" aria-expanded="true")
+            | Sign-In/Up 
+            span.caret
+          ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="signinupDropdown")
+            form#signForm
+              div.form-group
+                label(for="inputEmail") Email address
+                input#inputEmail.form-control(type="email" placeholder="Enter email")
+              div.form-group
+                label(for="inputPassword") Password
+                input#inputPassword(type="password" class="form-control" placeholder="Password")
+              hr    
+              button#doSignIn.btn.btn-info.btn-block Sign In
+              button#doSignUp.btn.btn-success.btn-block Sign Up
+        div#signStatus
+          span.fa.fa-circle-o-notch.fa-spin
