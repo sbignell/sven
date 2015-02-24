@@ -109,17 +109,25 @@
     processHome: function(e){
       e.preventDefault();
       console.log('view: #gotoHome clicked');
+
+      $('#public-menu').children().removeClass('active');
       app.showView(app.views.homeView);
     },
     processAbout: function(e){
       e.preventDefault();
       console.log('view: #gotoAbout clicked');
+
+      $('#public-menu').children().removeClass('active');
       app.showView(app.views.aboutView);
+      $('#gotoAbout').parent().addClass('active');
     },
     processCellar: function(e){
       e.preventDefault();
       console.log('view: #gotoCellar clicked');
+
+      $('#public-menu').children().removeClass('active');
       app.showView(app.views.cellarView);
+      $('#gotoAbout').parent().addClass('active');
     },
     processSignIn: function(e){
       e.preventDefault();
