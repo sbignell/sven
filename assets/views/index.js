@@ -94,7 +94,9 @@
       'click #gotoAbout': 'processAbout',
       'click #gotoCellar': 'processCellar',
       'click #doSignIn': 'processSignIn',
-      'click #doSignUp': 'processSignUp'
+      'click #doSignUp': 'processSignUp',
+      'click #gotoForgot': 'processForgot',
+      'click #gotoReset': 'processReset'
     },
     initialize: function() {
       console.log('headerView loaded.');
