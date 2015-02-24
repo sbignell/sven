@@ -73,7 +73,7 @@ module.exports = function(grunt) {
         },  
         files: {
           "www/index.html": ["assets/layouts/public.jade"],
-          "assets/views/home/tmpl-header.html": ["assets/views/header/*.jade"],
+          "assets/views/header/tmpl-header.html": ["assets/views/header/*.jade"],
           "assets/views/home/tmpl-home.html": ["assets/views/home/*.jade"],
           "assets/views/about/tmpl-about.html": ["assets/views/about/*.jade"],
           "assets/views/cellar/tmpl-cellar.html": ["assets/views/cellar/*.jade"]
