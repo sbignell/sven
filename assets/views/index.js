@@ -119,16 +119,16 @@
       $('#signAlert').html('');
 
       //
-      this.$el.find('.form-control').attr('disabled', true);
-      this.$el.find('#doSignIn').attr('disabled', true);
-      this.$el.find('#doSignUp').attr('disabled', true);
-      this.$el.find('#signinupDropdown').attr('disabled', true);
+      $('.form-control').attr('disabled', true);
+      $('#doSignIn').attr('disabled', true);
+      $('#doSignUp').attr('disabled', true);
+      $('#signinupDropdown').attr('disabled', true);
 
       app.login = new app.Login();
 
       app.login.save({
-        username: this.$el.find('#inputUsername').val(),
-        password: this.$el.find('#inputPassword').val()
+        username: $('#inputUsername').val(),
+        password: $('#inputPassword').val()
       },{
         success: function(model, response) {
           if (response.success) {
@@ -140,11 +140,11 @@
             //model.set(response);
             var alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
             console.log('Fail!');
-            this.$el.find('.form-control').attr('disabled', false);
-            this.$el.find('#doSignIn').attr('disabled', false);
-            this.$el.find('#doSignUp').attr('disabled', false);
-            this.$el.find('#signinupDropdown').attr('disabled', false);
-            this.$el.find('#signAlert').html(alertStr);
+            $('.form-control').attr('disabled', false);
+            $('#doSignIn').attr('disabled', false);
+            $('#doSignUp').attr('disabled', false);
+            $('#signinupDropdown').attr('disabled', false);
+            $('#signAlert').html(alertStr);
           }
         }
       });
