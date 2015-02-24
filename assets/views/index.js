@@ -116,6 +116,7 @@
       //app.showView(app.views.cellarView);
 
       $('#signStatus').css("display", "inline");
+      $('#signAlert').html('');
 
       //
       this.$el.find('.form-control').attr('disabled', true);
@@ -132,18 +133,23 @@
         success: function(model, response) {
           if (response.success) {
             console.log('Signed In!');
+            //toggle dropdown away
+            //change button to username
           }
           else {
-            model.set(response);
+            //model.set(response);
+            alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
+            console.log('Fail!');
             this.$el.find('.form-control').attr('disabled', false);
             this.$el.find('#doSignIn').attr('disabled', false);
             this.$el.find('#doSignUp').attr('disabled', false);
             this.$el.find('#signinupDropdown').attr('disabled', false);
+            this.$el.find('#signAlert').html(alertStr);
           }
         }
       });
 
-      
+
     },
     processSignUp: function(e){
       e.preventDefault();

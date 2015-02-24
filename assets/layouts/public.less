@@ -54,16 +54,22 @@ select, textarea, input, .form-control {
   }
 
   li > a {
-    color: #333;
+    color: #333 !important;
   }
 
   li > a:hover {
-    background-color: #f0ad4e;
-    border-radius-top-left: 5px;
-    border-radius-top-right: 5px;
-    border-radius-bottom-right: 5px;
-    border-radius-bottom-left: 5px;
+    background-color: #f0ad4e !important;
+    border-radius-top-left: 5px !important;
+    border-radius-top-right: 5px !important;
+    border-radius-bottom-right: 5px !important;
+    border-radius-bottom-left: 5px !important;
 
+  }
+
+  #public-menu li:active {
+    border-bottom: 1px solid #f0ad4e;
+    border-radius-bottom-right: 5px !important;
+    border-radius-bottom-left: 5px !important;
   }
 
   .navbar-brand-label {
