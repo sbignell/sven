@@ -150,7 +150,7 @@
             //change button to username
           }
           else {
-            //model.set(response);
+            model.set(response);
             var alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
             console.log('Fail!');
             $('.form-control').attr('disabled', false);
@@ -195,7 +195,7 @@
             //change button to username
           }
           else {
-            //model.set(response);
+            model.set(response);
             var alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
             console.log('Fail!');
             $('.form-control').attr('disabled', false);
