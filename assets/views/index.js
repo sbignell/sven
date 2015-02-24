@@ -217,6 +217,20 @@
         }
       });
 
+    },
+    processForgot: function(e){
+      e.preventDefault();
+      console.log('view: #gotoForgot clicked');
+
+      $('#public-menu').children().removeClass('active');
+      app.showView(app.views.forgotView);
+    },
+    processReset: function(e){
+      e.preventDefault();
+      console.log('view: #gotoReset clicked');
+
+      $('#public-menu').children().removeClass('active');
+      app.showView(app.views.resetView);
     }
   }); 
 
@@ -255,6 +269,36 @@
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('cellarView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      this.render();
+    },
+    render: function() {
+      this.$el.html(this.template( 'hello' ));
+      return this;
+    }
+  });
+
+  app.ForgotView = Backbone.View.extend({
+    el: '#forgot',
+    template: _.template(JST["assets/views/login/forgot/tmpl-forgot.html"]()), //We need to jade this and pass data
+    initialize: function() {
+      console.log('forgotView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      this.render();
+    },
+    render: function() {
+      this.$el.html(this.template( 'hello' ));
+      return this;
+    }
+  });
+
+  app.ResetView = Backbone.View.extend({
+    el: '#reset',
+    template: _.template(JST["assets/views/login/reset/tmpl-reset.html"]()), //We need to jade this and pass data
+    initialize: function() {
+      console.log('resetView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
       this.render();
@@ -416,6 +460,8 @@
     app.views.current = app.views.homeView;
     app.views.aboutView = new app.AboutView();
     app.views.cellarView = new app.CellarView();
+    app.views.forgotView = new app.ForgotView();
+    app.views.resetView = new app.ResetView();
     console.log('app loaded!');
   };
 
