@@ -15,6 +15,16 @@
     $(app.views.current.el).show();
   };
 
+  app.Login = Backbone.Model.extend({
+    url: '/api/v1/login/',
+    defaults: {
+      errors: [],
+      errfor: {},
+      username: '',
+      password: ''
+    }
+  });
+
   app.Record = Backbone.Model.extend({
     idAttribute: '_id',
     defaults: {
@@ -106,6 +116,34 @@
       //app.showView(app.views.cellarView);
 
       $('#signStatus').css("display", "inline");
+
+      //
+      this.$el.find('.form-control').attr('disabled', true);
+      this.$el.find('#doSignIn').attr('disabled', true);
+      this.$el.find('#doSignUp').attr('disabled', true);
+      this.$el.find('#signinupDropdown').attr('disabled', true);
+
+      app.login = new app.Login();
+
+      app.login.save({
+        username: this.$el.find('#inputUsername').val(),
+        password: this.$el.find('#inputPassword').val()
+      },{
+        success: function(model, response) {
+          if (response.success) {
+            console.log('Signed In!');
+          }
+          else {
+            model.set(response);
+            this.$el.find('.form-control').attr('disabled', false);
+            this.$el.find('#doSignIn').attr('disabled', false);
+            this.$el.find('#doSignUp').attr('disabled', false);
+            this.$el.find('#signinupDropdown').attr('disabled', false);
+          }
+        }
+      });
+
+      
     },
     processSignUp: function(e){
       e.preventDefault();
