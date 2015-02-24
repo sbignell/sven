@@ -119,10 +119,12 @@
       $('#signAlert').html('');
 
       //
+      $('#signinupDropdown').attr('disabled', true);
+      $('.dropdown-menu').attr('disabled', true);
       $('.form-control').attr('disabled', true);
       $('#doSignIn').attr('disabled', true);
       $('#doSignUp').attr('disabled', true);
-      $('#signinupDropdown').attr('disabled', true);
+
 
       app.login = new app.Login();
 
@@ -144,6 +146,8 @@
             $('#doSignIn').attr('disabled', false);
             $('#doSignUp').attr('disabled', false);
             $('#signinupDropdown').attr('disabled', false);
+            $('.dropdown-menu').attr('disabled', false);
+            $('#signStatus').css("display", "none");
             $('#signAlert').html(alertStr);
           }
         }
