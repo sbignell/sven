@@ -138,7 +138,7 @@
           }
           else {
             //model.set(response);
-            alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
+            var alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
             console.log('Fail!');
             this.$el.find('.form-control').attr('disabled', false);
             this.$el.find('#doSignIn').attr('disabled', false);
