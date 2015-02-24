@@ -182,9 +182,9 @@
       $('#doSignUp').attr('disabled', true);
 
 
-      app.login = new app.Login();
+      app.signup = new app.Signup();
 
-      app.login.save({
+      app.signup.save({
         username: $('#inputUsername').val(),
         password: $('#inputPassword').val()
       },{
