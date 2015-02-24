@@ -25,6 +25,17 @@
     }
   });
 
+  app.Signup = Backbone.Model.extend({
+    url: '/api/v1/signup/',
+    defaults: {
+      errors: [],
+      errfor: {},
+      username: '',
+      email: '',
+      password: ''
+    }
+  });
+
   app.Record = Backbone.Model.extend({
     idAttribute: '_id',
     defaults: {
@@ -161,6 +172,43 @@
       //app.showView(app.views.cellarView);
 
       $('#signStatus').css("display", "inline");
+      $('#signAlert').html('');
+
+      //
+      $('#signinupDropdown').attr('disabled', true);
+      $('.dropdown-menu').attr('disabled', true);
+      $('.form-control').attr('disabled', true);
+      $('#doSignIn').attr('disabled', true);
+      $('#doSignUp').attr('disabled', true);
+
+
+      app.login = new app.Login();
+
+      app.login.save({
+        username: $('#inputUsername').val(),
+        password: $('#inputPassword').val()
+      },{
+        success: function(model, response) {
+          if (response.success) {
+            console.log('Signed Up!');
+            //toggle dropdown away
+            //change button to username
+          }
+          else {
+            //model.set(response);
+            var alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
+            console.log('Fail!');
+            $('.form-control').attr('disabled', false);
+            $('#doSignIn').attr('disabled', false);
+            $('#doSignUp').attr('disabled', false);
+            $('#signinupDropdown').attr('disabled', false);
+            $('.dropdown-menu').attr('disabled', false);
+            $('#signStatus').css("display", "none");
+            $('#signAlert').html(alertStr);
+          }
+        }
+      });
+
     }
   }); 
 
