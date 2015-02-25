@@ -22,7 +22,7 @@
     console.log('showView: ');
     console.dir(view.el);
 
-    if(view != app.views.resetView && (typeof app.getUrlParameter('u') || typeof app.getUrlParameter('t'))){
+    if(view != app.views.resetView && (typeof app.getUrlParameter('u') != 'undefined' || typeof app.getUrlParameter('t') != 'undefined')){
       window.load('http://www.revisit.cc');
     }
 
