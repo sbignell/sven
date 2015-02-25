@@ -5,6 +5,19 @@
 
   app = app || {};
 
+  app.getUrlParameter = function (sParam){
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+  }      
+
   app.showView = function (view){
     console.log('showView: ');
     console.dir(view.el);
@@ -346,7 +359,7 @@
       data.confirm = $('#resetConfirm').val();
 
       $.ajax({
-          url: 'api/v1/login/reset',
+          url: 'api/v1/login/reset', //+ ?params...
           data: data,
           type: 'PUT',
           success: function(response) {
@@ -512,6 +525,10 @@
     app.views.forgotView = new app.ForgotView();
     app.views.resetView = new app.ResetView();
     console.log('app loaded!');
+
+    //if params, load up reset screen
+    console.log(getUrlParameter('u'));
+    console.log(getUrlParameter('t'));
   };
 
 }());
