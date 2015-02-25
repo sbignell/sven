@@ -527,8 +527,8 @@
     console.log('app loaded!');
 
     //if params, load up reset screen
-    console.log(getUrlParameter('u'));
-    console.log(getUrlParameter('t'));
+    console.log(app.getUrlParameter('u'));
+    console.log(app.getUrlParameter('t'));
   };
 
 }());
