@@ -325,7 +325,7 @@
     el: '#reset',
     template: _.template(JST["assets/views/login/reset/tmpl-reset.html"]()), //We need to jade this and pass data
     events: {
-      'click #doReset': 'processdoReset'
+      'click #doReset': 'doReset'
     },
     initialize: function() {
       console.log('resetView loaded.');
