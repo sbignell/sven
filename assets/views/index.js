@@ -529,6 +529,9 @@
     //if params, load up reset screen
     console.log(app.getUrlParameter('u'));
     console.log(app.getUrlParameter('t'));
+    if(typeof app.getUrlParameter('u') != 'undefined' && typeof app.getUrlParameter('t') != 'undefined'){
+      app.showView(app.views.resetView);
+    }
   };
 
 }());
