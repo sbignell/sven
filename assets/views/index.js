@@ -93,8 +93,8 @@
       'click #gotoHome': 'processHome',
       'click #gotoAbout': 'processAbout',
       'click #gotoCellar': 'processCellar',
-      'click #doSignIn': 'processSignIn',
-      'click #doSignUp': 'processSignUp',
+      'click #doSignIn': 'doSignIn',
+      'click #doSignUp': 'doSignUp',
       'click #gotoForgot': 'processForgot',
       'click #gotoReset': 'processReset'
     },
@@ -131,7 +131,7 @@
       app.showView(app.views.cellarView);
       $('#gotoAbout').parent().addClass('active');
     },
-    processSignIn: function(e){
+    doSignIn: function(e){
       e.preventDefault();
       console.log('view: #doSignIn clicked');
       //app.showView(app.views.cellarView);
@@ -176,7 +176,7 @@
 
 
     },
-    processSignUp: function(e){
+    doSignUp: function(e){
       e.preventDefault();
       console.log('view: #doSignUp clicked');
       //app.showView(app.views.cellarView);
@@ -284,6 +284,9 @@
   app.ForgotView = Backbone.View.extend({
     el: '#forgot',
     template: _.template(JST["assets/views/login/forgot/tmpl-forgot.html"]()), //We need to jade this and pass data
+    events: {
+      'click #doForgot': 'doForgot'
+    },
     initialize: function() {
       console.log('forgotView loaded.');
       //this.model = new app.Record();
@@ -293,12 +296,28 @@
     render: function() {
       this.$el.html(this.template( 'hello' ));
       return this;
+    },
+    doForgot: function(e){
+      e.preventDefault();
+      console.log('view: #doForgot clicked');
+      //post...
+      var data = {};
+      data.email = $('#forgotEmail').val();
+
+      $.post('api/v1/login/forgot', data, function(response, status){
+        console.log('responded:');
+        console.dir(response);
+
+      });
     }
   });
 
   app.ResetView = Backbone.View.extend({
     el: '#reset',
     template: _.template(JST["assets/views/login/reset/tmpl-reset.html"]()), //We need to jade this and pass data
+    events: {
+      'click #doReset': 'processdoReset'
+    },
     initialize: function() {
       console.log('resetView loaded.');
       //this.model = new app.Record();
@@ -308,6 +327,21 @@
     render: function() {
       this.$el.html(this.template( 'hello' ));
       return this;
+    },
+    doReset: function(e){
+      e.preventDefault();
+      console.log('view: #doReset clicked');
+
+      /*var data = {};
+      data.email = $('#forgotEmail').val();
+
+      $.post({
+        type: "POST",
+        url: 'api/v1/login/reset',
+        data: data,
+        success: success,
+        dataType: dataType
+      });*/
     }
   });
 
