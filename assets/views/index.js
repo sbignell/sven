@@ -359,7 +359,7 @@
       data.confirm = $('#resetConfirm').val();
 
       $.ajax({
-          url: 'api/v1/login/reset', //+ ?params...
+          url: 'api/v1/login/reset/' + app.getUrlParameter('u') + '/' + app.getUrlParameter('t') + '/', 
           data: data,
           type: 'PUT',
           success: function(response) {
