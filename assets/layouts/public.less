@@ -57,6 +57,7 @@ select, textarea, input, .form-control {
 
   li > a {
     color: #333 !important;
+    border-bottom: 2px solid #F8F8F8;
   }
 
   li > a:hover {
@@ -68,8 +69,8 @@ select, textarea, input, .form-control {
 
   }
 
-  #public-menu li:active {
-    border-bottom: 1px solid #f0ad4e;
+  #public-menu li.active {
+    border-bottom: 2px solid #f0ad4e !important;
     border-radius-bottom-right: 5px !important;
     border-radius-bottom-left: 5px !important;
   }
@@ -100,7 +101,10 @@ select, textarea, input, .form-control {
       padding-left: 35px;
     }
 
-
+    p.small {
+      padding-left: 30px;
+    }
+    
   }
 
 }

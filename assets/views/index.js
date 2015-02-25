@@ -119,7 +119,7 @@
       e.preventDefault();
       console.log('view: #gotoAbout clicked');
 
-      $('#public-menu').children().removeClass('active');
+      $('#public-menu > li.active').removeClass('active');
       app.showView(app.views.aboutView);
       $('#gotoAbout').parent().addClass('active');
     },
@@ -127,9 +127,9 @@
       e.preventDefault();
       console.log('view: #gotoCellar clicked');
 
-      $('#public-menu').children().removeClass('active');
+      $('#public-menu > li.active').removeClass('active');
       app.showView(app.views.cellarView);
-      $('#gotoAbout').parent().addClass('active');
+      $('#gotoCellar').parent().addClass('active');
     },
     doSignIn: function(e){
       e.preventDefault();
@@ -307,6 +307,15 @@
       $.post('api/v1/login/forgot', data, function(response, status){
         console.log('responded:');
         console.dir(response);
+        var alertStr = '';
+
+        if(response.success){
+          alertStr = '<div class="alert alert-success" role="alert">Success! Check your email.</div>';
+          $('#forgotErrors').html(alertStr);
+        } else {
+          alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
+          $('#forgotErrors').html(alertStr);
+        }
 
       });
     }
