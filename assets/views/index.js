@@ -371,6 +371,14 @@
               // Do something with the result
               console.log('response:');
               console.dir(response);
+
+              if(response.success){
+                alertStr = '<div class="alert alert-success" role="alert">Success! Move along now.</div>';
+                $('#resetErrors').html(alertStr);
+              } else {
+                alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
+                $('#resetErrors').html(alertStr);
+              }
           }
       });
     }
