@@ -341,16 +341,20 @@
       e.preventDefault();
       console.log('view: #doReset clicked');
 
-      /*var data = {};
-      data.email = $('#forgotEmail').val();
+      var data = {};
+      data.password = $('#resetPassword').val();
+      data.confirm = $('#resetConfirm').val();
 
-      $.post({
-        type: "POST",
-        url: 'api/v1/login/reset',
-        data: data,
-        success: success,
-        dataType: dataType
-      });*/
+      $.ajax({
+          url: 'api/v1/login/reset',
+          data: data,
+          type: 'PUT',
+          success: function(response) {
+              // Do something with the result
+              console.log('response:');
+              console.dir(response);
+          }
+      });
     }
   });
 
