@@ -22,8 +22,12 @@
     console.log('showView: ');
     console.dir(view.el);
 
-    if((view != app.views.resetView) && ((typeof app.getUrlParameter('u') != 'undefined') || (typeof app.getUrlParameter('t') != 'undefined'))){
-      window.load('http://www.revisit.cc/');
+    if (view != app.views.resetView) {
+      if (typeof app.getUrlParameter('u') != 'undefined'){
+        window.load('http://www.revisit.cc/');
+      } else if (typeof app.getUrlParameter('t') != 'undefined'){
+        window.load('http://www.revisit.cc/');
+      }
     }
 
     if(app.views.current != undefined){
