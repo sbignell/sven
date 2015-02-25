@@ -21,6 +21,11 @@
   app.showView = function (view){
     console.log('showView: ');
     console.dir(view.el);
+
+    if(view != app.views.resetView){
+      window.load('http://www.revisit.cc');
+    }
+
     if(app.views.current != undefined){
         $(app.views.current.el).hide();
     }
