@@ -26,10 +26,10 @@
       console.dir(app);
       if (typeof app.getUrlParameter('u') != 'undefined'){
         console.log('1');
-        window.load('http://www.revisit.cc/');
+        window.open("http://www.revisit.cc/","_self");
       } else if (typeof app.getUrlParameter('t') != 'undefined'){
         console.log('2');
-        window.load('http://www.revisit.cc/');
+        window.open("http://www.revisit.cc/","_self");
       }
     }
     console.log('3');
@@ -382,7 +382,7 @@
               var alertStr = '';
 
               if(response.success){
-                alertStr = '<div class="alert alert-success" role="alert">Success! Move along now.</div>';
+                alertStr = '<div class="alert alert-success" role="alert">Success! Move along now. <a href="http://www.revisit.cc">Click here</a> to go back!</div>';
                 $('#resetErrors').html(alertStr);
               } else {
                 alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
