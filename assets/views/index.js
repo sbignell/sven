@@ -22,19 +22,13 @@
     console.log('showView: ');
     console.dir(view.el);
 
-    if (view != app.views.resetView) {
-      console.dir(app);
+    if (view != app.views.resetView) { //If user clicks away from reset page, remove url params
       if (typeof app.getUrlParameter('u') != 'undefined'){
-        console.log('1');
-        //window.open("http://www.revisit.cc/","_self");
         window.history.replaceState( {} , 'Simon is awake.', 'http://www.revisit.cc' );
       } else if (typeof app.getUrlParameter('t') != 'undefined'){
-        console.log('2');
-        //window.open("http://www.revisit.cc/","_self");
         window.history.replaceState( {} , 'Simon is awake.', 'http://www.revisit.cc' );
       }
     }
-    console.log('3');
 
     if(app.views.current != undefined){
         $(app.views.current.el).hide();
@@ -184,8 +178,27 @@
         success: function(model, response) {
           if (response.success) {
             console.log('Signed In!');
-            //toggle dropdown away
+
+            $('.form-control').attr('disabled', false);
+            $('#doSignIn').attr('disabled', false);
+            $('#doSignUp').attr('disabled', false);
+            $('#signinupDropdown').attr('disabled', false);
+            $('.dropdown-menu').attr('disabled', false);
+            $('#signStatus').css("display", "none");
+
             //change button to username
+            var loggedInBtn = '<button id="signedinDropdown btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">';
+            loggedInBtn += '<span class="fa fa-user"></span> ' + app.login.username + ' <span class="caret"></span></button>';
+            loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
+            loggedInBtn += '<li><a id="profile" href="#">Profile</a></li>';
+            loggedInBtn += '<li><a id="signout" href="http://www.revisit.cc/logout/">Sign Out</a></li>';
+            loggedInBtn += '</ul>';
+
+            $('div.dropdown').html(loggedInBtn);
+
+            //move to cellar
+            app.showView(app.views.cellarView);
+
           }
           else {
             model.set(response);
