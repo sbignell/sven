@@ -25,11 +25,14 @@
     if (view != app.views.resetView) {
       console.dir(app);
       if (typeof app.getUrlParameter('u') != 'undefined'){
+        console.log('1');
         window.load('http://www.revisit.cc/');
       } else if (typeof app.getUrlParameter('t') != 'undefined'){
+        console.log('2');
         window.load('http://www.revisit.cc/');
       }
     }
+    console.log('3');
 
     if(app.views.current != undefined){
         $(app.views.current.el).hide();
