@@ -197,6 +197,7 @@
             loggedInBtn += '</ul>';
 
             $('div.dropdown').html(loggedInBtn);
+            $('.dropdown-toggle').dropdown('toggle');
 
             //move to cellar
             app.showView(app.views.cellarView);
