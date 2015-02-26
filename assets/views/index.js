@@ -23,6 +23,7 @@
     console.dir(view.el);
 
     if (view != app.views.resetView) {
+      console.dir(app);
       if (typeof app.getUrlParameter('u') != 'undefined'){
         window.load('http://www.revisit.cc/');
       } else if (typeof app.getUrlParameter('t') != 'undefined'){
