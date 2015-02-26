@@ -26,10 +26,12 @@
       console.dir(app);
       if (typeof app.getUrlParameter('u') != 'undefined'){
         console.log('1');
-        window.open("http://www.revisit.cc/","_self");
+        //window.open("http://www.revisit.cc/","_self");
+        window.history.replaceState( {} , 'Simon is awake.', 'http://www.revisit.cc' );
       } else if (typeof app.getUrlParameter('t') != 'undefined'){
         console.log('2');
-        window.open("http://www.revisit.cc/","_self");
+        //window.open("http://www.revisit.cc/","_self");
+        window.history.replaceState( {} , 'Simon is awake.', 'http://www.revisit.cc' );
       }
     }
     console.log('3');
