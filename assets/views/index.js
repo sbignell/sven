@@ -178,6 +178,8 @@
         success: function(model, response) {
           if (response.success) {
             console.log('Signed In!');
+            console.dir(model);
+            console.dir(response);
 
             $('.form-control').attr('disabled', false);
             $('#doSignIn').attr('disabled', false);
@@ -187,8 +189,8 @@
             $('#signStatus').css("display", "none");
 
             //change button to username
-            var loggedInBtn = '<button id="signedinDropdown btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">';
-            loggedInBtn += '<span class="fa fa-user"></span> ' + app.login.username + ' <span class="caret"></span></button>';
+            var loggedInBtn = '<button id="signedinDropdown" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">';
+            loggedInBtn += '<span class="fa fa-user"></span> ' + model.username + ' <span class="caret"></span></button>';
             loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
             loggedInBtn += '<li><a id="profile" href="#">Profile</a></li>';
             loggedInBtn += '<li><a id="signout" href="http://www.revisit.cc/logout/">Sign Out</a></li>';
