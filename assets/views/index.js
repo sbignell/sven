@@ -353,7 +353,7 @@
 
   app.MyCellarView = Backbone.View.extend({
     el: '#cellar',
-    //template: _.template(JST["assets/views/cellar/tmpl-mycellar.html"](app.user.attributes)), //We need to jade this and pass data
+    template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('mycellarView loaded.');
       //this.model = new app.Record();
@@ -362,7 +362,6 @@
       this.render();
     },
     render: function() {
-      //console.dir(app.user);
 
       /*if (typeof app.user != 'undefined'){
   
@@ -373,9 +372,13 @@
 
       console.dir(app.user.attributes);
 
-      this.template = _.template(JST["assets/views/cellar/tmpl-mycellar.html"](app.user.attributes));
-
       this.$el.html(this.template());
+
+      var welcomeText = 'Welcome, ' + app.user.attributes.username;
+      var panelHeading = '<img class="wines" src="media/wines.png" /> ' + app.user.attributes.username + '\'s Top 20';
+      $('#cellar div.media-body h4.media-heading').html(welcomeText);
+      $('#cellar div.panel-heading h3.panel-title').html(panelHeading);
+
       return this;
     }
   });

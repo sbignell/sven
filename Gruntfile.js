@@ -77,7 +77,7 @@ module.exports = function(grunt) {
           "assets/views/home/tmpl-home.html": ["assets/views/home/*.jade"],
           "assets/views/about/tmpl-about.html": ["assets/views/about/*.jade"],
           "assets/views/cellar/tmpl-cellar.html": ["assets/views/cellar/index.jade"],
-          "assets/views/cellar/tmpl-mycellar.html": ["assets/views/cellar/my.jade"],
+          //"assets/views/cellar/tmpl-mycellar.html": ["assets/views/cellar/my.jade"],
           "assets/views/login/forgot/tmpl-forgot.html": ["assets/views/login/forgot/*.jade"],
           "assets/views/login/reset/tmpl-reset.html": ["assets/views/login/reset/*.jade"]
         }
