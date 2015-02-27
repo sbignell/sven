@@ -31,7 +31,9 @@
     }
 
     if(view == app.views.cellarView && typeof app.user != 'undefined') { //If user logged in, change cellarView
+      console.log('showView: user logged in and requested cellarView');
       if(typeof app.views.mycellarView == 'undefined'){
+        console.log('showView: creating mycellarView');
         app.views.mycellarView = new app.MyCellarView();
       }
       
@@ -221,7 +223,7 @@
             $('.dropdown-toggle').dropdown('toggle');
 
             //re-render with user model
-            app.views.mycellarView.render();
+            //app.views.mycellarView.render();
 
             //move to cellar
             app.showView(app.views.cellarView);
