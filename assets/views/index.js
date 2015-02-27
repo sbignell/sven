@@ -31,6 +31,10 @@
     }
 
     if(view == app.views.cellarView && typeof app.user != 'undefined') { //If user logged in, change cellarView
+      if(typeof app.views.mycellarView == 'undefined'){
+        app.views.mycellarView = new app.MyCellarView();
+      }
+      
       view = app.views.mycellarView;
     }
 
@@ -362,7 +366,7 @@
   
         fetch collection from server
       }*/
-      
+
       this.$el.html(this.template( app.user.attributes ));
       return this;
     }
@@ -605,7 +609,7 @@
     app.views.current = app.views.homeView;
     app.views.aboutView = new app.AboutView();
     app.views.cellarView = new app.CellarView();
-    app.views.mycellarView = new app.MyCellarView();
+    //app.views.mycellarView = new app.MyCellarView();
     app.views.forgotView = new app.ForgotView();
     app.views.resetView = new app.ResetView();
     console.log('app loaded!');
