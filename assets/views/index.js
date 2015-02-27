@@ -375,8 +375,10 @@
       this.$el.html(this.template());
 
       var welcomeText = 'Welcome, ' + app.user.attributes.username;
+      var cellarBlurb = 'This is your wine cellar, why don\'t you start adding your favourite drops! Look, I\'ve started you off with one of my personal favourites.';
       var panelHeading = '<img class="wines" src="media/wines.png" /> ' + app.user.attributes.username + '\'s Top 20';
       $('#cellar div.media-body h4.media-heading').html(welcomeText);
+      $('#cellar div.media-body p.cellarConversation').text(cellarBlurb);
       $('#cellar div.panel-heading h3.panel-title').html(panelHeading);
 
       return this;
