@@ -216,6 +216,9 @@
             $('div.dropdown').html(loggedInBtn);
             $('.dropdown-toggle').dropdown('toggle');
 
+            //re-render with user model
+            app.views.mycellarView.render();
+
             //move to cellar
             app.showView(app.views.cellarView);
 
