@@ -352,11 +352,18 @@
       console.log('mycellarView loaded.');
       //this.model = new app.Record();
       //this.listenTo(this.model, 'change', this.render);
+
       this.render();
     },
     render: function() {
-      console.dir(app.user);
-      this.$el.html(this.template( app.user ));
+      //console.dir(app.user);
+
+      /*if (typeof app.user != 'undefined'){
+  
+        fetch collection from server
+      }*/
+      
+      this.$el.html(this.template( app.user.attributes ));
       return this;
     }
   });
