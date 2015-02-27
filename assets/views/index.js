@@ -353,7 +353,7 @@
 
   app.MyCellarView = Backbone.View.extend({
     el: '#cellar',
-    template: _.template(JST["assets/views/cellar/tmpl-mycellar.html"]()), //We need to jade this and pass data
+    template: _.template(JST["assets/views/cellar/tmpl-mycellar.html"](app.user.attributes)), //We need to jade this and pass data
     initialize: function() {
       console.log('mycellarView loaded.');
       //this.model = new app.Record();
@@ -373,7 +373,7 @@
 
       console.dir(app.user.attributes);
 
-      this.$el.html(this.template( app.user.attributes ));
+      this.$el.html(this.template());
       return this;
     }
   });
