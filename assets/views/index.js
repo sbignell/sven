@@ -366,8 +366,12 @@
 
       /*if (typeof app.user != 'undefined'){
   
-        fetch collection from server
+        fetch my collection from server
+      } else {
+        fetch sid's collection
       }*/
+
+      console.dir(app.user.attributes);
 
       this.$el.html(this.template( app.user.attributes ));
       return this;
@@ -604,6 +608,9 @@
     app.firstLoad = true;
     //app.router = new app.Router();
     //Backbone.history.start();
+
+    //check with server if predefined session exists
+
     app.views = {};
 
     app.views.headerView = new app.HeaderView();

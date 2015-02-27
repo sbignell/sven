@@ -6,7 +6,7 @@ block cellar
       div.media-body
         h4.media-heading Welcome, 
         h2= username
-        p This is yuor wine cellar, why don't you start adding your favourite drops! Look, I've started you of with my personal favourite.
+        p This is your wine cellar, why don't you start adding your favourite drops! Look, I've started you of with my personal favourite.
         p My wine cellar is built on mysql and I interact with it via the great npm module Sequelize. I could of course use mongodb instead, however in this configuration you can gain an understanding of how to integrate mysql into your project rather than the usual choice of mongodb.
       div.clearfix
   div.row
@@ -15,7 +15,7 @@ block cellar
         div.panel-heading
           h3.panel-title
             img.wines(src="media/wines.png") 
-            |=  username
+            =  username
             | 's Top 20
         div.panel-body
         table.table
