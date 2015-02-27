@@ -30,6 +30,10 @@
       }
     }
 
+    if(view == app.views.cellarView && typeof app.user != 'undefined') { //If user logged in, change cellarView
+      view = app.views.mycellarView;
+    }
+
     if(app.views.current != undefined){
         $(app.views.current.el).hide();
     }
@@ -55,6 +59,16 @@
       username: '',
       email: '',
       password: ''
+    }
+  });
+
+  app.User = Backbone.Model.extend({
+    url: '/api/v1/user/',
+    defaults: {
+      errors: [],
+      errfor: {},
+      username: '',
+      email: ''
     }
   });
 
@@ -180,6 +194,9 @@
             console.log('Signed In!');
             console.dir(model);
             console.dir(response);
+            app.user = new app.User({
+              username: model.attributes.username
+            });
 
             $('.form-control').attr('disabled', false);
             $('#doSignIn').attr('disabled', false);
@@ -321,6 +338,22 @@
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
+      return this;
+    }
+  });
+
+  app.MyCellarView = Backbone.View.extend({
+    el: '#cellar',
+    template: _.template(JST["assets/views/cellar/tmpl-mycellar.html"]()), //We need to jade this and pass data
+    initialize: function() {
+      console.log('mycellarView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      this.render();
+    },
+    render: function() {
+      console.dir(app.user);
+      this.$el.html(this.template( app.user ));
       return this;
     }
   });
@@ -562,6 +595,7 @@
     app.views.current = app.views.homeView;
     app.views.aboutView = new app.AboutView();
     app.views.cellarView = new app.CellarView();
+    app.views.mycellarView = new app.MyCellarView();
     app.views.forgotView = new app.ForgotView();
     app.views.resetView = new app.ResetView();
     console.log('app loaded!');
