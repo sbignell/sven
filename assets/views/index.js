@@ -82,25 +82,22 @@
     idAttribute: '_id',
     defaults: {
       _id: undefined,
-      'name.full': '',
-      company: '',
-      phone: '',
-      zip: '',
-      status: {
-        id: undefined,
-        name: '',
-        userCreated: {}
-      },
-      userCreated: {}
+      grape: '',
+      estate: '',
+      name: '',
+      notes: '',
+      pairing: '',
+      rating: '',
+      userId: ''
     },
     url: function() {
-      return '/admin/accounts/'+ (this.isNew() ? '' : this.id +'/');
+      return '/cellar/'+ (this.isNew() ? '' : this.id +'/');
     }
   });
 
   app.RecordCollection = Backbone.Collection.extend({
     model: app.Record,
-    url: '/admin/accounts/',
+    url: '/cellar/',
     parse: function(results) {
       app.pagingView.model.set({
         pages: results.pages,
@@ -341,12 +338,27 @@
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('cellarView loaded.');
-      //this.model = new app.Record();
-      //this.listenTo(this.model, 'change', this.render);
+
+      this.collection = new app.RecordCollection( );
+      this.listenTo(this.collection, 'reset', this.render);
+
       this.render();
     },
     render: function() {
       this.$el.html(this.template( 'hello' ));
+
+      var frag = document.createDocumentFragment();
+      this.collection.each(function(record) {
+        console.log('Wine name is: ' + record.name);
+        var view = new app.ResultsRowView({ model: record });
+        frag.appendChild(view.render().el);
+      }, this);
+      $('#results-rows').append(frag);
+
+      if (this.collection.length === 0) {
+        //$('#results-rows').append( $('#tmpl-results-empty-row').html() );
+      }
+
       return this;
     }
   });
@@ -356,19 +368,17 @@
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('mycellarView loaded.');
-      //this.model = new app.Record();
-      //this.listenTo(this.model, 'change', this.render);
+
+      this.collection = new app.RecordCollection( );
+      this.listenTo(this.collection, 'reset', this.render);
+
 
       this.render();
     },
     render: function() {
 
-      /*if (typeof app.user != 'undefined'){
-  
-        fetch my collection from server
-      } else {
-        fetch sid's collection
-      }*/
+      //fetch my collection from server
+
 
       console.dir(app.user.attributes);
 
@@ -380,6 +390,18 @@
       $('#cellar div.media-body h4.media-heading').html(welcomeText);
       $('#cellar div.media-body p.cellarConversation').text(cellarBlurb);
       $('#cellar div.panel-heading h3.panel-title').html(panelHeading);
+
+      var frag = document.createDocumentFragment();
+      this.collection.each(function(record) {
+        console.log('Wine name is: ' + record.name);
+        var view = new app.ResultsRowView({ model: record });
+        frag.appendChild(view.render().el);
+      }, this);
+      $('#results-rows').append(frag);
+
+      if (this.collection.length === 0) {
+        //$('#results-rows').append( $('#tmpl-results-empty-row').html() );
+      }
 
       return this;
     }
@@ -471,33 +493,9 @@
     }
   });
 
-  app.ResultsView = Backbone.View.extend({
-    el: '#results-table',
-    //template: _.template( $('#tmpl-results-table').html() ),
-    initialize: function() {
-      this.collection = new app.RecordCollection( app.mainView.results.data );
-      this.listenTo(this.collection, 'reset', this.render);
-      this.render();
-    },
-    render: function() {
-      this.$el.html( this.template() );
-
-      var frag = document.createDocumentFragment();
-      this.collection.each(function(record) {
-        var view = new app.ResultsRowView({ model: record });
-        frag.appendChild(view.render().el);
-      }, this);
-      $('#results-rows').append(frag);
-
-      if (this.collection.length === 0) {
-        $('#results-rows').append( $('#tmpl-results-empty-row').html() );
-      }
-    }
-  });
-
   app.ResultsRowView = Backbone.View.extend({
     tagName: 'tr',
-    //template: _.template( $('#tmpl-results-row').html() ),
+    template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
     events: {
       'click .btn-details': 'viewDetails'
     },
