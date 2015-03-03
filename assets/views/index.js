@@ -362,7 +362,7 @@
 
       var frag = document.createDocumentFragment();
       this.collection.each(function(record) {
-        console.log('Wine name is: ' + record.name);
+        console.log('Wine name is: ' + record.attributes.name);
         var view = new app.ResultsRowView({ model: record });
         frag.appendChild(view.render().el);
       }, this);
@@ -417,7 +417,7 @@
 
       var frag = document.createDocumentFragment();
       this.collection.each(function(record) {
-        console.log('Wine name is: ' + record.name);
+        console.log('Wine name is: ' + record.attributes.name);
         var view = new app.ResultsRowView({ model: record });
         frag.appendChild(view.render().el);
       }, this);
