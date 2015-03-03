@@ -521,7 +521,7 @@
 
   app.FilterView = Backbone.View.extend({
     el: '#filters',
-    _.template(JST["assets/views/cellar/filter/tmpl-filter.html"]()),
+    template: _.template(JST["assets/views/cellar/filter/tmpl-filter.html"]()),
     events: {
       'submit form': 'preventSubmit',
       'keypress input[type="text"]': 'filterOnEnter',
@@ -556,7 +556,7 @@
 
   app.PagingView = Backbone.View.extend({
     el: '#results-paging',
-    _.template(JST["assets/views/cellar/paging/tmpl-paging.html"]()),
+    template: _.template(JST["assets/views/cellar/paging/tmpl-paging.html"]()),
     events: {
       'click .btn-page': 'goToPage'
     },
