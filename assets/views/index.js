@@ -99,11 +99,11 @@
     model: app.Record,
     url: '/cellar/',
     parse: function(results) {
-      app.pagingView.model.set({
+      /*app.pagingView.model.set({
         pages: results.pages,
         items: results.items
       });
-      app.filterView.model.set(results.filters);
+      app.filterView.model.set(results.filters);*/
       return results.data;
     }
   });
@@ -625,8 +625,8 @@
     app.views.current = app.views.homeView;
     app.views.aboutView = new app.AboutView();
     app.views.cellarView = new app.CellarView();
-    app.views.filterView = new app.FilterView();
-    app.views.pagingView = new app.PagingView();
+    //app.views.filterView = new app.FilterView();
+    //app.views.pagingView = new app.PagingView();
     //app.views.mycellarView = new app.MyCellarView();
     app.views.forgotView = new app.ForgotView();
     app.views.resetView = new app.ResetView();
