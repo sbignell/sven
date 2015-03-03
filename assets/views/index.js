@@ -338,6 +338,7 @@
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('cellarView loaded.');
+      var self = this;
 
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
@@ -347,7 +348,7 @@
           console.dir(collection);
           console.dir(response);
           console.dir(options);
-          this.render();
+          self.render();
         }
       });
 
@@ -380,6 +381,7 @@
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('mycellarView loaded.');
+      var self = this;
 
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
@@ -389,7 +391,7 @@
           console.dir(collection);
           console.dir(response);
           console.dir(options);
-          this.render();
+          self.render();
         }
       });
 
