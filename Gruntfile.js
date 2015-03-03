@@ -78,8 +78,8 @@ module.exports = function(grunt) {
           "assets/views/about/tmpl-about.html": ["assets/views/about/*.jade"],
           "assets/views/cellar/tmpl-cellar.html": ["assets/views/cellar/index.jade"],
           "assets/views/cellar/wines/tmpl-wines.html": ["assets/views/cellar/wines/index.jade"],
-          "assets/views/cellar/filter/tmpl-filter.html": ["assets/views/cellar/filter/filter.jade"],
-          "assets/views/cellar/paging/tmpl-paging.html": ["assets/views/cellar/paging/paging.jade"],
+          //"assets/views/cellar/filter/tmpl-filter.html": ["assets/views/cellar/filter/filter.jade"],
+          //"assets/views/cellar/paging/tmpl-paging.html": ["assets/views/cellar/paging/paging.jade"],
           "assets/views/login/forgot/tmpl-forgot.html": ["assets/views/login/forgot/*.jade"],
           "assets/views/login/reset/tmpl-reset.html": ["assets/views/login/reset/*.jade"]
         }
