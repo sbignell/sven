@@ -497,7 +497,7 @@
     tagName: 'tr',
     template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
     events: {
-      'click .btn-details': 'viewDetails'
+      //'click .btn-details': 'viewDetails'
     },
     viewDetails: function() {
       location.href = this.model.url();
