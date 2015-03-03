@@ -341,12 +341,14 @@
 
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
-      this.collection.fetch(success: function(collection, response, options){
-        console.log('collection, response, options');
-        console.dir(collection);
-        console.dir(response);
-        console.dir(options);
-        this.render();
+      this.collection.fetch({
+        success: function(collection, response, options){
+          console.log('collection, response, options');
+          console.dir(collection);
+          console.dir(response);
+          console.dir(options);
+          this.render();
+        }
       });
 
       
