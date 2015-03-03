@@ -527,6 +527,8 @@
       location.href = this.model.url();
     },
     render: function() {
+      console.log('ResultsRowView: render');
+      console.dir(this.model.attributes);
       this.$el.html(this.template( this.model.attributes ));
       /*this.$el.find('.timeago').each(function(index, indexValue) {
         if (indexValue.innerText) {
