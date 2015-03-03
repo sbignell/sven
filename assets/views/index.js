@@ -519,7 +519,7 @@
 
   app.ResultsRowView = Backbone.View.extend({
     tagName: 'tr',
-    template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
+    //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
     events: {
       //'click .btn-details': 'viewDetails'
     },
@@ -529,7 +529,9 @@
     render: function() {
       console.log('ResultsRowView: render');
       console.dir(this.model.attributes);
-      this.$el.html(this.template( this.model ));
+
+      //this.$el.html(this.template( this.model ));
+      this.$el.html(_.template(JST["assets/views/cellar/wines/tmpl-wines.html"](this.model));
       /*this.$el.find('.timeago').each(function(index, indexValue) {
         if (indexValue.innerText) {
           var myMoment = moment(indexValue.innerText);
