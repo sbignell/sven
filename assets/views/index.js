@@ -506,7 +506,7 @@
     },
     render: function() {
       this.$el.html(this.template( this.model.attributes ));
-      this.$el.find('.timeago').each(function(index, indexValue) {
+      /*this.$el.find('.timeago').each(function(index, indexValue) {
         if (indexValue.innerText) {
           var myMoment = moment(indexValue.innerText);
           indexValue.innerText = myMoment.from();
@@ -514,12 +514,12 @@
             indexValue.innerText = indexValue.innerText.replace('ago', 'old');
           }
         }
-      });
+      });*/
       return this;
     }
   });
 
-  app.FilterView = Backbone.View.extend({
+  /*app.FilterView = Backbone.View.extend({
     el: '#filters',
     template: _.template(JST["assets/views/cellar/filter/tmpl-filter.html"]()),
     events: {
@@ -552,9 +552,9 @@
       var query = $('#filters form').serialize();
       Backbone.history.navigate('q/'+ query, { trigger: true });
     }
-  });
+  });*/
 
-  app.PagingView = Backbone.View.extend({
+  /*app.PagingView = Backbone.View.extend({
     el: '#results-paging',
     template: _.template(JST["assets/views/cellar/paging/tmpl-paging.html"]()),
     events: {
@@ -586,7 +586,7 @@
       Backbone.history.navigate('q/'+ query, { trigger: true });
       $('body').scrollTop(0);
     }
-  });
+  });*/
 
   /*app.Router = Backbone.Router.extend({
     routes: {
