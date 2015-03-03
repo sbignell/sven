@@ -341,6 +341,7 @@
 
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
+      this.collection.fetch();
 
       this.render();
     },
@@ -371,6 +372,7 @@
 
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
+      this.collection.fetch();
 
 
       this.render();
