@@ -362,7 +362,7 @@
       var self = this;
 
       //remove Sid's top 20 records
-      $('#results-row').html('');
+      $('#results-row').empty();
 
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
