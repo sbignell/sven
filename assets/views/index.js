@@ -16,7 +16,7 @@
 
     //change button to username
     var loggedInBtn = '<button id="signedinDropdown" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">';
-    loggedInBtn += '<span class="fa fa-user"></span> ' + model.attributes.username + ' <span class="caret"></span></button>';
+    loggedInBtn += '<span class="fa fa-user"></span> ' + app.user.attributes.username + ' <span class="caret"></span></button>';
     loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
     loggedInBtn += '<li><a id="profile" href="#">Profile</a></li>';
     loggedInBtn += '<li><a id="signout" href="http://www.revisit.cc/logout/">Sign Out</a></li>';
