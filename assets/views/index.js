@@ -356,6 +356,10 @@
   app.MyCellarView = Backbone.View.extend({
     el: '#cellar',
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
+    events: {
+      'click #add-wine': 'addWine',
+      'click #delete-wine': 'deleteWine'
+    },
     initialize: function() {
       console.log('mycellarView loaded.');
       var self = this;
@@ -385,6 +389,9 @@
       console.dir(app.user.attributes);
 
       this.$el.html(this.template());
+
+      //Add + button
+      $('#cellar div.panel-heading').append('<button id="add-wine" class="btn btn-default pull-right"><span class="fa fa-plus"></span></button>');
 
       //remove Sid's top 20 records
       $('#results-rows').empty();
@@ -419,6 +426,12 @@
       $('#results-rows').append(frag);
 
       return this;
+    },
+    addWine: function(e){
+      console.log('add wine');
+    },
+    deleteWine: function(e){
+      console.log('delete wine');
     }
   });
 
