@@ -79,16 +79,17 @@
   });
 
   app.Record = Backbone.Model.extend({
-    idAttribute: '_id',
+    idAttribute: 'id',
     defaults: {
-      _id: undefined,
+      id: undefined,
       grape: '',
       estate: '',
       name: '',
       notes: '',
       pairing: '',
       rating: '',
-      userId: ''
+      year: '',
+      createdBy: ''
     },
     url: function() {
       return '/cellar/'+ (this.isNew() ? '' : this.id +'/');
