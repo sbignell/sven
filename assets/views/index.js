@@ -114,7 +114,6 @@
       estate: '',
       name: '',
       notes: '',
-      pairing: '',
       rating: '',
       year: '',
       createdBy: ''
@@ -392,7 +391,7 @@
 
       if(this.collection.length == 0){
         console.log('We need to add the dummy item');
-        $('#results-rows').append('<tr><td>Cabernet Sauvignon</td><td>Wolf Blass</td><td>2005 Private Selection</td><td>Blackberries and teardrops</td><td>Lamb</td><td>8.5</td></tr>');
+        $('#results-rows').append('<tr><td>Chardonnay</td><td>Heemskerk</td><td>2012 Coal River Valley Chardonnay</td><td>Bright straw-green; French oak barrel fermented, and pure class from start to finish, with perfect balance, line and length; Tasmanian acidity provides the framework and the length of a delicious wine. Trophy Best Chardonnay Tasmanian Wine Show ’14.</td><td>9.8</td></tr>');
       }
 
       var welcomeText = 'Welcome, ' + app.user.attributes.username;
