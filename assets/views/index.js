@@ -79,7 +79,7 @@
   });
 
   app.Record = Backbone.Model.extend({
-    idAttribute: 'id',
+    //idAttribute: 'id',
     defaults: {
       id: undefined,
       grape: '',
@@ -98,15 +98,7 @@
 
   app.RecordCollection = Backbone.Collection.extend({
     model: app.Record,
-    url: '/cellar/',
-    parse: function(results) {
-      /*app.pagingView.model.set({
-        pages: results.pages,
-        items: results.items
-      });
-      app.filterView.model.set(results.filters);*/
-      return results.data;
-    }
+    url: '/cellar/'
   });
 
   app.Filter = Backbone.Model.extend({
