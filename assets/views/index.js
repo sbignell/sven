@@ -5,6 +5,34 @@
 
   app = app || {};
 
+  app.finishSignIn = function (){
+
+    $('.form-control').attr('disabled', false);
+    $('#doSignIn').attr('disabled', false);
+    $('#doSignUp').attr('disabled', false);
+    $('#signinupDropdown').attr('disabled', false);
+    $('.dropdown-menu').attr('disabled', false);
+    $('#signStatus').css("display", "none");
+
+    //change button to username
+    var loggedInBtn = '<button id="signedinDropdown" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">';
+    loggedInBtn += '<span class="fa fa-user"></span> ' + model.attributes.username + ' <span class="caret"></span></button>';
+    loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
+    loggedInBtn += '<li><a id="profile" href="#">Profile</a></li>';
+    loggedInBtn += '<li><a id="signout" href="http://www.revisit.cc/logout/">Sign Out</a></li>';
+    loggedInBtn += '</ul>';
+
+    $('div.dropdown').html(loggedInBtn);
+    $('.dropdown-toggle').dropdown('toggle');
+
+    //re-render with user model
+    //app.views.mycellarView.render();
+
+    //move to cellar
+    app.showView(app.views.cellarView);
+
+  }
+
   app.getUrlParameter = function (sParam){
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');
@@ -190,33 +218,13 @@
             console.log('Signed In!');
             console.dir(model);
             console.dir(response);
+
             app.user = new app.User({
               username: model.attributes.username
             });
 
-            $('.form-control').attr('disabled', false);
-            $('#doSignIn').attr('disabled', false);
-            $('#doSignUp').attr('disabled', false);
-            $('#signinupDropdown').attr('disabled', false);
-            $('.dropdown-menu').attr('disabled', false);
-            $('#signStatus').css("display", "none");
-
-            //change button to username
-            var loggedInBtn = '<button id="signedinDropdown" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">';
-            loggedInBtn += '<span class="fa fa-user"></span> ' + model.attributes.username + ' <span class="caret"></span></button>';
-            loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
-            loggedInBtn += '<li><a id="profile" href="#">Profile</a></li>';
-            loggedInBtn += '<li><a id="signout" href="http://www.revisit.cc/logout/">Sign Out</a></li>';
-            loggedInBtn += '</ul>';
-
-            $('div.dropdown').html(loggedInBtn);
-            $('.dropdown-toggle').dropdown('toggle');
-
-            //re-render with user model
-            //app.views.mycellarView.render();
-
-            //move to cellar
-            app.showView(app.views.cellarView);
+            app.finishSignIn();
+            
 
           }
           else {
@@ -331,40 +339,16 @@
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     initialize: function() {
       console.log('cellarView loaded.');
-      var self = this;
-
-      this.collection = new app.RecordCollection( );
-      this.listenTo(this.collection, 'reset', this.render);
-      this.collection.fetch({
-        success: function(collection, response, options){
-          //console.log('collection, response, options');
-          //console.dir(collection);
-          console.dir(response);
-          //console.dir(options);
-          self.render();
-        }
-      });
-
       
+      this.render();
+  
     },
     render: function() {
 
       console.log('cellarView: render');
-      console.log(this.collection.length);
+
 
       this.$el.html(this.template( 'hello' ));
-
-      var frag = document.createDocumentFragment();
-      this.collection.each(function(record) {
-        console.log('Wine name is: ' + record.attributes.name);
-        var view = new app.ResultsRowView({ model: record });
-        frag.appendChild(view.render().el);
-      }, this);
-      $('#results-rows').append(frag);
-
-      if (this.collection.length === 0) {
-        //$('#results-rows').append( $('#tmpl-results-empty-row').html() );
-      }
 
       return this;
     }
@@ -381,32 +365,38 @@
       this.listenTo(this.collection, 'reset', this.render);
       this.collection.fetch({
         success: function(collection, response, options){
-          console.log('collection, response, options');
-          console.dir(collection);
+          //console.log('collection, response, options');
+          //console.dir(collection);
           console.dir(response);
-          console.dir(options);
+          //console.dir(options);
           self.render();
         }
       });
 
-
-
-      
     },
     render: function() {
 
       //fetch my collection from server
       console.log('mycellarView: render');
+      console.log(this.collection.length);
 
       console.dir(app.user.attributes);
 
       this.$el.html(this.template());
 
       var welcomeText = 'Welcome, ' + app.user.attributes.username;
-      var cellarBlurb = 'This is your wine cellar, why don\'t you start adding your favourite drops! Look, I\'ve started you off with one of my personal favourites.';
+      var cellarBlurb1 = 'This is your wine cellar, why don\'t you start adding your favourite drops! Look, I\'ve started you off with one of my personal favourites.';
+      var cellarBlurb2 = 'Excellent, I see you have great taste in wine! Keep building your cellar!';
+      var cellarBlurb3 = 'This is quite the collection you have! You\'ll need to stop there or you risk overshadowing me!!';
       var panelHeading = '<img class="wines" src="media/wines.png" /> ' + app.user.attributes.username + '\'s Top 20';
       $('#cellar div.media-body h4.media-heading').html(welcomeText);
-      $('#cellar div.media-body p.cellarConversation').text(cellarBlurb);
+      if (this.collection.length == 0){
+        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb1);
+      } else if (this.collection.length < 20){
+        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb2);
+      } else if (this.collection.length == 20){
+        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb3);
+      }
       $('#cellar div.panel-heading h3.panel-title').html(panelHeading);
 
       var frag = document.createDocumentFragment();
@@ -658,6 +648,7 @@
     if(typeof app.getUrlParameter('u') != 'undefined' && typeof app.getUrlParameter('t') != 'undefined'){
       app.showView(app.views.resetView);
     }
+
   };
 
 }());
