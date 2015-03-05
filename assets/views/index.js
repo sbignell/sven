@@ -358,6 +358,8 @@
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     events: {
       'click #add-wine': 'addWine',
+      'click #submit-wine': 'submitWine',
+      'click #cancel-wine': 'cancelWine',
       'click #delete-wine': 'deleteWine'
     },
     initialize: function() {
@@ -391,7 +393,9 @@
       this.$el.html(this.template());
 
       //Add + button
-      $('#cellar div.panel-heading').append('<button id="add-wine" class="btn btn-default pull-right"><span class="fa fa-plus"></span></button>');
+      $('#cellar div.panel-heading h3').append('<button id="add-wine" class="btn btn-default pull-right"><span class="fa fa-plus"></span></button>');
+      //Add the delete heading
+      $('#cellar .table thead').prepend('<th><span class="fa fa-trash-o"></span></th>');
 
       //remove Sid's top 20 records
       $('#results-rows').empty();
@@ -429,9 +433,30 @@
     },
     addWine: function(e){
       console.log('add wine');
+
+      var newWineRow = '<tr><td></td>';
+      newWineRow += '<td><input type="text"></td>';
+      newWineRow += '<td><input type="text"></td>';
+      newWineRow += '<td><input type="text"></td>';
+      newWineRow += '<td><input type="text"></td>';
+      newWineRow += '<td><input type="text"></td></tr>';
+
+      $('#results-rows').prepend(newWineRow);     
+
+      $('#cellar div.panel-heading h3').append('<button id="submit-wine" class="btn btn-sm btn-success pull-right"><span class="fa fa-check"></span></button><button id="cancel-wine" class="btn btn-sm btn-warning pull-right"><span class="fa fa-times"></span></button>');
+
+    },
+    submitWine: function(e){
+      console.log('submit wine');
+
+    },
+    cancelWine: function(e){
+      console.log('cancel wine');
+
     },
     deleteWine: function(e){
       console.log('delete wine');
+
     }
   });
 
