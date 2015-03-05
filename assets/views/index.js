@@ -361,6 +361,9 @@
       console.log('mycellarView loaded.');
       var self = this;
 
+      //remove Sid's top 20 records
+      $('#results-row').html('');
+
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
       this.collection.fetch({
@@ -369,6 +372,10 @@
           //console.dir(collection);
           console.dir(response);
           //console.dir(options);
+          if(this.collection.length == 0){
+            console.log('We need to add the dummy item');
+            $('#results-row').append('<tr><td>Cabernet Sauvignon</td><td>Wolf Blass</td><td>2005 Private Selection</td><td>Blackberries and teardrops</td><td>Lamb</td><td>8.5</td></tr>');
+          }
           self.render();
         }
       });
