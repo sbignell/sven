@@ -361,8 +361,7 @@
       console.log('mycellarView loaded.');
       var self = this;
 
-      //remove Sid's top 20 records
-      $('#results-row').empty();
+      
 
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
@@ -372,10 +371,7 @@
           console.dir(collection);
           console.dir(response);
           //console.dir(options);
-          if(collection.length == 0){
-            console.log('We need to add the dummy item');
-            $('#results-row').append('<tr><td>Cabernet Sauvignon</td><td>Wolf Blass</td><td>2005 Private Selection</td><td>Blackberries and teardrops</td><td>Lamb</td><td>8.5</td></tr>');
-          }
+          
           self.render();
         }
       });
@@ -391,11 +387,20 @@
 
       this.$el.html(this.template());
 
+      //remove Sid's top 20 records
+      $('#results-row').empty();
+
+      if(collection.length == 0){
+        console.log('We need to add the dummy item');
+        $('#results-row').append('<tr><td>Cabernet Sauvignon</td><td>Wolf Blass</td><td>2005 Private Selection</td><td>Blackberries and teardrops</td><td>Lamb</td><td>8.5</td></tr>');
+      }
+
       var welcomeText = 'Welcome, ' + app.user.attributes.username;
       var cellarBlurb1 = 'This is your wine cellar, why don\'t you start adding your favourite drops! Look, I\'ve started you off with one of my personal favourites.';
       var cellarBlurb2 = 'Excellent, I see you have great taste in wine! Keep building your cellar!';
       var cellarBlurb3 = 'This is quite the collection you have! You\'ll need to stop there or you risk overshadowing me!!';
       var panelHeading = '<img class="wines" src="media/wines.png" /> ' + app.user.attributes.username + '\'s Top 20';
+      
       $('#cellar div.media-body h4.media-heading').html(welcomeText);
       if (this.collection.length == 0){
         $('#cellar div.media-body p.cellarConversation').text(cellarBlurb1);
@@ -413,10 +418,6 @@
         frag.appendChild(view.render().el);
       }, this);
       $('#results-rows').append(frag);
-
-      if (this.collection.length === 0) {
-        //$('#results-rows').append( $('#tmpl-results-empty-row').html() );
-      }
 
       return this;
     }
