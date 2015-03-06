@@ -356,7 +356,7 @@
     el: '#cellar',
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     events: {
-      //'click #add-wine': 'addWine',
+      'click #add-wine': 'addWine',
       'click #submit-wine': 'submitWine',
       'click #cancel-wine': 'cancelWine',
       'click #delete-wine': 'deleteWine'
@@ -364,6 +364,8 @@
     initialize: function() {
       console.log('mycellarView loaded.');
       var self = this;
+
+      $('#wine-modal').modal();
 
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
@@ -433,7 +435,7 @@
       
       //show modal
 
-      //$('.modal').modal('show');
+      $('#wine-modal').modal('show');
 
       /* for inline row, doesnt look good
       var newWineRow = '<tr><td></td>';
@@ -467,7 +469,7 @@
     cancelWine: function(e){
       console.log('cancel wine');
 
-      $('.modal').modal('hide');
+      $('#wine-modal').modal('hide');
 
     },
     deleteWine: function(e){
