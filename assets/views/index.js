@@ -485,8 +485,8 @@
     },
     deleteWine: function(e){
       console.log('delete wine');
-      console.dir(e.currentTarget.closest('tr'));
-      var parent = e.currentTarget.closest('tr');
+      console.dir($(e.currentTarget).closest('tr'));
+      var parent = $(e.currentTarget).closest('tr');
       var wineName = $(parent + ' .name').val();
       console.log('wineName: ' + wineName);
 
