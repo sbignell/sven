@@ -393,7 +393,7 @@
       this.$el.html(this.template());
 
       //Add + button
-      $('#cellar div.panel-heading').append('<button id="add-wine" class="btn btn-default pull-right"><span class="fa fa-plus"></span></button>');
+      $('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm"><span class="fa fa-plus"></span></button>');
       //Add the delete heading
       $('#cellar .table thead tr').prepend('<th><span class="fa fa-trash-o"></span></th>');
 
@@ -433,17 +433,18 @@
     },
     addWine: function(e){
       console.log('add wine');
+      //modal instead
 
       var newWineRow = '<tr><td></td>';
-      newWineRow += '<td><input type="text"></td>';
-      newWineRow += '<td><input type="text"></td>';
-      newWineRow += '<td><input type="text"></td>';
-      newWineRow += '<td><input type="text"></td>';
-      newWineRow += '<td><input type="text"></td></tr>';
+      newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
+      newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
+      newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
+      newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
+      newWineRow += '<td><div class="col-md-1"><input type="text"></div></td></tr>';
 
       $('#results-rows').prepend(newWineRow);     
 
-      $('#cellar div.panel-heading').append('<button id="submit-wine" class="btn btn-sm btn-success pull-right"><span class="fa fa-check"></span></button><button id="cancel-wine" class="btn btn-sm btn-warning pull-right"><span class="fa fa-times"></span></button>');
+      $('#cellar div.panel-heading .btn-group').prepend('<button id="submit-wine" class="btn btn-sm btn-success"><span class="fa fa-check"></span></button><button id="cancel-wine" class="btn btn-sm btn-warning"><span class="fa fa-times"></span></button>');
 
     },
     submitWine: function(e){
@@ -456,6 +457,8 @@
     },
     deleteWine: function(e){
       console.log('delete wine');
+
+      //parent tr remove, fadeOut
 
     }
   });
