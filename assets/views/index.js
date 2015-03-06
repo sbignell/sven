@@ -488,14 +488,14 @@
       console.dir(e.currentTarget.closest('tr'));
       var parent = e.currentTarget.closest('tr');
       var wineName = $(parent + ' .name').val();
-      console.log('wineName: ' wineName);
+      console.log('wineName: ' + wineName);
 
       //parent tr remove, fadeOut
       var removeWine = this.collection.findWhere({
         name: wineName
       });
 
-      console.log('removeWine: ' removeWine);
+      console.log('removeWine: ' + removeWine);
       this.collection.remove(removeWine);
 
     }
