@@ -115,7 +115,6 @@
       name: '',
       notes: '',
       rating: '',
-      year: '',
       createdBy: ''
     },
     url: function() {
@@ -366,8 +365,6 @@
       console.log('mycellarView loaded.');
       var self = this;
 
-      
-
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
       this.collection.fetch({
@@ -436,7 +433,7 @@
       
       //show modal
 
-      $('.modal').show();
+      $('.modal').modal('show');
 
       /* for inline row, doesnt look good
       var newWineRow = '<tr><td></td>';
@@ -456,9 +453,21 @@
     submitWine: function(e){
       console.log('submit wine');
 
+      var newWine = app.Record();
+
+      newWine.save({
+        grape: this.$el.find('.modal #wineGrape').val(),
+        estate: this.$el.find('.modal #wineEstate').val(),
+        name: this.$el.find('.modal #wineName').val(),
+        notes: this.$el.find('.modal #wineNotes').val(),
+        rating: this.$el.find('.modal #wineRating').val()
+      });
+
     },
     cancelWine: function(e){
       console.log('cancel wine');
+
+      $('.modal').modal('hide');
 
     },
     deleteWine: function(e){
