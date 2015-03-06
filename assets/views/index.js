@@ -454,6 +454,7 @@
     },
     submitWine: function(e){
       console.log('submit wine');
+      var self = this;
 
       var newWine = new app.Record();
 
@@ -468,7 +469,7 @@
         console.log("success");
         console.dir(model);
         $('#wine-modal').modal('hide');
-        this.collection.add(model);
+        self.collection.add(model);
       },
       error: function (model, response) {
           console.log("error");
