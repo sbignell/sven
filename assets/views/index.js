@@ -356,7 +356,7 @@
     el: '#cellar',
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     events: {
-      'click #add-wine': 'addWine',
+      //'click #add-wine': 'addWine',
       'click #submit-wine': 'submitWine',
       'click #cancel-wine': 'cancelWine',
       'click #delete-wine': 'deleteWine'
