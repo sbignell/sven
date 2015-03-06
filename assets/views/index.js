@@ -433,7 +433,7 @@
       
       //show modal
 
-      $('.modal').modal('show');
+      //$('.modal').modal('show');
 
       /* for inline row, doesnt look good
       var newWineRow = '<tr><td></td>';
