@@ -433,8 +433,12 @@
     },
     addWine: function(e){
       console.log('add wine');
-      //modal instead
+      
+      //show modal
 
+      $('.modal').show();
+
+      /* for inline row, doesnt look good
       var newWineRow = '<tr><td></td>';
       newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
       newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
@@ -442,9 +446,11 @@
       newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
       newWineRow += '<td><div class="col-md-1"><input type="text"></div></td></tr>';
 
-      $('#results-rows').prepend(newWineRow);     
+      $('#results-rows').prepend(newWineRow);
+      */     
 
-      $('#cellar div.panel-heading .btn-group').prepend('<button id="submit-wine" class="btn btn-sm btn-success"><span class="fa fa-check"></span></button><button id="cancel-wine" class="btn btn-sm btn-warning"><span class="fa fa-times"></span></button>');
+      //add/cancel buttons on top of panel
+      //$('#cellar div.panel-heading .btn-group').prepend('<button id="submit-wine" class="btn btn-sm btn-success"><span class="fa fa-check"></span></button><button id="cancel-wine" class="btn btn-sm btn-warning"><span class="fa fa-times"></span></button>');
 
     },
     submitWine: function(e){
