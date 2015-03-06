@@ -453,7 +453,7 @@
     submitWine: function(e){
       console.log('submit wine');
 
-      var newWine = app.Record();
+      var newWine = new app.Record();
 
       newWine.save({
         grape: this.$el.find('.modal #wineGrape').val(),
