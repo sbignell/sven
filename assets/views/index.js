@@ -485,8 +485,12 @@
     },
     deleteWine: function(e){
       console.log('delete wine');
+      console.dir(e.currentTarget);
 
       //parent tr remove, fadeOut
+      //var removeWine = this.collection.findWhere({
+        //name: 
+      //});
       //this.collection.remove({id: e.currentTarget....});
 
     }
