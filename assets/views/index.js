@@ -367,6 +367,8 @@
 
       this.collection = new app.RecordCollection( );
       this.listenTo(this.collection, 'reset', this.render);
+      this.listenTo(this.collection, 'add', this.render);
+      this.listenTo(this.collection, 'remove', this.render);
       this.collection.fetch({
         success: function(collection, response, options){
           //console.log('collection, response, options');
@@ -466,7 +468,7 @@
         console.log("success");
         console.dir(model);
         $('#wine-modal').modal('hide');
-        //insert into list?
+        this.collection.add(model);
       },
       error: function (model, response) {
           console.log("error");
@@ -484,6 +486,7 @@
       console.log('delete wine');
 
       //parent tr remove, fadeOut
+      //this.collection.remove({id: e.currentTarget....});
 
     }
   });
