@@ -486,13 +486,13 @@
     deleteWine: function(e){
       console.log('delete wine');
       console.dir($(e.currentTarget).closest('tr'));
-      var parent = $(e.currentTarget).closest('tr');
-      var wineName = $(parent + ' .name').val();
-      console.log('wineName: ' + wineName);
+      var siblings = $(e.currentTarget).closest('tr').children();
+
+      console.log('wineName: ' + siblings[3]);
 
       //parent tr remove, fadeOut
       var removeWine = this.collection.findWhere({
-        name: wineName
+        name: siblings[3]
       });
 
       console.log('removeWine: ' + removeWine);
