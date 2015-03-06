@@ -359,7 +359,7 @@
       //'click #add-wine': 'addWine',
       'click #submit-wine': 'submitWine',
       'click #cancel-wine': 'cancelWine',
-      'click #delete-wine': 'deleteWine'
+      'click .delete-wine': 'deleteWine'
     },
     initialize: function() {
       console.log('mycellarView loaded.');
@@ -485,13 +485,18 @@
     },
     deleteWine: function(e){
       console.log('delete wine');
-      console.dir(e.currentTarget);
+      console.dir(e.currentTarget.closest('tr'));
+      var parent = e.currentTarget.closest('tr');
+      var wineName = $(parent + ' .name').val();
+      console.log('wineName: ' wineName);
 
       //parent tr remove, fadeOut
-      //var removeWine = this.collection.findWhere({
-        //name: 
-      //});
-      //this.collection.remove({id: e.currentTarget....});
+      var removeWine = this.collection.findWhere({
+        name: wineName
+      });
+
+      console.log('removeWine: ' removeWine);
+      this.collection.remove(removeWine);
 
     }
   });
