@@ -461,6 +461,16 @@
         name: this.$el.find('.modal #wineName').val(),
         notes: this.$el.find('.modal #wineNotes').val(),
         rating: this.$el.find('.modal #wineRating').val()
+      }, {
+      success: function (model, response) {
+        console.log("success");
+        console.dir(model);
+        $('#wine-modal').modal('hide');
+        //insert into list?
+      },
+      error: function (model, response) {
+          console.log("error");
+      }
       });
 
     },
