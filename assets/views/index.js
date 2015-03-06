@@ -486,6 +486,7 @@
     deleteWine: function(e){
       console.log('delete wine');
       console.dir($(e.currentTarget).closest('tr'));
+      var self = this;
       var siblings = $(e.currentTarget).closest('tr').children();
 
       console.log('wineName: ');
@@ -495,9 +496,15 @@
       var removeWine = this.collection.findWhere({
         name: siblings[3].innerText
       });
+      console.log('removeWine: ')
+      console.dir(removeWine);
 
-      console.log('removeWine: ' + removeWine);
-      this.collection.remove(removeWine);
+      removeWine.destroy().complete(function(){
+          self.collection.fetch();
+        });
+
+      
+      //this.collection.remove(removeWine);
 
     }
   });
