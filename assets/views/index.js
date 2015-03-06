@@ -488,11 +488,12 @@
       console.dir($(e.currentTarget).closest('tr'));
       var siblings = $(e.currentTarget).closest('tr').children();
 
-      console.log('wineName: ' + siblings[3]);
+      console.log('wineName: ');
+        console.dir(siblings[3]);
 
       //parent tr remove, fadeOut
       var removeWine = this.collection.findWhere({
-        name: siblings[3]
+        name: siblings[3].innerText
       });
 
       console.log('removeWine: ' + removeWine);
