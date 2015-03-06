@@ -378,6 +378,9 @@
         }
       });
 
+      //Init addWine modal
+      $('.modal').modal();
+
     },
     render: function() {
 
