@@ -378,9 +378,6 @@
         }
       });
 
-      //Init addWine modal
-      $('.modal').modal();
-
     },
     render: function() {
 
@@ -393,7 +390,7 @@
       this.$el.html(this.template());
 
       //Add + button
-      $('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm"><span class="fa fa-plus"></span></button>');
+      $('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-toggle="modal" data-target="#wine-modal"><span class="fa fa-plus"></span></button>');
       //Add the delete heading
       $('#cellar .table thead tr').prepend('<th><span class="fa fa-trash-o"></span></th>');
 
