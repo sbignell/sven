@@ -217,13 +217,10 @@
             console.dir(model);
             console.dir(response);
 
-            app.user = new app.User({
-              username: model.attributes.username
-            });
+            app.user.username = model.attributes.username;
 
             app.finishSignIn();
-            
-
+          
           }
           else {
             model.set(response);
@@ -721,6 +718,22 @@
     //Backbone.history.start();
 
     //check with server if predefined session exists
+    app.user = new app.User();
+    app.user.fetch({
+        success: function(model, response, options){
+          //console.log('collection, response, options');
+          console.dir(model);
+          console.dir(response);
+          //console.dir(options);
+          
+          //if exists then theyre logged in
+          if(model.attributes.username != undefined){
+            app.finishSignIn();
+          }
+          //otherwise we're not logged in
+        }
+      });
+
 
     app.views = {};
 

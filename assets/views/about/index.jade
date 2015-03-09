@@ -1,11 +1,19 @@
 block about
   div.row
     div.page-header
-        h1 Best of friends
+        h1 The Project
         p 
-          b The objective: To get you up and running with a single page web app as quickly as possible, using current tools.
+          b Objective: To get you up and running with a single page web app as quickly as possible, using current tools.
         p This project exists because I've built a few side project apps and always disliked the initial time spent getting a framework and the other pieces together to actually get something simple off the ground. I found myself coming back to the Drywall project time and time again, and manipulating it for my purposes time and time again. I recently decided to take Drywall, modify it and extend it to my purposes and turn that into an open source repository to be used by anyone to kickstart their apps too. One difference of note is that I've incorporated the Sequelize ORM into this project which helps you use MySql (or Postgres) instead or as well as Mongodb. Another feature is that client and server are completely seperated, you could therefore turn the client into a mobile app using cordova (phonegap) or nativescript really easily thereby keeping consistent code across web app and mobile app.
-        p A huge thank you and shout out to Reza Akhavan and the Drywall project, as well as to Christophe Coenraets and his Wine Cellar tutorial, from which I've taken his great idea of a wine cellar to showcase how you can use this tool. If you'd like to get involved I'd gladly take improvements and suggestions via the github repo's issues page.  
+        p A huge thank you and shout out to Reza Akhavan and the 
+          a(href="http://jedireza.github.io/drywall/" target="_blank") Drywall project
+          | , as well as to Christophe Coenraets and his 
+          a(href="http://coenraets.org/blog/2012/10/nodecellar-sample-application-with-backbone-js-twitter-bootstrap-node-js-express-and-mongodb/" target="_blank") Wine Cellar tutorial
+          | , from which I've taken his great idea of a wine cellar to showcase how you can use this tool. If you'd like to get involved I'd gladly take improvements and suggestions via the github repo's 
+          a(href="https://github.com/sbignell" target="_blank") issues 
+          | page.  
+    div.col-sm-10.col-sm-offset-2
+      h1 Best of friends
     div.col-sm-6
       div.media
         a.pull-left(href='#')
@@ -13,6 +21,14 @@ block about
         div.media-body
           h4.media-heading Sid
           p Sid is the server. He serves Sven's front end code statically and provides an API for services, such as authentication, and an API for the application, in this case, the wine cellar app. You can bring your own front end or use Sven to start with, Sid also connects your app to MySql. 
+          p All the technologies used to make Sid are listed here: 
+            a(href="http://nodejs.org" target="_blank") node 
+            a(href="http://gruntjs.com/" target="_blank") grunt 
+            a(href="http://expressjs.com/" target="_blank") express 
+            a(href="http://sequelizejs.com" target="_blank") sequelize 
+            a(href="http://www.mysql.com/" target="_blank") mysql 
+            a(href="http://www.mongodb.org/" target="_blank") mongodb 
+            a(href="http://passportjs.org/" target="_blank") passport 
     div.col-sm-6.special
       div.media.text-right
         a.pull-right(href='#')
@@ -20,7 +36,11 @@ block about
         div.media-body
           h4.media-heading Sven
           p Sven is our front end. He's loaded via index.html and is mostly javascript, he interacts with Sid over API calls. All javascript gets minified and packed, there's Jade/JST templating and a simple, clean design.
-  div.row
-    div.lastly
-      p All the technologies used to make Sven are listed here: backbone, underscore, grunt, jade.
-      p All the technologies used to make Sid are listed here: node, grunt, express, sequelize, mysql, mongodb, passport.
+          p All the technologies used to make Sven are listed here: 
+            a(href="http://backbonejs.org/" target="_blank") backbone 
+            a(href="http://underscorejs.org/" target="_blank") underscore 
+            a(href="http://gruntjs.com/" target="_blank") grunt 
+            a(href="http://jade-lang.com/" target="_blank") jade 
+            a(href="http://lesscss.org/" target="_blank") less 
+            a(href="http://getbootstrap.com/" target="_blank") bootstrap
+            a(href="http://fortawesome.github.io/Font-Awesome/" target="_blank") font awesome
