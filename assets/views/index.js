@@ -721,7 +721,7 @@
     app.user = new app.User();
     app.user.fetch({
         success: function(model, response, options){
-          //console.log('collection, response, options');
+          console.log('fetched user');
           console.dir(model);
           console.dir(response);
           //console.dir(options);
