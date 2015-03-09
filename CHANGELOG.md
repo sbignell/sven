@@ -32,15 +32,16 @@ create too much noise in the file. People will have to assume that the
 missing sections were intentionally left out because they contained no
 notable changes.
 
-## [0.0.3] - 2014-08-09
+## [0.3.0] - 2015-03-04
 ### Added
-- "Why should I care?" section mentioning The Changelog podcast.
+- The cellar app correctly adds and removes wine from the user's cellar.
+- The app interacts with the server via API calls for both authentication and wine cellar.
 
 ## [0.2.0] - 2015-02-23
 ### Added
 - When used in conjunction with Simon, Fred correctly displays. This is a milestone.
 
-## 0.1.0 - 2015-02-16
+## [0.1.0] - 2015-02-16
 ### Added
 - This CHANGELOG file to log versioning.
 - The client files from the Simon project to create the Fred project.

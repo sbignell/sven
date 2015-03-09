@@ -1,9 +1,9 @@
-Fred
+Sven
 =============
 
-Fred is a front-end.
+Sven is a front-end.
 
-A simple front end to show the workings of Simon, the server. Fred is built using javascript, grunt, JST templates, and backbone. [See a bird's eye view.](http://jedireza.github.io/drywall/)
+A simple front end to show the workings of Sid, the server. Sven is built using javascript, grunt, JST templates, and backbone. [See a bird's eye view.](http://jedireza.github.io/drywall/)
 
 [![Dependency Status](https://david-dm.org/jedireza/drywall.svg?theme=shields.io)](https://david-dm.org/jedireza/drywall)
 [![devDependency Status](https://david-dm.org/jedireza/drywall/dev-status.svg?theme=shields.io)](https://david-dm.org/jedireza/drywall#info=devDependencies)
@@ -22,7 +22,7 @@ __Note:__ The live demos have been modified so you cannot change the root user, 
 Requirements
 ------------
 
-You need Simon, [Node.js](http://nodejs.org/download/) and [MongoDB](http://www.mongodb.org/downloads) installed and running.
+You need Sid, [Node.js](http://nodejs.org/download/) and [MongoDB](http://www.mongodb.org/downloads) installed and running.
 
 We use [Grunt](http://gruntjs.com/) as our task runner. Get the CLI (command line interface).
 
