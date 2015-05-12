@@ -529,7 +529,7 @@
       var data = {};
       data.email = $('#forgotEmail').val();
 
-      $.post('api/v1/login/forgot', data, function(response, status){
+      $.post('api/v1/login/forgot/', data, function(response, status){
         console.log('responded:');
         console.dir(response);
         var alertStr = '';
