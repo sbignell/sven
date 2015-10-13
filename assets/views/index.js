@@ -7,6 +7,7 @@
 
   app.finishSignIn = function (){
 
+    console.log('finishSignIn');
     $('.form-control').attr('disabled', false);
     $('#doSignIn').attr('disabled', false);
     $('#doSignUp').attr('disabled', false);
@@ -52,9 +53,9 @@
 
     if (view != app.views.resetView) { //If user clicks away from reset page, remove url params
       if (typeof app.getUrlParameter('u') != 'undefined'){
-        window.history.replaceState( {} , 'Simon is awake.', 'http://www.revisit.cc' );
+        window.history.replaceState( {} , 'Sid is awake.', 'http://www.firstday.io' );
       } else if (typeof app.getUrlParameter('t') != 'undefined'){
-        window.history.replaceState( {} , 'Simon is awake.', 'http://www.revisit.cc' );
+        window.history.replaceState( {} , 'Sid is awake.', 'http://www.firstday.io' );
       }
     }
 
@@ -581,7 +582,7 @@
               var alertStr = '';
 
               if(response.success){
-                alertStr = '<div class="alert alert-success" role="alert">Success! Move along now. <a href="http://www.revisit.cc">Click here</a> to go back!</div>';
+                alertStr = '<div class="alert alert-success" role="alert">Success! Move along now. <a href="http://www.firstday.io">Click here</a> to go back!</div>';
                 $('#resetErrors').html(alertStr);
               } else {
                 alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
