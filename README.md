@@ -1,36 +1,18 @@
 Sven
 =============
 
-Sven is a front-end.
+Sven is a single page front-end.
 
-A simple front end to show the workings of Sid, the server. Sven is built using javascript, grunt, JST templates, and backbone. [See a bird's eye view.](http://jedireza.github.io/drywall/)
-
-[![Dependency Status](https://david-dm.org/jedireza/drywall.svg?theme=shields.io)](https://david-dm.org/jedireza/drywall)
-[![devDependency Status](https://david-dm.org/jedireza/drywall/dev-status.svg?theme=shields.io)](https://david-dm.org/jedireza/drywall#info=devDependencies)
+In conjunction with his mate Sid, the server, they provide you with a node.js example framework that utilises MySQL as the data store http://www.sidandsven.com. Sven is built using javascript, grunt, JST templates, and backbone. Based on jedireza's fantastic [Drywall](http://jedireza.github.io/drywall/) project.
 
 
 Live Demos
 ------------
 
-| Platform                       | Username | Password |
-| ------------------------------ | -------- | -------- |
-| https://drywall.herokuapp.com/ | root     | h3r00t   |
-| https://drywall.nodejitsu.com/ | root     | j1ts00t  |
+| Platform                    | Username | Password |
+| --------------------------- | -------- | -------- |
+| http://www.sidandsven.com/ | root     | h@rr0    |
 
-__Note:__ The live demos have been modified so you cannot change the root user, the root user's linked Administrator role or the root Admin Group. This was done in order to keep the app ready to test at all times.
-
-Requirements
-------------
-
-You need Sid, [Node.js](http://nodejs.org/download/) and [MongoDB](http://www.mongodb.org/downloads) installed and running.
-
-We use [Grunt](http://gruntjs.com/) as our task runner. Get the CLI (command line interface).
-
-```bash
-$ npm install grunt-cli -g
-```
-
-We use [`bcrypt`](https://github.com/ncb000gt/node.bcrypt.js) for hashing secrets. If you have issues during installation related to `bcrypt` then [refer to this wiki page](https://github.com/jedireza/drywall/wiki/bcrypt-Installation-Trouble).
 
 Installation
 ------------
