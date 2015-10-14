@@ -102,6 +102,7 @@
     defaults: {
       errors: [],
       errfor: {},
+      id: '',
       username: '',
       email: ''
     }
@@ -116,7 +117,8 @@
       name: '',
       notes: '',
       rating: '',
-      createdBy: ''
+      createdById: '',
+      createdByName: ''
     },
     url: function() {
       return '/cellar/'+ (this.isNew() ? '' : this.id +'/');
@@ -461,7 +463,9 @@
         estate: this.$el.find('.modal #wineEstate').val(),
         name: this.$el.find('.modal #wineName').val(),
         notes: this.$el.find('.modal #wineNotes').val(),
-        rating: this.$el.find('.modal #wineRating').val()
+        rating: this.$el.find('.modal #wineRating').val(),
+        createdById: app.user.attributes.id,
+        createdByName: app.user.attributes.username
       }, {
       success: function (model, response) {
         console.log("success");
