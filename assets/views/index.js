@@ -20,7 +20,7 @@
     loggedInBtn += '<span class="fa fa-user"></span> ' + app.user.attributes.username + ' <span class="caret"></span></button>';
     loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
     loggedInBtn += '<li><a id="profile" href="#">Profile</a></li>';
-    loggedInBtn += '<li><a id="signout" href="http://www.revisit.cc/logout/">Sign Out</a></li>';
+    loggedInBtn += '<li><a id="signout" href="http://www.firstday.io/logout/">Sign Out</a></li>';
     loggedInBtn += '</ul>';
 
     $('div.dropdown').html(loggedInBtn);
