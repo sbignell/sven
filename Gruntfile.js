@@ -44,7 +44,7 @@ module.exports = function(grunt) {
           }
         ]
       },
-      fred: {
+      sven: {
         files: [
           { expand: true, cwd: 'assets/', src: ['media/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/vendor/font-awesome', src: ['fonts/*'], dest: 'www/' },
@@ -59,7 +59,8 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'assets/views/admin/administrators/', src: ['*.jade'], dest: 'www/views/admin/administrators/' },
           { expand: true, cwd: 'assets/views/admin/categories/', src: ['*.jade'], dest: 'www/views/admin/categories/' },
           { expand: true, cwd: 'assets/views/admin/statuses/', src: ['*.jade'], dest: 'www/views/admin/statuses/' },
-          { expand: true, cwd: 'assets/views/admin/users/', src: ['*.jade'], dest: 'www/views/admin/users/' }
+          { expand: true, cwd: 'assets/views/admin/users/', src: ['*.jade'], dest: 'www/views/admin/users/' },
+          { expand: true, cwd: 'assets/views/', src: ['templates.js'], dest: 'www/views/' }
         ]
       }
     },
@@ -216,6 +217,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-newer');
 
   //grunt.registerTask('default', ['copy:vendor', 'newer:uglify', 'newer:less', 'concurrent']);
-  grunt.registerTask('build', ['copy:vendor', 'jade', 'jst', 'uglify', 'less', 'copy:fred']);
+  grunt.registerTask('build', ['copy:vendor', 'jade', 'jst', 'uglify', 'less', 'copy:sven']);
   grunt.registerTask('lint', ['jshint']);
 };

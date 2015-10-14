@@ -304,7 +304,8 @@
 
   app.HomeView = Backbone.View.extend({
     el: '#home',
-    template: _.template(JST["assets/views/home/tmpl-home.html"]()), //We need to jade this and pass data
+    //template: _.template(JST["assets/views/home/tmpl-home.html"]()), //We need to jade this and pass data
+    template: _.template(JST["assets/views/home/tmpl-home.html"]()),
     initialize: function() {
       console.log('homeView loaded.');
       //this.model = new app.Record();
