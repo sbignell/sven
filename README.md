@@ -11,14 +11,14 @@ Live Demos
 
 | Platform                    | Username | Password |
 | --------------------------- | -------- | -------- |
-| http://www.sidandsven.com/ | root     | h@rr0    |
+| http://www.sidandsven.com/  | root     | h@rr0    |
 
 
 Installation
 ------------
 
 ```bash
-$ git clone git@github.com:jedireza/drywall.git && cd ./drywall
+$ git clone git@github.com:sbignell/sven.git && cd ./sven
 $ npm install
 $ mv ./config.example.js ./config.js #set mongodb and email credentials
 $ grunt
