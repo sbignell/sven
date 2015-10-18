@@ -20,7 +20,7 @@
     loggedInBtn += '<span class="fa fa-user"></span> ' + app.user.attributes.username + ' <span class="caret"></span></button>';
     loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
     loggedInBtn += '<li><a id="profile" href="#">Profile</a></li>';
-    loggedInBtn += '<li><a id="signout" href="http://www.firstday.io/logout/">Sign Out</a></li>';
+    loggedInBtn += '<li><a id="signout" href="http://www.sidandsven.com/logout/">Sign Out</a></li>';
     loggedInBtn += '</ul>';
 
     $('div.dropdown').html(loggedInBtn);
@@ -53,9 +53,9 @@
 
     if (view != app.views.resetView) { //If user clicks away from reset page, remove url params
       if (typeof app.getUrlParameter('u') != 'undefined'){
-        window.history.replaceState( {} , 'Sid is awake.', 'http://www.firstday.io' );
+        window.history.replaceState( {} , 'Sid is awake.', 'http://www.sidandsven.com' );
       } else if (typeof app.getUrlParameter('t') != 'undefined'){
-        window.history.replaceState( {} , 'Sid is awake.', 'http://www.firstday.io' );
+        window.history.replaceState( {} , 'Sid is awake.', 'http://www.sidandsven.com' );
       }
     }
 
@@ -587,7 +587,7 @@
               var alertStr = '';
 
               if(response.success){
-                alertStr = '<div class="alert alert-success" role="alert">Success! Move along now. <a href="http://www.firstday.io">Click here</a> to go back!</div>';
+                alertStr = '<div class="alert alert-success" role="alert">Success! Move along now. <a href="http://www.sidandsven.com">Click here</a> to go back!</div>';
                 $('#resetErrors').html(alertStr);
               } else {
                 alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
