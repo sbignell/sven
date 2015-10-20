@@ -733,7 +733,7 @@
           //console.dir(options);
           
           //if exists then theyre logged in
-          if(model.attributes.username != undefined){
+          if((model.attributes.username != undefined) && (model.attributes.username != "")){
             app.finishSignIn();
           }
           //otherwise we're not logged in
