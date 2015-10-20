@@ -59,13 +59,13 @@
       }
     }
 
-    if(view == app.views.cellarView && typeof app.user != 'undefined' && app.user.attributes.id > -1) { //If user logged in, change cellarView
+    if(view == app.views.cellarView && typeof app.user != 'undefined' && app.user.attributes.username != "") { //If user logged in, change cellarView
       console.log('showView: user logged in and requested cellarView');
       if(typeof app.views.mycellarView == 'undefined'){
         console.log('showView: creating mycellarView');
         app.views.mycellarView = new app.MyCellarView();
       }
-      console.log('showView: not logged in, showing cellarView');
+      
       view = app.views.mycellarView;
     }
 
