@@ -221,6 +221,7 @@
             console.dir(response);
 
             app.user.attributes.username = model.attributes.username;
+            app.user.attributes.id = model.attributes.id;
 
             app.finishSignIn();
           
