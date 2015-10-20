@@ -217,8 +217,8 @@
         success: function(model, response) {
           if (response.success) {
             console.log('Signed In!');
-            console.dir(model);
-            console.dir(response);
+            //console.dir(model);
+            //console.dir(response);
 
             app.user.attributes.username = response.username;
             app.user.attributes.id = response.userid;
@@ -389,7 +389,7 @@
       console.log('mycellarView: render');
       console.log(this.collection.length);
 
-      console.dir(app.user.attributes);
+      //console.dir(app.user.attributes);
 
       this.$el.html(this.template());
 
@@ -471,7 +471,7 @@
       }, {
       success: function (model, response) {
         console.log("success");
-        console.dir(model);
+        //console.dir(model);
         $('#wine-modal').modal('hide');
         self.collection.add(model);
       },
