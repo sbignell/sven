@@ -220,7 +220,7 @@
             console.dir(model);
             console.dir(response);
 
-            app.user.username = model.attributes.username;
+            app.user.attributes.username = model.attributes.username;
 
             app.finishSignIn();
           
