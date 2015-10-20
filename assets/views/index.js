@@ -59,7 +59,7 @@
       }
     }
 
-    if(view == app.views.cellarView && typeof app.user != 'undefined') { //If user logged in, change cellarView
+    if(view == app.views.cellarView && typeof app.user != 'undefined' && app.user.id != "") { //If user logged in, change cellarView
       console.log('showView: user logged in and requested cellarView');
       if(typeof app.views.mycellarView == 'undefined'){
         console.log('showView: creating mycellarView');
