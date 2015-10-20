@@ -59,7 +59,7 @@
       }
     }
 
-    if(view == app.views.cellarView && typeof app.user != 'undefined' && app.user.id != "") { //If user logged in, change cellarView
+    if(view == app.views.cellarView && typeof app.user != 'undefined' && app.user.attributes.id != "") { //If user logged in, change cellarView
       console.log('showView: user logged in and requested cellarView');
       if(typeof app.views.mycellarView == 'undefined'){
         console.log('showView: creating mycellarView');
@@ -220,8 +220,8 @@
             console.dir(model);
             console.dir(response);
 
-            app.user.attributes.username = model.attributes.username;
-            app.user.attributes.id = model.attributes.id;
+            app.user.attributes.username = response.username;
+            app.user.attributes.id = response.userid;
 
             app.finishSignIn();
           
