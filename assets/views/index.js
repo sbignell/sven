@@ -282,11 +282,15 @@
         },{
           success: function(model, response) {
             if (response.success) {
-              console.log('Signed Up!');
-              //toggle dropdown away
-              //change button to username
-            }
-            else {
+              console.log('Signed Up!!!');
+
+              app.user = new app.User();
+              app.user.attributes.username = response.username;
+              app.user.attributes.id = response.userid;
+
+              app.finishSignIn();
+
+            } else {
               model.set(response);
               var alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
               console.log('Fail!');
