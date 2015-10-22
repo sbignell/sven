@@ -264,6 +264,7 @@
 
         $('#signUpEmail').removeClass('hidden');
         $('#signUpEmail').addClass('show');
+        $('#signUpEmail').attr('disabled', false);
         $('#doCancelSignUp').removeClass('hidden');
         $('#doCancelSignUp').addClass('show');
 
