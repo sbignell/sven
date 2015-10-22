@@ -257,14 +257,13 @@
       $('.dropdown-menu').attr('disabled', true);
       $('.form-control').attr('disabled', true);
       $('#doSignIn').attr('disabled', true);
-      //$('#doSignUp').attr('disabled', true);
 
       if($('#signUpEmail').hasClass('hidden')){
         console.log('email field is hidden, unhiding');
 
         $('#signUpEmail').removeClass('hidden');
         $('#signUpEmail').addClass('show');
-        $('#signUpEmail').attr('disabled', false);
+        $('#inputEmail').attr('disabled', false);
         $('#doCancelSignUp').removeClass('hidden');
         $('#doCancelSignUp').addClass('show');
 
