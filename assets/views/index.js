@@ -24,7 +24,7 @@
     loggedInBtn += '</ul>';
 
     $('div.dropdown').html(loggedInBtn);
-    $('.dropdown-toggle').dropdown('toggle');
+    //$('.dropdown-toggle').dropdown('toggle');
 
     //re-render with user model
     //app.views.mycellarView.render();
@@ -156,6 +156,7 @@
       'click #gotoCellar': 'processCellar',
       'click #doSignIn': 'doSignIn',
       'click #doSignUp': 'doSignUp',
+      'click #doCancelSignUp': 'doCancelSignUp',
       'click #gotoForgot': 'processForgot',
       'click #gotoReset': 'processReset'
     },
@@ -256,35 +257,73 @@
       $('.dropdown-menu').attr('disabled', true);
       $('.form-control').attr('disabled', true);
       $('#doSignIn').attr('disabled', true);
-      $('#doSignUp').attr('disabled', true);
+      //$('#doSignUp').attr('disabled', true);
 
+      if($('#signUpEmail').hasClass('hidden')){
+        console.log('email field is hidden, unhiding');
 
-      app.signup = new app.Signup();
+        $('#signUpEmail').removeClass('hidden');
+        $('#signUpEmail').addClass('show');
+        $('#doCancelSignUp').removeClass('hidden');
+        $('#doCancelSignUp').addClass('show');
 
-      app.signup.save({
-        username: $('#inputUsername').val(),
-        password: $('#inputPassword').val()
-      },{
-        success: function(model, response) {
-          if (response.success) {
-            console.log('Signed Up!');
-            //toggle dropdown away
-            //change button to username
+      } else {
+        console.log('email field was showing so sign up will proceed');
+        $('#inputEmail').attr('disabled', true);
+        $('#doSignUp').attr('disabled', true);
+        $('#doCancelSignUp').attr('disabled', true);
+
+        app.signup = new app.Signup();
+
+        app.signup.save({
+          username: $('#inputUsername').val(),
+          password: $('#inputPassword').val(),
+          email: $('#inputEmail').val()
+        },{
+          success: function(model, response) {
+            if (response.success) {
+              console.log('Signed Up!');
+              //toggle dropdown away
+              //change button to username
+            }
+            else {
+              model.set(response);
+              var alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
+              console.log('Fail!');
+              $('.form-control').attr('disabled', false);
+              $('#doSignIn').attr('disabled', false);
+              $('#doSignUp').attr('disabled', false);
+              $('#signUpEmail').removeClass('show');
+              $('#signUpEmail').addClass('hidden');
+              $('#doCancelSignUp').removeClass('show');
+              $('#doCancelSignUp').addClass('hidden');
+              $('#signinupDropdown').attr('disabled', false);
+              $('.dropdown-menu').attr('disabled', false);
+              $('#signStatus').css("display", "none");
+              $('#signAlert').html(alertStr);
+            }
           }
-          else {
-            model.set(response);
-            var alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
-            console.log('Fail!');
-            $('.form-control').attr('disabled', false);
-            $('#doSignIn').attr('disabled', false);
-            $('#doSignUp').attr('disabled', false);
-            $('#signinupDropdown').attr('disabled', false);
-            $('.dropdown-menu').attr('disabled', false);
-            $('#signStatus').css("display", "none");
-            $('#signAlert').html(alertStr);
-          }
-        }
-      });
+        });
+
+      }
+     
+
+    },
+    doCancelSignUp: function(e){
+      console.log('signup cancelled');
+
+      $('.form-control').attr('disabled', false);
+      $('#doSignIn').attr('disabled', false);
+      $('#doSignUp').attr('disabled', false);
+      $('#signUpEmail').removeClass('show');
+      $('#signUpEmail').addClass('hidden');
+      $('#doCancelSignUp').removeClass('show');
+      $('#doCancelSignUp').addClass('hidden');
+      $('#signinupDropdown').attr('disabled', false);
+      $('.dropdown-menu').attr('disabled', false);
+      $('#signStatus').css("display", "none");
+
+      $('.dropdown-toggle').dropdown('toggle');
 
     },
     processForgot: function(e){
@@ -752,6 +791,8 @@
     //app.views.filterView = new app.FilterView();
     //app.views.pagingView = new app.PagingView();
     //app.views.mycellarView = new app.MyCellarView();
+    //profile
+    //admin
     app.views.forgotView = new app.ForgotView();
     app.views.resetView = new app.ResetView();
     console.log('app loaded!');

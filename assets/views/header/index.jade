@@ -25,9 +25,13 @@ block header
               div.form-group
                 label(for="inputPassword") Password
                 input#inputPassword(type="password" class="form-control" placeholder="Password")
+              div#signUpEmail.form-group.hidden
+                label(for="inputEmail") Email
+                input#inputEmail.form-control(type="email" placeholder="Enter email")    
               hr    
               button#doSignIn.btn.btn-info.btn-block Sign In
               button#doSignUp.btn.btn-warning.btn-block Sign Up
+              button#doCancelSignUp.btn.btn-danger.btn-block.hidden Cancel
               p.small 
                 a#gotoForgot(href='#') Forgot 
                 | /  
