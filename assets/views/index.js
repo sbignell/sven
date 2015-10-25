@@ -24,15 +24,15 @@
     var loggedInBtn = '<button id="signedinDropdown" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">';
     loggedInBtn += '<span class="fa fa-user"></span> ' + app.user.attributes.username + ' <span class="caret"></span></button>';
     loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
-    loggedInBtn += '<li><a id="profile" href="#">Profile</a></li>';
+    loggedInBtn += '<li><a id="bprofile" href="#">Profile</a></li>';
     if(app.user.attributes.roles.indexOf('0,') != -1){  //if they have admin role
-      loggedInBtn += '<li><a id="admin" href="#">Administer</a></li>';
+      loggedInBtn += '<li><a id="badmin" href="#">Administer</a></li>';
     }
     loggedInBtn += '<li><a id="signout" href="http://www.sidandsven.com/logout/">Sign Out</a></li>';
     loggedInBtn += '</ul>';
 
     $('div.dropdown').html(loggedInBtn);
-    //$('.dropdown-toggle').dropdown('toggle');
+    $('.dropdown-toggle').dropdown('toggle');
 
     //re-render with user model
     //app.views.mycellarView.render();
