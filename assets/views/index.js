@@ -7,9 +7,12 @@
 
   app.finishSignIn = function (){
 
-    app.views.profileView = new app.ProfileView();
-    if(app.user.attributes.roles.indexOf('0,') != -1){
-      app.views.adminView = new app.AdminView();
+    if(typeof app.views.profileView == 'undefined'){
+      console.log('creating profileView');
+      app.views.profileView = new app.ProfileView();
+      if(app.user.attributes.roles.indexOf('0,') != -1){
+        app.views.adminView = new app.AdminView();
+      }
     }
 
     console.log('finishSignIn');
@@ -684,6 +687,11 @@
     events: {
       //
     },
+    initialize: function(){
+
+      console.log('profileView loaded.');
+      this.render();
+    },
     render: function() {
       console.log('ProfileView: render');
       
@@ -698,6 +706,11 @@
     template: _.template(JST["assets/views/admin/tmpl-admin.html"]()),
     events: {
       //
+    },
+    initialize: function(){
+
+      console.log('profileView loaded.');
+      this.render();
     },
     render: function() {
       console.log('AdminView: render');
