@@ -679,57 +679,31 @@
   });
 
   app.ProfileView = Backbone.View.extend({
-    tagName: 'tr',
+    tagName: '#profile',
     //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
     events: {
-      //'click .btn-details': 'viewDetails'
-    },
-    viewDetails: function() {
-      location.href = this.model.url();
+      //
     },
     render: function() {
       console.log('ProfileView: render');
-      console.dir(this.model.attributes);
-
-      //this.$el.html(this.template( this.model ));
-      this.$el.html(_.template(JST["assets/views/cellar/wines/tmpl-wines.html"](this.model)));
-      /*this.$el.find('.timeago').each(function(index, indexValue) {
-        if (indexValue.innerText) {
-          var myMoment = moment(indexValue.innerText);
-          indexValue.innerText = myMoment.from();
-          if (indexValue.getAttribute('data-age')) {
-            indexValue.innerText = indexValue.innerText.replace('ago', 'old');
-          }
-        }
-      });*/
+      
+      this.$el.html(_.template(JST["assets/views/profile/tmpl-profile.html"](this.model)));
+      
       return this;
     }
   });
 
   app.AdminView = Backbone.View.extend({
-    tagName: 'tr',
+    tagName: '#admin',
     //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
     events: {
-      //'click .btn-details': 'viewDetails'
-    },
-    viewDetails: function() {
-      location.href = this.model.url();
+      //
     },
     render: function() {
       console.log('AdminView: render');
-      console.dir(this.model.attributes);
-
-      //this.$el.html(this.template( this.model ));
-      this.$el.html(_.template(JST["assets/views/cellar/wines/tmpl-wines.html"](this.model)));
-      /*this.$el.find('.timeago').each(function(index, indexValue) {
-        if (indexValue.innerText) {
-          var myMoment = moment(indexValue.innerText);
-          indexValue.innerText = myMoment.from();
-          if (indexValue.getAttribute('data-age')) {
-            indexValue.innerText = indexValue.innerText.replace('ago', 'old');
-          }
-        }
-      });*/
+      
+      this.$el.html(_.template(JST["assets/views/admin/tmpl-admin.html"](this.model)));
+      
       return this;
     }
   });
