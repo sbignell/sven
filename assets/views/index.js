@@ -7,6 +7,11 @@
 
   app.finishSignIn = function (){
 
+    app.views.profileView = new app.ProfileView();
+    if(app.user.attributes.roles.indexOf('0,')){
+      app.views.adminView = new app.AdminView();
+    }
+
     console.log('finishSignIn');
     $('.form-control').attr('disabled', false);
     $('#doSignIn').attr('disabled', false);
@@ -20,6 +25,9 @@
     loggedInBtn += '<span class="fa fa-user"></span> ' + app.user.attributes.username + ' <span class="caret"></span></button>';
     loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
     loggedInBtn += '<li><a id="profile" href="#">Profile</a></li>';
+    if(app.user.attributes.roles.indexOf('0,')){  //if they have admin role
+      loggedInBtn += '<li><a id="admin" href="#">Administer</a></li>';
+    }
     loggedInBtn += '<li><a id="signout" href="http://www.sidandsven.com/logout/">Sign Out</a></li>';
     loggedInBtn += '</ul>';
 
@@ -130,22 +138,6 @@
     url: '/cellar/'
   });
 
-  app.Filter = Backbone.Model.extend({
-    defaults: {
-      search: '',
-      status: '',
-      sort: '',
-      limit: ''
-    }
-  });
-
-  app.Paging = Backbone.Model.extend({
-    defaults: {
-      pages: {},
-      items: {}
-    }
-  });
-
 
   app.HeaderView = Backbone.View.extend({
     el: '#header', 
@@ -158,7 +150,9 @@
       'click #doSignUp': 'doSignUp',
       'click #doCancelSignUp': 'doCancelSignUp',
       'click #gotoForgot': 'processForgot',
-      'click #gotoReset': 'processReset'
+      'click #gotoReset': 'processReset',
+      'click #profile': 'showProfile',
+      'click #admin': 'showAdmin'
     },
     initialize: function() {
       console.log('headerView loaded.');
@@ -343,6 +337,14 @@
 
       $('#public-menu').children().removeClass('active');
       app.showView(app.views.resetView);
+    },
+    showProfile: function(e){
+      console.log('Loading profile page');
+      app.showView(app.views.profileView);
+    },
+    showAdmin: function(e){
+      console.log('Loading admin page');
+      app.showView(app.views.adminView);
     }
   }); 
 
@@ -670,95 +672,61 @@
     }
   });
 
-  /*app.FilterView = Backbone.View.extend({
-    el: '#filters',
-    template: _.template(JST["assets/views/cellar/filter/tmpl-filter.html"]()),
+  app.ProfileView = Backbone.View.extend({
+    tagName: 'tr',
+    //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
     events: {
-      'submit form': 'preventSubmit',
-      'keypress input[type="text"]': 'filterOnEnter',
-      'change select': 'filter'
+      //'click .btn-details': 'viewDetails'
     },
-    initialize: function() {
-      this.model = new app.Filter( app.mainView.results.filters );
-      this.listenTo(this.model, 'change', this.render);
-      this.render();
+    viewDetails: function() {
+      location.href = this.model.url();
     },
     render: function() {
-      this.$el.html(this.template( this.model.attributes ));
+      console.log('ProfileView: render');
+      console.dir(this.model.attributes);
 
-      for (var key in this.model.attributes) {
-        if (this.model.attributes.hasOwnProperty(key)) {
-          this.$el.find('[name="'+ key +'"]').val(this.model.attributes[key]);
+      //this.$el.html(this.template( this.model ));
+      this.$el.html(_.template(JST["assets/views/cellar/wines/tmpl-wines.html"](this.model)));
+      /*this.$el.find('.timeago').each(function(index, indexValue) {
+        if (indexValue.innerText) {
+          var myMoment = moment(indexValue.innerText);
+          indexValue.innerText = myMoment.from();
+          if (indexValue.getAttribute('data-age')) {
+            indexValue.innerText = indexValue.innerText.replace('ago', 'old');
+          }
         }
-      }
-    },
-    preventSubmit: function(event) {
-      event.preventDefault();
-    },
-    filterOnEnter: function(event) {
-      if (event.keyCode !== 13) { return; }
-      this.filter();
-    },
-    filter: function() {
-      var query = $('#filters form').serialize();
-      Backbone.history.navigate('q/'+ query, { trigger: true });
+      });*/
+      return this;
     }
-  });*/
+  });
 
-  /*app.PagingView = Backbone.View.extend({
-    el: '#results-paging',
-    template: _.template(JST["assets/views/cellar/paging/tmpl-paging.html"]()),
+  app.AdminView = Backbone.View.extend({
+    tagName: 'tr',
+    //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
     events: {
-      'click .btn-page': 'goToPage'
+      //'click .btn-details': 'viewDetails'
     },
-    initialize: function() {
-      this.model = new app.Paging({ pages: app.mainView.results.pages, items: app.mainView.results.items });
-      this.listenTo(this.model, 'change', this.render);
-      this.render();
+    viewDetails: function() {
+      location.href = this.model.url();
     },
     render: function() {
-      if (this.model.get('pages').total > 1) {
-        this.$el.html(this.template( this.model.attributes ));
+      console.log('AdminView: render');
+      console.dir(this.model.attributes);
 
-        if (!this.model.get('pages').hasPrev) {
-          this.$el.find('.btn-prev').attr('disabled', 'disabled');
+      //this.$el.html(this.template( this.model ));
+      this.$el.html(_.template(JST["assets/views/cellar/wines/tmpl-wines.html"](this.model)));
+      /*this.$el.find('.timeago').each(function(index, indexValue) {
+        if (indexValue.innerText) {
+          var myMoment = moment(indexValue.innerText);
+          indexValue.innerText = myMoment.from();
+          if (indexValue.getAttribute('data-age')) {
+            indexValue.innerText = indexValue.innerText.replace('ago', 'old');
+          }
         }
-
-        if (!this.model.get('pages').hasNext) {
-          this.$el.find('.btn-next').attr('disabled', 'disabled');
-        }
-      }
-      else {
-        this.$el.empty();
-      }
-    },
-    goToPage: function(event) {
-      var query = $('#filters form').serialize() +'&page='+ $(event.target).data('page');
-      Backbone.history.navigate('q/'+ query, { trigger: true });
-      $('body').scrollTop(0);
+      });*/
+      return this;
     }
-  });*/
-
-  /*app.Router = Backbone.Router.extend({
-    routes: {
-      '': 'default',
-      'q/:params': 'query'
-    },
-    initialize: function() {
-      console.log('router: init');
-    },
-    default: function() {
-      //if (!app.firstLoad) {
-        //app.resultsView.collection.fetch({ reset: true });
-      //}
-
-      app.firstLoad = false;
-    },
-    query: function(params) {
-      app.resultsView.collection.fetch({ data: params, reset: true });
-      app.firstLoad = false;
-    }
-  });*/
+  });
 
 
   window.onload = function(){
@@ -792,11 +760,9 @@
     app.views.current = app.views.homeView;
     app.views.aboutView = new app.AboutView();
     app.views.cellarView = new app.CellarView();
-    //app.views.filterView = new app.FilterView();
-    //app.views.pagingView = new app.PagingView();
-    //app.views.mycellarView = new app.MyCellarView();
-    //profile
-    //admin
+    //mycellarView: created upon login
+    //profile: created upon login
+    //admin: created upon login
     app.views.forgotView = new app.ForgotView();
     app.views.resetView = new app.ResetView();
     console.log('app loaded!');

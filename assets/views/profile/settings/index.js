@@ -5,18 +5,13 @@
 
   app = app || {};
 
-  app.Account = Backbone.Model.extend({
-    idAttribute: '_id',
-    url: '/account/settings/'
-  });
-
   app.User = Backbone.Model.extend({
-    idAttribute: '_id',
-    url: '/account/settings/'
+    idAttribute: 'id',
+    url: '/profile/settings/'
   });
 
   app.Details = Backbone.Model.extend({
-    idAttribute: '_id',
+    idAttribute: 'id',
     defaults: {
       success: false,
       errors: [],
@@ -28,7 +23,7 @@
       phone: '',
       zip: ''
     },
-    url: '/account/settings/',
+    url: '/profile/settings/',
     parse: function(response) {
       if (response.account) {
         app.mainView.account.set(response.account);
@@ -48,7 +43,7 @@
       username: '',
       email: ''
     },
-    url: '/account/settings/identity/',
+    url: '/profile/settings/identity/',
     parse: function(response) {
       if (response.user) {
         app.mainView.user.set(response.user);
@@ -60,7 +55,7 @@
   });
 
   app.Password = Backbone.Model.extend({
-    idAttribute: '_id',
+    idAttribute: 'id',
     defaults: {
       success: false,
       errors: [],
@@ -68,7 +63,7 @@
       newPassword: '',
       confirm: ''
     },
-    url: '/account/settings/password/',
+    url: '/profile/settings/password/',
     parse: function(response) {
       if (response.user) {
         app.mainView.user.set(response.user);
@@ -94,7 +89,7 @@
     },
     syncUp: function() {
       this.model.set({
-        _id: app.mainView.account.id,
+        id: app.mainView.account.id,
         first: app.mainView.account.get('name').first,
         middle: app.mainView.account.get('name').middle,
         last: app.mainView.account.get('name').last,
@@ -139,7 +134,7 @@
     },
     syncUp: function() {
       this.model.set({
-        _id: app.mainView.user.id,
+        id: app.mainView.user.id,
         username: app.mainView.user.get('username'),
         email: app.mainView.user.get('email')
       });
@@ -193,7 +188,6 @@
     el: '.page .container',
     initialize: function() {
       app.mainView = this;
-      this.account = new app.Account( JSON.parse( unescape($('#data-account').html()) ) );
       this.user = new app.User( JSON.parse( unescape($('#data-user').html()) ) );
 
       app.detailsView = new app.DetailsView();
