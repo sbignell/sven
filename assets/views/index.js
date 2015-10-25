@@ -680,14 +680,14 @@
 
   app.ProfileView = Backbone.View.extend({
     tagName: '#profile',
-    //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
+    template: _.template(JST["assets/views/profile/tmpl-profile.html"]()),
     events: {
       //
     },
     render: function() {
       console.log('ProfileView: render');
       
-      this.$el.html(_.template(JST["assets/views/profile/tmpl-profile.html"]()));
+      this.$el.html(this.template( 'hello' ) );
       
       return this;
     }
@@ -695,14 +695,14 @@
 
   app.AdminView = Backbone.View.extend({
     tagName: '#admin',
-    //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
+    template: _.template(JST["assets/views/admin/tmpl-admin.html"]()),
     events: {
       //
     },
     render: function() {
       console.log('AdminView: render');
       
-      this.$el.html(_.template(JST["assets/views/admin/tmpl-admin.html"]()));
+      this.$el.html(this.template( 'hello' ) );
       
       return this;
     }
