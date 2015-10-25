@@ -151,8 +151,8 @@
       'click #doCancelSignUp': 'doCancelSignUp',
       'click #gotoForgot': 'processForgot',
       'click #gotoReset': 'processReset',
-      'click #profile': 'showProfile',
-      'click #admin': 'showAdmin'
+      'click #bprofile': 'showProfile',
+      'click #badmin': 'showAdmin'
     },
     initialize: function() {
       console.log('headerView loaded.');
