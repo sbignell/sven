@@ -687,7 +687,7 @@
     render: function() {
       console.log('ProfileView: render');
       
-      this.$el.html(_.template(JST["assets/views/profile/tmpl-profile.html"](this.model)));
+      this.$el.html(_.template(JST["assets/views/profile/tmpl-profile.html"]()));
       
       return this;
     }
@@ -702,7 +702,7 @@
     render: function() {
       console.log('AdminView: render');
       
-      this.$el.html(_.template(JST["assets/views/admin/tmpl-admin.html"](this.model)));
+      this.$el.html(_.template(JST["assets/views/admin/tmpl-admin.html"]()));
       
       return this;
     }
