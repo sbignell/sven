@@ -8,7 +8,7 @@
   app.finishSignIn = function (){
 
     app.views.profileView = new app.ProfileView();
-    if(app.user.attributes.roles.indexOf('0,')){
+    if(app.user.attributes.roles.indexOf('0,') != -1){
       app.views.adminView = new app.AdminView();
     }
 
@@ -25,7 +25,7 @@
     loggedInBtn += '<span class="fa fa-user"></span> ' + app.user.attributes.username + ' <span class="caret"></span></button>';
     loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
     loggedInBtn += '<li><a id="profile" href="#">Profile</a></li>';
-    if(app.user.attributes.roles.indexOf('0,')){  //if they have admin role
+    if(app.user.attributes.roles.indexOf('0,') != -1){  //if they have admin role
       loggedInBtn += '<li><a id="admin" href="#">Administer</a></li>';
     }
     loggedInBtn += '<li><a id="signout" href="http://www.sidandsven.com/logout/">Sign Out</a></li>';
