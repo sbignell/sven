@@ -217,6 +217,9 @@
 
             app.user.attributes.username = response.username;
             app.user.attributes.id = response.userid;
+            app.user.attributes.roles = response.roles;
+            app.user.attributes.firstname = response.firstname;
+            app.user.attributes.lastname = response.lastname;
 
             app.finishSignIn();
           
@@ -282,7 +285,7 @@
               app.user.attributes.username = response.username;
               app.user.attributes.id = response.userid;
               app.user.attributes.roles = response.roles;
-              app.user.attributes.firstname = response.firstnamee;
+              app.user.attributes.firstname = response.firstname;
               app.user.attributes.lastname = response.lastname;
 
               app.finishSignIn();
