@@ -25,17 +25,26 @@ block header
               div.form-group
                 label(for="inputPassword") Password
                 input#inputPassword(type="password" class="form-control" placeholder="Password")
-              div#signUpEmail.form-group.hidden
+              button#doSignIn.btn.btn-info.btn-block Sign In
+              p#forgotResetLine.small 
+               a#gotoForgot(href='#') Forgot Password
+              hr  
+              div#signUpEmail.form-group
                 label(for="inputEmail") Email
                 input#inputEmail.form-control(type="email" placeholder="Enter email")    
-              hr    
-              button#doSignIn.btn.btn-info.btn-block Sign In
+              
               button#doSignUp.btn.btn-warning.btn-block Sign Up
-              button#doCancelSignUp.btn.btn-danger.btn-block.hidden Cancel
-              p#forgotResetLine.small 
-                a#gotoForgot(href='#') Forgot 
-                | /  
-                a#gotoReset(href='#') Reset
+              div#social-signup
+                p - or -
+                div#social-signup-buttons
+                 a#facebook.btn.btn-secondary(href="#" role="button")
+                  i.fa.fa-facebook
+                 a#twitter.btn.btn-secondary(href="#" role="button")
+                  i.fa.fa-twitter
+                 a#google.btn.btn-secondary(href="#" role="button")
+                  i.fa.fa-google
+                 a#github.btn.btn-secondary(href="#" role="button")
+                  i.fa.fa-github 
               div#signStatus
                 span.fa.fa-5x.fa-spinner.fa-spin
               div#signAlert    

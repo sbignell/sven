@@ -1,3 +1,4 @@
+
 //
 // Variables
 // --------------------------------------------------
@@ -116,6 +117,8 @@
 //** Carets increase slightly in size for larger components.
 @caret-width-large:         5px;
 
+//** `.form-group` margin
+@form-group-margin-bottom:       15px;
 
 //== Tables
 //
@@ -170,6 +173,10 @@
 
 @btn-link-disabled-color:        @gray-light;
 
+// Allows for customizing button radius independently from global border radius
+@btn-border-radius-base:         @border-radius-base;
+@btn-border-radius-large:        @border-radius-large;
+@btn-border-radius-small:        @border-radius-small;
 
 //== Forms
 //
@@ -266,6 +273,7 @@
 @zindex-popover:           1060;
 @zindex-tooltip:           1070;
 @zindex-navbar-fixed:      1030;
+@zindex-modal-background:  1040;
 @zindex-modal:             1040;
 
 
@@ -480,7 +488,7 @@
 @jumbotron-bg:                   @gray-lighter;
 @jumbotron-heading-color:        inherit;
 @jumbotron-font-size:            ceil((@font-size-base * 1.5));
-
+@jumbotron-heading-font-size:    ceil((@font-size-base * 4.5));
 
 //== Form states and alerts
 //

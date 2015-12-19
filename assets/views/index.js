@@ -5,15 +5,59 @@
 
   app = app || {};
 
+  app.clearForm = function(frm_elements){
+    console.log('clear the form: ' + frm_elements);
+
+    for (var i = 0; i < frm_elements.length; i++)
+    {
+        var field_type = frm_elements[i].type.toLowerCase();
+        switch (field_type)
+        {
+        case "text":
+        case "password":
+        case "textarea":
+        case "hidden":
+            frm_elements[i].value = "";
+            break;
+        case "radio":
+        case "checkbox":
+            if (frm_elements[i].checked)
+            {
+                frm_elements[i].checked = false;
+            }
+            break;
+        case "select-one":
+        case "select-multi":
+            frm_elements[i].selectedIndex = -1;
+            break;
+        default:
+            break;
+        }
+    }
+
+  }
+
   app.finishSignIn = function (){
 
-    if(typeof app.views.profileView == 'undefined'){
+    if(typeof app.views.mycellarView == 'undefined'){
+        console.log('creating mycellarView');
+        app.views.mycellarView = new app.MyCellarView();
+      }
+
+    /*if(typeof app.views.profileView == 'undefined'){
       console.log('creating profileView');
       app.views.profileView = new app.ProfileView();
       if(app.user.attributes.roles.indexOf('0,') != -1){
         app.views.adminView = new app.AdminView();
       }
-    }
+    }*/
+
+    /*if(typeof app.views.adminView == 'undefined'){
+      
+      if(app.user.attributes.roles.indexOf('0,') != -1){
+        app.views.adminView = new app.AdminView();
+      }
+    }*/
 
     console.log('finishSignIn');
     $('.form-control').attr('disabled', false);
@@ -36,9 +80,6 @@
 
     $('div.dropdown').html(loggedInBtn);
     $('.dropdown-toggle').dropdown('toggle');
-
-    //re-render with user model
-    //app.views.mycellarView.render();
 
     //move to cellar
     app.showView(app.views.cellarView);
@@ -72,10 +113,6 @@
 
     if(view == app.views.cellarView && typeof app.user != 'undefined' && app.user.attributes.username != "") { //If user logged in, change cellarView
       console.log('showView: user logged in and requested cellarView');
-      if(typeof app.views.mycellarView == 'undefined'){
-        console.log('showView: creating mycellarView');
-        app.views.mycellarView = new app.MyCellarView();
-      }
       
       view = app.views.mycellarView;
     }
@@ -104,7 +141,8 @@
       errfor: {},
       username: '',
       email: '',
-      password: ''
+      password: '',
+      roles: ''
     }
   });
 
@@ -115,7 +153,19 @@
       errfor: {},
       id: '',
       username: '',
-      email: ''
+      email: '',
+      firstname: '',
+      lastname: '',
+      isActive: '',
+      isVerified: '',
+      roles: '',
+      groups: '',
+      phone: '',
+      twitterKey: '',
+      facebookKey: '',
+      googleKey: '',
+      githubKey: '',
+      createdById: ''
     }
   });
 
@@ -128,17 +178,44 @@
       name: '',
       notes: '',
       rating: '',
-      createdById: '',
-      createdByName: ''
+      createdById: ''
     },
     url: function() {
-      return '/cellar/'+ (this.isNew() ? '' : this.id +'/');
+      return '/api/v1/cellar/'+ (this.isNew() ? '' : this.id +'/');
     }
   });
 
   app.RecordCollection = Backbone.Collection.extend({
     model: app.Record,
-    url: '/cellar/'
+    url: '/api/v1/cellar/'
+  });
+
+  app.UserRecord = Backbone.Model.extend({
+    defaults: {
+      id: undefined,
+      username: '',
+      email: '',
+      firstname: '',
+      lastname: '',
+      isActive: '',
+      isVerified: '',
+      roles: '',
+      groups: '',
+      phone: '',
+      twitterKey: '',
+      facebookKey: '',
+      googleKey: '',
+      githubKey: '',
+      createdById: ''
+    },
+    url: function() {
+      return '/api/v1/admin/users/'+ (this.isNew() ? '' : this.id +'/');
+    }
+  });
+
+  app.UserCollection = Backbone.Collection.extend({
+    model: app.UserRecord,
+    url: '/api/v1/admin/users/'
   });
 
 
@@ -152,6 +229,7 @@
       'click #doSignIn': 'doSignIn',
       'click #doSignUp': 'doSignUp',
       'click #doCancelSignUp': 'doCancelSignUp',
+      'click #social-signup-buttons a': 'doSocialSignUp',
       'click #gotoForgot': 'processForgot',
       'click #gotoReset': 'processReset',
       'click #bprofile': 'showProfile',
@@ -223,6 +301,15 @@
             app.user.attributes.roles = response.roles;
             app.user.attributes.firstname = response.firstname;
             app.user.attributes.lastname = response.lastname;
+            app.user.attributes.isActive = response.isActive;
+            app.user.attributes.isVerified = response.isVerified;
+            app.user.attributes.lastname = response.groups;
+            app.user.attributes.lastname = response.phone;
+            app.user.attributes.lastname = response.twitterKey;
+            app.user.attributes.lastname = response.facebookKey;
+            app.user.attributes.lastname = response.googleKey;
+            app.user.attributes.lastname = response.githubKey;
+            app.user.attributes.lastname = response.createdById;  
 
             app.finishSignIn();
           
@@ -247,28 +334,17 @@
     doSignUp: function(e){
       e.preventDefault();
       console.log('view: #doSignUp clicked');
-      //app.showView(app.views.cellarView);
 
       $('#signStatus').css("display", "inline");
       $('#signAlert').html('');
 
-      //
       $('#signinupDropdown').attr('disabled', true);
       $('.dropdown-menu').attr('disabled', true);
       $('.form-control').attr('disabled', true);
       $('#doSignIn').attr('disabled', true);
 
-      if($('#signUpEmail').hasClass('hidden')){
-        console.log('email field is hidden, unhiding');
 
-        $('#signUpEmail').removeClass('hidden');
-        $('#signUpEmail').addClass('show');
-        $('#inputEmail').attr('disabled', false);
-        $('#doCancelSignUp').removeClass('hidden');
-        $('#doCancelSignUp').addClass('show');
-
-      } else {
-        console.log('email field was showing so sign up will proceed');
+        //console.log('email field was showing so sign up will proceed');
         $('#inputEmail').attr('disabled', true);
         $('#doSignUp').attr('disabled', true);
         $('#doCancelSignUp').attr('disabled', true);
@@ -278,7 +354,8 @@
         app.signup.save({
           username: $('#inputUsername').val(),
           password: $('#inputPassword').val(),
-          email: $('#inputEmail').val()
+          email: $('#inputEmail').val(),
+          roles: "1,"
         },{
           success: function(model, response) {
             if (response.success) {
@@ -300,19 +377,14 @@
               $('.form-control').attr('disabled', false);
               $('#doSignIn').attr('disabled', false);
               $('#doSignUp').attr('disabled', false);
-              $('#signUpEmail').removeClass('show');
-              $('#signUpEmail').addClass('hidden');
-              $('#doCancelSignUp').removeClass('show');
-              $('#doCancelSignUp').addClass('hidden');
               $('#signinupDropdown').attr('disabled', false);
               $('.dropdown-menu').attr('disabled', false);
               $('#signStatus').css("display", "none");
               $('#signAlert').html(alertStr);
             }
           }
-        });
 
-      }
+        });
      
 
     },
@@ -322,15 +394,70 @@
       $('.form-control').attr('disabled', false);
       $('#doSignIn').attr('disabled', false);
       $('#doSignUp').attr('disabled', false);
-      $('#signUpEmail').removeClass('show');
-      $('#signUpEmail').addClass('hidden');
-      $('#doCancelSignUp').removeClass('show');
-      $('#doCancelSignUp').addClass('hidden');
       $('#signinupDropdown').attr('disabled', false);
       $('.dropdown-menu').attr('disabled', false);
       $('#signStatus').css("display", "none");
 
       $('.dropdown-toggle').dropdown('toggle');
+
+    },
+    doSocialSignUp: function(e){
+      e.preventDefault();
+      console.log('view: social signup clicked - ' + e.currentTarget.id);
+      console.log($('#inputEmail').val());
+
+      if (e.currentTarget.id == "facebook"){
+        $.ajax({
+          method: "POST",
+          url:  "http://" + window.location.host + "/api/v1/signup/facebook/",
+          data: { email: $('#inputEmail').val(),
+                  username: $('#inputUsername').val(),
+                  password: $('#inputPassword').val() }
+        })
+          .done(function( msg ) {
+            console.dir( msg );
+            app.finishSignIn();
+          });
+      } else if (e.currentTarget.id == "twitter") {
+        $.ajax({
+          method: "POST",
+          url:  "http://" + window.location.host + "/api/v1/signup/twitter/",
+          data: { email: $('#inputEmail').val(),
+                  username: $('#inputUsername').val(),
+                  password: $('#inputPassword').val() }
+        })
+          .done(function( msg ) {
+            console.dir( msg );
+            app.finishSignIn();
+          });
+      } else if (e.currentTarget.id == "google") {
+        $.ajax({
+          method: "POST",
+          url:  "http://" + window.location.host + "/api/v1/signup/google/",
+          data: { email: $('#inputEmail').val(),
+                  username: $('#inputUsername').val(),
+                  password: $('#inputPassword').val() }
+        })
+          .done(function( msg ) {
+            console.dir( msg );
+            app.finishSignIn();
+          });
+      } else if (e.currentTarget.id == "github") {
+        $.ajax({
+          method: "POST",
+          url:  "http://" + window.location.host + "/api/v1/signup/github/",
+          data: { email: $('#inputEmail').val(),
+                  username: $('#inputUsername').val(),
+                  password: $('#inputPassword').val() }
+        })
+          .done(function( msg ) {
+            console.dir( msg );
+            app.finishSignIn();
+          });
+      } else {
+        //nothing
+      }
+
 
     },
     processForgot: function(e){
@@ -348,11 +475,15 @@
       app.showView(app.views.resetView);
     },
     showProfile: function(e){
-      console.log('Loading profile page');
+      console.log('view: #bprofile clicked');
+      console.dir(app.views.profileView);
+      $('#public-menu').children().removeClass('active');
       app.showView(app.views.profileView);
     },
     showAdmin: function(e){
-      console.log('Loading admin page');
+      console.log('view: #badmin clicked');
+      console.dir(app.views.adminView);
+      $('#public-menu').children().removeClass('active');
       app.showView(app.views.adminView);
     }
   }); 
@@ -431,7 +562,15 @@
           console.dir(collection);
           console.dir(response);
           //console.dir(options);
-          
+          app.views.profileView = new app.ProfileView();
+
+          if(typeof app.views.adminView == 'undefined'){
+      
+            if(app.user.attributes.roles.indexOf('0,') != -1){
+              app.views.adminView = new app.AdminView();
+            }
+          }
+
           self.render();
         }
       });
@@ -448,7 +587,8 @@
       this.$el.html(this.template());
 
       //Add + button
-      $('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-toggle="modal" data-target="#wine-modal"><span class="fa fa-plus"></span></button>');
+      $('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-toggle="modal" data-target="#wine-modal" data-backdrop="false"><span class="fa fa-plus"></span></button>');
+      //$('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-backdrop="false"><span class="fa fa-plus"></span></button>');
       //Add the delete heading
       $('#cellar .table thead tr').prepend('<th><span class="fa fa-trash-o"></span></th>');
 
@@ -477,6 +617,7 @@
       $('#cellar div.panel-heading h3.panel-title').html(panelHeading);
 
       var frag = document.createDocumentFragment();
+      console.log('reached wine record creation');
       this.collection.each(function(record) {
         console.log('Wine name is: ' + record.attributes.name);
         var view = new app.ResultsRowView({ model: record });
@@ -487,26 +628,11 @@
       return this;
     },
     addWine: function(e){
+      e.preventDefault();
       console.log('add wine');
       
       //show modal
-
-      $('#wine-modal').modal('show');
-
-      /* for inline row, doesnt look good
-      var newWineRow = '<tr><td></td>';
-      newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
-      newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
-      newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
-      newWineRow += '<td><div class="col-md-2"><input type="text"></div></td>';
-      newWineRow += '<td><div class="col-md-1"><input type="text"></div></td></tr>';
-
-      $('#results-rows').prepend(newWineRow);
-      */     
-
-      //add/cancel buttons on top of panel
-      //$('#cellar div.panel-heading .btn-group').prepend('<button id="submit-wine" class="btn btn-sm btn-success"><span class="fa fa-check"></span></button><button id="cancel-wine" class="btn btn-sm btn-warning"><span class="fa fa-times"></span></button>');
-
+      $('#wine-modal').modal('show'); 
     },
     submitWine: function(e){
       console.log('submit wine');
@@ -668,55 +794,328 @@
 
       //this.$el.html(this.template( this.model ));
       this.$el.html(_.template(JST["assets/views/cellar/wines/tmpl-wines.html"](this.model)));
-      /*this.$el.find('.timeago').each(function(index, indexValue) {
-        if (indexValue.innerText) {
-          var myMoment = moment(indexValue.innerText);
-          indexValue.innerText = myMoment.from();
-          if (indexValue.getAttribute('data-age')) {
-            indexValue.innerText = indexValue.innerText.replace('ago', 'old');
-          }
-        }
-      });*/
+
       return this;
     }
   });
 
   app.ProfileView = Backbone.View.extend({
-    tagName: '#profile',
-    template: _.template(JST["assets/views/profile/tmpl-profile.html"]()),
+    el: '#profile',
+    //template loaded during render
     events: {
-      //
+      'click #profile-settings': 'doProfileSettings',
+      'click #submit-profile': 'doSubmitProfileChanges'
     },
     initialize: function(){
 
       console.log('profileView loaded.');
-      this.render();
+
+      var wines = app.views.mycellarView.collection;
+      console.log(wines.length);
+      var noWines = wines.length;
+      var avgRating = 0;
+      if(wines.length > 0){
+        wines.each(function(wine) {
+          console.log(wine.attributes.rating);
+          avgRating += parseInt(wine.attributes.rating);
+        });
+      } else {
+        avgRating = 0;
+      }
+      
+      var vars = {
+        avgRating: avgRating,
+        noWines: noWines
+      }
+
+      this.render(vars);
     },
-    render: function() {
+    render: function(vars) {
       console.log('ProfileView: render');
-      
-      this.$el.html(this.template( 'hello' ) );
-      
+      var wines = app.views.mycellarView.collection;
+
+      if(wines.length > 0){
+        vars.avgRating = (vars.avgRating / vars.noWines).toFixed(2);
+      } else {
+        vars.avgRating = 0;
+      }
+
+      this.$el.html(_.template(JST["assets/views/profile/tmpl-profile.html"]( vars )));
+
       return this;
+    },
+    doProfileSettings: function (e) {
+      //reset the form fields..
+      app.clearForm($('#profile-settings-modal form input'));
+      var profileUser = app.user;
+      
+      $('#profileUsername').val(profileUser.attributes.username);
+      $('#profileEmail').val(profileUser.attributes.email);
+      $('#profileFirst').val(profileUser.attributes.firstname);
+      $('#profileLast').val(profileUser.attributes.lastname);
+      $('#profilePhone').val(profileUser.attributes.phone);
+      $('#profileTwitter').val(profileUser.attributes.twitterKey);
+      $('#profileFacebook').val(profileUser.attributes.facebookKey);
+      $('#profileGoogle').val(profileUser.attributes.googleKey);
+      $('#profileGithub').val(profileUser.attributes.githubKey);
+    },
+    doSubmitProfileChanges: function () {
+      console.log('submitted profile changes');
+      
+      var self = this;
+      var groups = "";
+
+      $('#profileGroups').find(":selected").each(function() {
+          groups = groups + $(this).text() + ", ";
+      });
+
+
+      app.user.save({
+        firstname: $('#profileFirst').val(),
+        lastname: $('#profileLast').val(),
+        //groups
+        groups: groups,
+        phone: $('#profilePhone').val(),
+        twitterKey: $('#profileTwitter').val(),
+        facebookKey: $('#profileFacebook').val(),
+        googleKey: $('#profileGoogle').val(),
+        githubKey: $('#profileGithub').val()
+      }).then(function(){
+        self.render;
+      });
+
+    $('#profile-settings-modal').hide();
+
+
     }
   });
 
   app.AdminView = Backbone.View.extend({
-    tagName: '#admin',
-    template: _.template(JST["assets/views/admin/tmpl-admin.html"]()),
+    el: '#admin',
+    template: _.template(JST["assets/views/admin/tmpl-admin.html"]( )), 
     events: {
-      //
+      'click .delete-user': 'doDeleteUser',
+      'click #submit-add-user': 'doAddUser',
+      'click #loadEditModal': 'loadEditUser',
+      'click #submit-edit-user': 'submitEditUser'
     },
     initialize: function(){
 
-      console.log('profileView loaded.');
-      this.render();
+      console.log('adminView loaded.');
+
+      var self = this;
+      this.collection = new app.UserCollection();
+
+      this.collection.fetch({
+        success: function(collection, response, options){
+          console.log('users retrieved');
+          console.dir(collection);
+          console.dir(response);
+  
+          self.render();
+        }
+      });
+      
     },
     render: function() {
       console.log('AdminView: render');
+      //console.dir(this.collection);
+      var no_admins = 0;
+
+      //Get total # of wines - for stats only
+      $.ajax({
+        url: "/api/v1/admin/totalwines/"
+      }).done(function(total) {
+        $('#no-wines').html(total);
+      });
       
-      this.$el.html(this.template( 'hello' ) );
+      this.$el.html(this.template());
+
+      //Add + button
+      $('#manage-users-table .btn-group').append('<button id="add-user" class="btn btn-default btn-sm" data-toggle="modal" data-target="#add-user-modal" data-backdrop="false"><span class="fa fa-plus"></span></button>');
+      //Add the delete heading
+      $('#manage-users-table .table thead tr').prepend('<th><span class="fa fa-trash-o"></span></th>');
+
+      var frag = document.createDocumentFragment();
+      this.collection.each(function(record) {
+        //console.log('User name is: ' + record.attributes.username);
+        record.attributes.roles = record.attributes.roles.replace("0", "admin");
+        record.attributes.roles = record.attributes.roles.replace("1", "user");
+        var view = new app.AdminResultsRowView({ model: record });
+        frag.appendChild(view.render().el);
+
+        if(record.attributes.roles.search("admin")+1){
+          no_admins = no_admins + 1;
+        }
+
+
+      }, this);
+      $('#admin-results-rows').append(frag);
+
+      $('#no-users').html(this.collection.length);
+      $('#no-admins').html(no_admins);
+
+
+      this.listenTo(this.collection, 'reset', this.render);
+      this.listenTo(this.collection, 'add', this.render);
+      this.listenTo(this.collection, 'remove', this.render);
+
+      return this;
+    },
+    doDeleteUser: function(e) {
+
+      var siblings = $(e.currentTarget).closest('tr').children();
+
+      console.log('username: ');
+        console.dir(siblings[2]);
+
+      //parent tr remove, fadeOut
+      var removeUser = this.collection.findWhere({
+        username: siblings[2].innerText
+      });
+      console.log('removeUser: ')
+      console.dir(removeUser);
+
+      removeUser.destroy().complete(function(){
+          self.collection.fetch();
+        });
+    },
+    doAddUser: function() {
       
+      var self = this;
+      var newUser = new app.UserRecord();
+
+      newUser.save({
+        username: this.$el.find('#add-user-modal #userUsername').val(),
+        email: this.$el.find('#add-user-modal #userEmail').val(),
+        roles: "1,",
+        createdById: app.user.attributes.id
+      }, {
+      success: function (model, response) {
+        console.log("success");
+        //console.dir(model);
+        $('#add-user-modal').modal('hide');
+        self.collection.add(model);
+        self.collection.fetch();
+      },
+      error: function (model, response) {
+          console.log("error");
+      }
+      });
+    },
+    loadEditUser: function(e) {
+      console.log('loading edit user data');
+      //reset the form fields..
+      app.clearForm($('#edit-user-modal form input'));
+
+      var siblings = $(e.currentTarget).closest('tr').children();
+
+      var updateUser = this.collection.findWhere({
+        username: siblings[2].innerText
+      });
+      console.dir(updateUser);
+      var roleAdmin = updateUser.attributes.roles.indexOf("admin,");
+      var roleUser = updateUser.attributes.roles.indexOf("user,");
+
+      $('#editUsername').val(updateUser.attributes.username);
+      $('#editEmail').val(updateUser.attributes.email);
+      $('#editFirst').val(updateUser.attributes.firstname);
+      $('#editLast').val(updateUser.attributes.lastname);
+      //isActive
+      if(updateUser.attributes.isActive == 'yes'){
+        $('#activeRadios #optionsRadios1').prop("checked", true);
+      } else {
+        $('#activeRadios #optionsRadios2').prop("checked", true);
+      }
+      //isVerified
+      if(updateUser.attributes.isVerified == 'yes'){
+        $('#verifiedRadios #optionsRadios1').prop("checked", true);
+      } else {
+        $('#verifiedRadios #optionsRadios2').prop("checked", true);
+      }
+      //roles
+      if(roleAdmin != -1){
+        $('#editRolesAdmin .admin').prop("checked", true);
+      } 
+
+      if(roleUser != -1){
+        $('#editRolesUser .user').prop("checked", true);
+      }
+      //groups
+
+      $('#editPhone').val(updateUser.attributes.phone);
+      $('#editTwitter').val(updateUser.attributes.twitterKey);
+      $('#editFacebook').val(updateUser.attributes.facebookKey);
+      $('#editGoogle').val(updateUser.attributes.googleKey);
+      $('#editGithub').val(updateUser.attributes.githubKey);
+
+
+    },
+    submitEditUser: function() {
+      console.log('edit user submitted');
+      var self = this;
+      var isActive = "no";
+      var isVerified = "no";
+      var roles = "";
+      var groups = "";
+      var i = 0;
+
+      var updateUser = this.collection.findWhere({
+        username: $('#editUsername').val()
+      });
+      //console.log('user being updated is: ' + updateUser);
+
+
+      isActive = $('input[name=activeRadios]:checked').val();
+      isVerified = $('input[name=verifiedRadios]:checked').val();
+
+      $('.checkbox input:checked').each(function() {
+          roles = roles + $(this).val() + ", ";
+      });
+
+      $('#editGroups').find(":selected").each(function() {
+          groups = groups + $(this).text() + ", ";
+      });
+
+
+      updateUser.save({
+        firstname: $('#editFirst').val(),
+        lastname: $('#editLast').val(),
+        isActive: isActive,
+        isVerified: isVerified,
+        //roles
+        roles: roles,
+        //groups
+        groups: groups,
+        phone: $('#editPhone').val(),
+        twitterKey: $('#editTwitter').val(),
+        facebookKey: $('#editFacebook').val(),
+        googleKey: $('#editGoogle').val(),
+        githubKey: $('#editGithub').val()
+      }).then(function(){
+        self.render;
+      });
+
+    $('#edit-user-modal').hide();
+
+    }
+  });
+
+  app.AdminResultsRowView = Backbone.View.extend({
+    tagName: 'tr',
+    viewDetails: function() {
+      //location.href = this.model.url();
+    },
+    render: function() {
+      this.$el.html(_.template(JST["assets/views/admin/users/tmpl-a-users.html"](this.model)));
+
+      if(this.model.attributes.username == "root"){
+        //Do not show delete checkbox for root account
+        console.log('row user is root');
+        console.dir(this.$('.delete-user').html());
+        this.$('.delete-user').remove();
+      } 
+
       return this;
     }
   });

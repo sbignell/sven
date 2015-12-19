@@ -49,18 +49,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'assets/', src: ['media/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/vendor/font-awesome', src: ['fonts/*'], dest: 'www/' },
           { expand: true, cwd: 'assets/', src: ['favicon.ico'], dest: 'www/' },
-          { expand: true, cwd: 'assets/views', src: ['templates.js'], dest: 'www/views/' },
-          { expand: true, cwd: 'assets/views/account/', src: ['*.jade'], dest: 'www/views/account/' },
-          { expand: true, cwd: 'assets/views/account/settings/', src: ['*.jade'], dest: 'www/views/account/settings/' },
-          { expand: true, cwd: 'assets/views/account/verification/', src: ['*.jade'], dest: 'www/views/account/verification/' },
-          { expand: true, cwd: 'assets/views/admin/', src: ['*.jade'], dest: 'www/views/admin/' },
-          { expand: true, cwd: 'assets/views/admin/accounts/', src: ['*.jade'], dest: 'www/views/admin/accounts/' },
-          { expand: true, cwd: 'assets/views/admin/admin-groups/', src: ['*.jade'], dest: 'www/views/admin/admin-groups/' },
-          { expand: true, cwd: 'assets/views/admin/administrators/', src: ['*.jade'], dest: 'www/views/admin/administrators/' },
-          { expand: true, cwd: 'assets/views/admin/categories/', src: ['*.jade'], dest: 'www/views/admin/categories/' },
-          { expand: true, cwd: 'assets/views/admin/statuses/', src: ['*.jade'], dest: 'www/views/admin/statuses/' },
-          { expand: true, cwd: 'assets/views/admin/users/', src: ['*.jade'], dest: 'www/views/admin/users/' },
-          { expand: true, cwd: 'assets/views/', src: ['templates.js'], dest: 'www/views/' }
+          { expand: true, cwd: 'assets/views', src: ['templates.js'], dest: 'www/views/' }
         ]
       }
     },
@@ -80,7 +69,10 @@ module.exports = function(grunt) {
           "assets/views/cellar/tmpl-cellar.html": ["assets/views/cellar/index.jade"],
           "assets/views/profile/tmpl-profile.html": ["assets/views/profile/index.jade"],
           "assets/views/admin/tmpl-admin.html": ["assets/views/admin/index.jade"],
+          "assets/views/admin/users/tmpl-a-users.html": ["assets/views/admin/users/index.jade"],
           "assets/views/cellar/wines/tmpl-wines.html": ["assets/views/cellar/wines/index.jade"],
+          "assets/views/profile/tmpl-profile.html": ["assets/views/profile/index.jade"],
+          "assets/views/profile/settings/tmpl-settings.html": ["assets/views/profile/settings/index.jade"],
           "assets/views/login/forgot/tmpl-forgot.html": ["assets/views/login/forgot/*.jade"],
           "assets/views/login/reset/tmpl-reset.html": ["assets/views/login/reset/*.jade"]
         }
@@ -126,8 +118,6 @@ module.exports = function(grunt) {
             'assets/vendor/respond/respond.js',
             'assets/layouts/ie-sucks.js'
           ],
-          'www/scripts/admin.min.js': ['assets/layouts/admin.js'],
-          'www/scripts/account.min.js': ['assets/layouts/account.js'],
           'www/scripts/public.min.js': ['assets/layouts/public.js'],
           'www/scripts/index.min.js': ['assets/views/index.js']
         }
@@ -167,8 +157,6 @@ module.exports = function(grunt) {
             'assets/less/bootstrap-build.less',
             'assets/less/font-awesome-build.less'
           ],
-          'www/styles/admin.min.css': ['assets/layouts/admin.less'],
-          'www/styles/account.min.css': ['assets/layouts/account.less'],
           'www/styles/public.min.css': ['assets/layouts/public.less'],
           'www/styles/index.min.css': ['assets/views/index.less']
         }
@@ -187,9 +175,9 @@ module.exports = function(grunt) {
       js: {
         src: [
           'assets/layouts/**/*.min.js',
-          //'assets/layouts/**/*.min.js.map',
+          'assets/layouts/**/*.min.js.map',
           'www/scripts/**/*.min.js',
-          //'www/scripts/**/*.min.js.map'
+          'www/scripts/**/*.min.js.map'
         ]
       },
       css: {
