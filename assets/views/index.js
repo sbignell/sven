@@ -303,13 +303,13 @@
             app.user.attributes.lastname = response.lastname;
             app.user.attributes.isActive = response.isActive;
             app.user.attributes.isVerified = response.isVerified;
-            app.user.attributes.lastname = response.groups;
-            app.user.attributes.lastname = response.phone;
-            app.user.attributes.lastname = response.twitterKey;
-            app.user.attributes.lastname = response.facebookKey;
-            app.user.attributes.lastname = response.googleKey;
-            app.user.attributes.lastname = response.githubKey;
-            app.user.attributes.lastname = response.createdById;  
+            app.user.attributes.groups = response.groups;
+            app.user.attributes.phone = response.phone;
+            app.user.attributes.twitterKey = response.twitterKey;
+            app.user.attributes.facebookKey = response.facebookKey;
+            app.user.attributes.googleKey = response.googleKey;
+            app.user.attributes.githubKey = response.githubKey;
+            app.user.attributes.createdById = response.createdById;  
 
             app.finishSignIn();
           
@@ -400,7 +400,7 @@
 
       $('.dropdown-toggle').dropdown('toggle');
 
-    },
+    }/*,  Social Not Working
     doSocialSignUp: function(e){
       e.preventDefault();
       console.log('view: social signup clicked - ' + e.currentTarget.id);
@@ -459,7 +459,7 @@
       }
 
 
-    },
+    }*/,
     processForgot: function(e){
       e.preventDefault();
       console.log('view: #gotoForgot clicked');
