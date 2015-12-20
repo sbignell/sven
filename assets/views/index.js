@@ -408,7 +408,7 @@
 
       if (e.currentTarget.id == "facebook"){
         $.ajax({
-          method: "POST",
+          method: "GET",
           url:  "http://" + window.location.host + "/api/v1/signup/facebook/",
           data: { email: $('#inputEmail').val(),
                   username: $('#inputUsername').val(),
