@@ -631,8 +631,10 @@
       e.preventDefault();
       console.log('add wine');
       
-      //show modal
-      $('#wine-modal').modal('show'); 
+      //show modal - only add 100 wines
+      if(this.collection.length < 101){
+        $('#wine-modal').modal('show'); 
+      }
     },
     submitWine: function(e){
       console.log('submit wine');
@@ -985,23 +987,27 @@
       var self = this;
       var newUser = new app.UserRecord();
 
-      newUser.save({
-        username: this.$el.find('#add-user-modal #userUsername').val(),
-        email: this.$el.find('#add-user-modal #userEmail').val(),
-        roles: "1,",
-        createdById: app.user.attributes.id
-      }, {
-      success: function (model, response) {
-        console.log("success");
-        //console.dir(model);
-        $('#add-user-modal').modal('hide');
-        self.collection.add(model);
-        self.collection.fetch();
-      },
-      error: function (model, response) {
-          console.log("error");
+      //100 user limit
+      if(this.collection.length < 101){
+
+        newUser.save({
+          username: this.$el.find('#add-user-modal #userUsername').val(),
+          email: this.$el.find('#add-user-modal #userEmail').val(),
+          roles: "1,",
+          createdById: app.user.attributes.id
+        }, {
+        success: function (model, response) {
+          console.log("success");
+          //console.dir(model);
+          $('#add-user-modal').modal('hide');
+          self.collection.add(model);
+          self.collection.fetch();
+        },
+        error: function (model, response) {
+            console.log("error");
+        }
+        });
       }
-      });
     },
     loadEditUser: function(e) {
       console.log('loading edit user data');
