@@ -51,6 +51,11 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'assets/', src: ['favicon.ico'], dest: 'www/' },
           { expand: true, cwd: 'assets/views', src: ['templates.js'], dest: 'www/views/' }
         ]
+      },
+      dest: {
+        files: [
+          { expand: true, cwd: 'www', src: ['**'], dest: '../sid/client/' }
+        ]
       }
     },
     jade: {
@@ -188,6 +193,9 @@ module.exports = function(grunt) {
       },
       vendor: {
         src: ['assets/vendor/**']
+      },
+      dest: {
+        src: ['../sid/client/**']
       }
     }
   });
@@ -206,5 +214,6 @@ module.exports = function(grunt) {
 
   //grunt.registerTask('default', ['copy:vendor', 'newer:uglify', 'newer:less', 'concurrent']);
   grunt.registerTask('build', ['copy:vendor', 'jade', 'jst', 'uglify', 'less', 'copy:sven']);
+  grunt.registerTask('deploy', ['clean:dest', 'copy:dest']);
   grunt.registerTask('lint', ['jshint']);
 };

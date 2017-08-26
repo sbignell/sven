@@ -5,124 +5,9 @@
 
   app = app || {};
 
-  app.clearForm = function(frm_elements){
-    console.log('clear the form: ' + frm_elements);
-
-    for (var i = 0; i < frm_elements.length; i++)
-    {
-        var field_type = frm_elements[i].type.toLowerCase();
-        switch (field_type)
-        {
-        case "text":
-        case "password":
-        case "textarea":
-        case "hidden":
-            frm_elements[i].value = "";
-            break;
-        case "radio":
-        case "checkbox":
-            if (frm_elements[i].checked)
-            {
-                frm_elements[i].checked = false;
-            }
-            break;
-        case "select-one":
-        case "select-multi":
-            frm_elements[i].selectedIndex = -1;
-            break;
-        default:
-            break;
-        }
-    }
-
-  }
-
-  app.finishSignIn = function (){
-
-    if(typeof app.views.mycellarView == 'undefined'){
-        console.log('creating mycellarView');
-        app.views.mycellarView = new app.MyCellarView();
-      }
-
-    /*if(typeof app.views.profileView == 'undefined'){
-      console.log('creating profileView');
-      app.views.profileView = new app.ProfileView();
-      if(app.user.attributes.roles.indexOf('0,') != -1){
-        app.views.adminView = new app.AdminView();
-      }
-    }*/
-
-    /*if(typeof app.views.adminView == 'undefined'){
-      
-      if(app.user.attributes.roles.indexOf('0,') != -1){
-        app.views.adminView = new app.AdminView();
-      }
-    }*/
-
-    console.log('finishSignIn');
-    $('.form-control').attr('disabled', false);
-    $('#doSignIn').attr('disabled', false);
-    $('#doSignUp').attr('disabled', false);
-    $('#signinupDropdown').attr('disabled', false);
-    $('.dropdown-menu').attr('disabled', false);
-    $('#signStatus').css("display", "none");
-
-    //change button to username
-    var loggedInBtn = '<button id="signedinDropdown" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">';
-    loggedInBtn += '<span class="fa fa-user"></span> ' + app.user.attributes.username + ' <span class="caret"></span></button>';
-    loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
-    loggedInBtn += '<li><a id="bprofile" href="#">Profile</a></li>';
-    if(app.user.attributes.roles.indexOf('0,') != -1){  //if they have admin role
-      loggedInBtn += '<li><a id="badmin" href="#">Administer</a></li>';
-    }
-    loggedInBtn += '<li><a id="signout" href="http://www.sidandsven.com/logout/">Sign Out</a></li>';
-    loggedInBtn += '</ul>';
-
-    $('div.dropdown').html(loggedInBtn);
-    $('.dropdown-toggle').dropdown('toggle');
-
-    //move to cellar
-    app.showView(app.views.cellarView);
-
-  }
-
-  app.getUrlParameter = function (sParam){
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++) 
-    {
-        var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam) 
-        {
-            return sParameterName[1];
-        }
-    }
-  }      
-
-  app.showView = function (view){
-    console.log('showView: ');
-    console.dir(view.el);
-
-    if (view != app.views.resetView) { //If user clicks away from reset page, remove url params
-      if (typeof app.getUrlParameter('u') != 'undefined'){
-        window.history.replaceState( {} , 'Sid is awake.', 'http://www.sidandsven.com' );
-      } else if (typeof app.getUrlParameter('t') != 'undefined'){
-        window.history.replaceState( {} , 'Sid is awake.', 'http://www.sidandsven.com' );
-      }
-    }
-
-    if(view == app.views.cellarView && typeof app.user != 'undefined' && app.user.attributes.username != "") { //If user logged in, change cellarView
-      console.log('showView: user logged in and requested cellarView');
-      
-      view = app.views.mycellarView;
-    }
-
-    if(app.views.current != undefined){
-        $(app.views.current.el).hide();
-    }
-    app.views.current = view;
-    $(app.views.current.el).show();
-  };
+  /////////////////////////////////////////////////////////////
+  //*************        MODELS      ************************//
+  /////////////////////////////////////////////////////////////
 
   app.Login = Backbone.Model.extend({
     url: '/api/v1/login/',
@@ -218,6 +103,209 @@
     url: '/api/v1/admin/users/'
   });
 
+  /////////////////////////////////////////////////////////////
+  //*************        CELLAR      ************************//
+  /////////////////////////////////////////////////////////////
+
+  app.CellarView = Backbone.View.extend({
+    el: '#cellar',
+    template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
+    initialize: function() {
+      console.log('cellarView loaded.');
+      
+      this.render();
+  
+    },
+    render: function() {
+
+      console.log('cellarView: render');
+
+
+      this.$el.html(this.template( 'hello' ));
+
+      return this;
+    }
+  });
+
+  app.MyCellarView = Backbone.View.extend({
+    el: '#cellar',
+    template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
+    events: {
+      //'click #add-wine': 'addWine',
+      'click #submit-wine': 'submitWine',
+      'click #cancel-wine': 'cancelWine',
+      'click .delete-wine': 'deleteWine'
+    },
+    initialize: function() {
+      console.log('mycellarView loaded.');
+      var self = this;
+
+      this.collection = new app.RecordCollection( );
+      this.listenTo(this.collection, 'reset', this.render);
+      this.listenTo(this.collection, 'add', this.render);
+      this.listenTo(this.collection, 'remove', this.render);
+      this.collection.fetch({
+        success: function(collection, response, options){
+          //console.log('collection, response, options');
+          console.dir(collection);
+          console.dir(response);
+          //console.dir(options);
+          app.views.profileView = new app.ProfileView();
+
+          if(typeof app.views.adminView == 'undefined'){
+      
+            if(app.user.attributes.roles.indexOf('0,') != -1){
+              app.views.adminView = new app.AdminView();
+            }
+          }
+
+          self.render();
+        }
+      });
+
+    },
+    render: function() {
+
+      //fetch my collection from server
+      console.log('mycellarView: render');
+      console.log(this.collection.length);
+
+      //console.dir(app.user.attributes);
+
+      this.$el.html(this.template());
+
+      //Add + button
+      $('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-toggle="modal" data-target="#wine-modal" data-backdrop="false"><span class="fa fa-plus"></span></button>');
+      //$('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-backdrop="false"><span class="fa fa-plus"></span></button>');
+      //Add the delete heading
+      $('#cellar .table thead tr').prepend('<th><span class="fa fa-trash-o"></span></th>');
+
+      //remove Sid's top 20 records
+      $('#results-rows').empty();
+
+      if(this.collection.length == 0){
+        console.log('We need to add the dummy item');
+        $('#results-rows').append('<tr><td>Chardonnay</td><td>Heemskerk</td><td>2012 Coal River Valley Chardonnay</td><td>Bright straw-green; French oak barrel fermented, and pure class from start to finish, with perfect balance, line and length; Tasmanian acidity provides the framework and the length of a delicious wine. Trophy Best Chardonnay Tasmanian Wine Show ’14.</td><td>9.8</td></tr>');
+      }
+
+      var welcomeText = 'Welcome, ' + app.user.attributes.username;
+      var cellarBlurb1 = 'This is your wine cellar, why don\'t you start adding your favourite drops! Look, I\'ve started you off with one of my personal favourites.';
+      var cellarBlurb2 = 'Excellent, I see you have great taste in wine! Keep building your cellar!';
+      var cellarBlurb3 = 'This is quite the collection you have! You\'ll need to stop there or you risk overshadowing me!!';
+      var panelHeading = '<img class="wines" src="media/wines.png" /> ' + app.user.attributes.username + '\'s Top 20';
+      
+      $('#cellar div.media-body h4.media-heading').html(welcomeText);
+      if (this.collection.length == 0){
+        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb1);
+      } else if (this.collection.length < 20){
+        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb2);
+      } else if (this.collection.length == 20){
+        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb3);
+      }
+      $('#cellar div.panel-heading h3.panel-title').html(panelHeading);
+
+      var frag = document.createDocumentFragment();
+      console.log('reached wine record creation');
+      this.collection.each(function(record) {
+        console.log('Wine name is: ' + record.attributes.name);
+        var view = new app.ResultsRowView({ model: record });
+        frag.appendChild(view.render().el);
+      }, this);
+      $('#results-rows').append(frag);
+
+      return this;
+    },
+    addWine: function(e){
+      e.preventDefault();
+      console.log('add wine');
+      
+      //show modal - only add 100 wines
+      if(this.collection.length < 101){
+        $('#wine-modal').modal('show'); 
+      }
+    },
+    submitWine: function(e){
+      console.log('submit wine');
+      var self = this;
+
+      var newWine = new app.Record();
+
+      newWine.save({
+        grape: this.$el.find('.modal #wineGrape').val(),
+        estate: this.$el.find('.modal #wineEstate').val(),
+        name: this.$el.find('.modal #wineName').val(),
+        notes: this.$el.find('.modal #wineNotes').val(),
+        rating: this.$el.find('.modal #wineRating').val(),
+        createdById: app.user.attributes.id,
+        createdByName: app.user.attributes.username
+      }, {
+      success: function (model, response) {
+        console.log("success");
+        //console.dir(model);
+        $('#wine-modal').modal('hide');
+        self.collection.add(model);
+      },
+      error: function (model, response) {
+          console.log("error");
+      }
+      });
+
+    },
+    cancelWine: function(e){
+      console.log('cancel wine');
+
+      $('#wine-modal').modal('hide');
+
+    },
+    deleteWine: function(e){
+      console.log('delete wine');
+      console.dir($(e.currentTarget).closest('tr'));
+      var self = this;
+      var siblings = $(e.currentTarget).closest('tr').children();
+
+      console.log('wineName: ');
+        console.dir(siblings[3]);
+
+      //parent tr remove, fadeOut
+      var removeWine = this.collection.findWhere({
+        name: siblings[3].innerText
+      });
+      console.log('removeWine: ')
+      console.dir(removeWine);
+
+      removeWine.destroy().complete(function(){
+          self.collection.fetch();
+        });
+
+      
+      //this.collection.remove(removeWine);
+
+    }
+  });
+
+  app.ResultsRowView = Backbone.View.extend({
+    tagName: 'tr',
+    //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
+    events: {
+      //'click .btn-details': 'viewDetails'
+    },
+    viewDetails: function() {
+      location.href = this.model.url();
+    },
+    render: function() {
+      console.log('ResultsRowView: render');
+      console.dir(this.model.attributes);
+
+      //this.$el.html(this.template( this.model ));
+      this.$el.html(_.template(JST["assets/views/cellar/wines/tmpl-wines.html"](this.model)));
+
+      return this;
+    }
+  });
+
+  /////////////////////////////////////////////////////////////
+  //*************       HEAD/HOME    ************************//
+  /////////////////////////////////////////////////////////////
 
   app.HeaderView = Backbone.View.extend({
     el: '#header', 
@@ -519,287 +607,9 @@
     }
   });
 
-  app.CellarView = Backbone.View.extend({
-    el: '#cellar',
-    template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
-    initialize: function() {
-      console.log('cellarView loaded.');
-      
-      this.render();
-  
-    },
-    render: function() {
-
-      console.log('cellarView: render');
-
-
-      this.$el.html(this.template( 'hello' ));
-
-      return this;
-    }
-  });
-
-  app.MyCellarView = Backbone.View.extend({
-    el: '#cellar',
-    template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
-    events: {
-      //'click #add-wine': 'addWine',
-      'click #submit-wine': 'submitWine',
-      'click #cancel-wine': 'cancelWine',
-      'click .delete-wine': 'deleteWine'
-    },
-    initialize: function() {
-      console.log('mycellarView loaded.');
-      var self = this;
-
-      this.collection = new app.RecordCollection( );
-      this.listenTo(this.collection, 'reset', this.render);
-      this.listenTo(this.collection, 'add', this.render);
-      this.listenTo(this.collection, 'remove', this.render);
-      this.collection.fetch({
-        success: function(collection, response, options){
-          //console.log('collection, response, options');
-          console.dir(collection);
-          console.dir(response);
-          //console.dir(options);
-          app.views.profileView = new app.ProfileView();
-
-          if(typeof app.views.adminView == 'undefined'){
-      
-            if(app.user.attributes.roles.indexOf('0,') != -1){
-              app.views.adminView = new app.AdminView();
-            }
-          }
-
-          self.render();
-        }
-      });
-
-    },
-    render: function() {
-
-      //fetch my collection from server
-      console.log('mycellarView: render');
-      console.log(this.collection.length);
-
-      //console.dir(app.user.attributes);
-
-      this.$el.html(this.template());
-
-      //Add + button
-      $('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-toggle="modal" data-target="#wine-modal" data-backdrop="false"><span class="fa fa-plus"></span></button>');
-      //$('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-backdrop="false"><span class="fa fa-plus"></span></button>');
-      //Add the delete heading
-      $('#cellar .table thead tr').prepend('<th><span class="fa fa-trash-o"></span></th>');
-
-      //remove Sid's top 20 records
-      $('#results-rows').empty();
-
-      if(this.collection.length == 0){
-        console.log('We need to add the dummy item');
-        $('#results-rows').append('<tr><td>Chardonnay</td><td>Heemskerk</td><td>2012 Coal River Valley Chardonnay</td><td>Bright straw-green; French oak barrel fermented, and pure class from start to finish, with perfect balance, line and length; Tasmanian acidity provides the framework and the length of a delicious wine. Trophy Best Chardonnay Tasmanian Wine Show ’14.</td><td>9.8</td></tr>');
-      }
-
-      var welcomeText = 'Welcome, ' + app.user.attributes.username;
-      var cellarBlurb1 = 'This is your wine cellar, why don\'t you start adding your favourite drops! Look, I\'ve started you off with one of my personal favourites.';
-      var cellarBlurb2 = 'Excellent, I see you have great taste in wine! Keep building your cellar!';
-      var cellarBlurb3 = 'This is quite the collection you have! You\'ll need to stop there or you risk overshadowing me!!';
-      var panelHeading = '<img class="wines" src="media/wines.png" /> ' + app.user.attributes.username + '\'s Top 20';
-      
-      $('#cellar div.media-body h4.media-heading').html(welcomeText);
-      if (this.collection.length == 0){
-        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb1);
-      } else if (this.collection.length < 20){
-        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb2);
-      } else if (this.collection.length == 20){
-        $('#cellar div.media-body p.cellarConversation').text(cellarBlurb3);
-      }
-      $('#cellar div.panel-heading h3.panel-title').html(panelHeading);
-
-      var frag = document.createDocumentFragment();
-      console.log('reached wine record creation');
-      this.collection.each(function(record) {
-        console.log('Wine name is: ' + record.attributes.name);
-        var view = new app.ResultsRowView({ model: record });
-        frag.appendChild(view.render().el);
-      }, this);
-      $('#results-rows').append(frag);
-
-      return this;
-    },
-    addWine: function(e){
-      e.preventDefault();
-      console.log('add wine');
-      
-      //show modal - only add 100 wines
-      if(this.collection.length < 101){
-        $('#wine-modal').modal('show'); 
-      }
-    },
-    submitWine: function(e){
-      console.log('submit wine');
-      var self = this;
-
-      var newWine = new app.Record();
-
-      newWine.save({
-        grape: this.$el.find('.modal #wineGrape').val(),
-        estate: this.$el.find('.modal #wineEstate').val(),
-        name: this.$el.find('.modal #wineName').val(),
-        notes: this.$el.find('.modal #wineNotes').val(),
-        rating: this.$el.find('.modal #wineRating').val(),
-        createdById: app.user.attributes.id,
-        createdByName: app.user.attributes.username
-      }, {
-      success: function (model, response) {
-        console.log("success");
-        //console.dir(model);
-        $('#wine-modal').modal('hide');
-        self.collection.add(model);
-      },
-      error: function (model, response) {
-          console.log("error");
-      }
-      });
-
-    },
-    cancelWine: function(e){
-      console.log('cancel wine');
-
-      $('#wine-modal').modal('hide');
-
-    },
-    deleteWine: function(e){
-      console.log('delete wine');
-      console.dir($(e.currentTarget).closest('tr'));
-      var self = this;
-      var siblings = $(e.currentTarget).closest('tr').children();
-
-      console.log('wineName: ');
-        console.dir(siblings[3]);
-
-      //parent tr remove, fadeOut
-      var removeWine = this.collection.findWhere({
-        name: siblings[3].innerText
-      });
-      console.log('removeWine: ')
-      console.dir(removeWine);
-
-      removeWine.destroy().complete(function(){
-          self.collection.fetch();
-        });
-
-      
-      //this.collection.remove(removeWine);
-
-    }
-  });
-
-  app.ForgotView = Backbone.View.extend({
-    el: '#forgot',
-    template: _.template(JST["assets/views/login/forgot/tmpl-forgot.html"]()), //We need to jade this and pass data
-    events: {
-      'click #doForgot': 'doForgot'
-    },
-    initialize: function() {
-      console.log('forgotView loaded.');
-      //this.model = new app.Record();
-      //this.listenTo(this.model, 'change', this.render);
-      this.render();
-    },
-    render: function() {
-      this.$el.html(this.template( 'hello' ));
-      return this;
-    },
-    doForgot: function(e){
-      e.preventDefault();
-      console.log('view: #doForgot clicked');
-      //post...
-      var data = {};
-      data.email = $('#forgotEmail').val();
-
-      $.post('api/v1/login/forgot/', data, function(response, status){
-        console.log('responded:');
-        console.dir(response);
-        var alertStr = '';
-
-        if(response.success){
-          alertStr = '<div class="alert alert-success" role="alert">Success! Check your email.</div>';
-          $('#forgotErrors').html(alertStr);
-        } else {
-          alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
-          $('#forgotErrors').html(alertStr);
-        }
-
-      });
-    }
-  });
-
-  app.ResetView = Backbone.View.extend({
-    el: '#reset',
-    template: _.template(JST["assets/views/login/reset/tmpl-reset.html"]()), //We need to jade this and pass data
-    events: {
-      'click #doReset': 'doReset'
-    },
-    initialize: function() {
-      console.log('resetView loaded.');
-      //this.model = new app.Record();
-      //this.listenTo(this.model, 'change', this.render);
-      this.render();
-    },
-    render: function() {
-      this.$el.html(this.template( 'hello' ));
-      return this;
-    },
-    doReset: function(e){
-      e.preventDefault();
-      console.log('view: #doReset clicked');
-
-      var data = {};
-      data.password = $('#resetPassword').val();
-      data.confirm = $('#resetConfirm').val();
-
-      $.ajax({
-          url: 'api/v1/login/reset/' + app.getUrlParameter('u') + '/' + app.getUrlParameter('t') + '/', 
-          data: data,
-          type: 'PUT',
-          success: function(response) {
-              // Do something with the result
-              console.log('response:');
-              console.dir(response);
-              var alertStr = '';
-
-              if(response.success){
-                alertStr = '<div class="alert alert-success" role="alert">Success! Move along now. <a href="http://www.sidandsven.com">Click here</a> to go back!</div>';
-                $('#resetErrors').html(alertStr);
-              } else {
-                alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
-                $('#resetErrors').html(alertStr);
-              }
-          }
-      });
-    }
-  });
-
-  app.ResultsRowView = Backbone.View.extend({
-    tagName: 'tr',
-    //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
-    events: {
-      //'click .btn-details': 'viewDetails'
-    },
-    viewDetails: function() {
-      location.href = this.model.url();
-    },
-    render: function() {
-      console.log('ResultsRowView: render');
-      console.dir(this.model.attributes);
-
-      //this.$el.html(this.template( this.model ));
-      this.$el.html(_.template(JST["assets/views/cellar/wines/tmpl-wines.html"](this.model)));
-
-      return this;
-    }
-  });
+  /////////////////////////////////////////////////////////////
+  //*************        PROFILE     ************************//
+  /////////////////////////////////////////////////////////////
 
   app.ProfileView = Backbone.View.extend({
     el: '#profile',
@@ -891,6 +701,96 @@
 
     }
   });
+
+  app.ForgotView = Backbone.View.extend({
+    el: '#forgot',
+    template: _.template(JST["assets/views/login/forgot/tmpl-forgot.html"]()), //We need to jade this and pass data
+    events: {
+      'click #doForgot': 'doForgot'
+    },
+    initialize: function() {
+      console.log('forgotView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      this.render();
+    },
+    render: function() {
+      this.$el.html(this.template( 'hello' ));
+      return this;
+    },
+    doForgot: function(e){
+      e.preventDefault();
+      console.log('view: #doForgot clicked');
+      //post...
+      var data = {};
+      data.email = $('#forgotEmail').val();
+
+      $.post('api/v1/login/forgot/', data, function(response, status){
+        console.log('responded:');
+        console.dir(response);
+        var alertStr = '';
+
+        if(response.success){
+          alertStr = '<div class="alert alert-success" role="alert">Success! Check your email.</div>';
+          $('#forgotErrors').html(alertStr);
+        } else {
+          alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
+          $('#forgotErrors').html(alertStr);
+        }
+
+      });
+    }
+  });
+
+  app.ResetView = Backbone.View.extend({
+    el: '#reset',
+    template: _.template(JST["assets/views/login/reset/tmpl-reset.html"]()), //We need to jade this and pass data
+    events: {
+      'click #doReset': 'doReset'
+    },
+    initialize: function() {
+      console.log('resetView loaded.');
+      //this.model = new app.Record();
+      //this.listenTo(this.model, 'change', this.render);
+      this.render();
+    },
+    render: function() {
+      this.$el.html(this.template( 'hello' ));
+      return this;
+    },
+    doReset: function(e){
+      e.preventDefault();
+      console.log('view: #doReset clicked');
+
+      var data = {};
+      data.password = $('#resetPassword').val();
+      data.confirm = $('#resetConfirm').val();
+
+      $.ajax({
+          url: 'api/v1/login/reset/' + app.getUrlParameter('u') + '/' + app.getUrlParameter('t') + '/', 
+          data: data,
+          type: 'PUT',
+          success: function(response) {
+              // Do something with the result
+              console.log('response:');
+              console.dir(response);
+              var alertStr = '';
+
+              if(response.success){
+                alertStr = '<div class="alert alert-success" role="alert">Success! Move along now. <a href="http://www.sidandsven.com">Click here</a> to go back!</div>';
+                $('#resetErrors').html(alertStr);
+              } else {
+                alertStr = '<div class="alert alert-danger" role="alert">' + response.errors + '</div>';
+                $('#resetErrors').html(alertStr);
+              }
+          }
+      });
+    }
+  });
+
+  /////////////////////////////////////////////////////////////
+  //*************         ADMIN      ************************//
+  /////////////////////////////////////////////////////////////
 
   app.AdminView = Backbone.View.extend({
     el: '#admin',
@@ -1126,6 +1026,10 @@
     }
   });
 
+  /////////////////////////////////////////////////////////////
+  //*************         MAIN      ************************//
+  /////////////////////////////////////////////////////////////
+
 
   window.onload = function(){
     console.log('app loading...');
@@ -1173,5 +1077,132 @@
     }
 
   };
+
+  /////////////////////////////////////////////////////////////
+  //*************         UTILS      ************************//
+  /////////////////////////////////////////////////////////////
+
+  app.clearForm = function(frm_elements){
+    console.log('clear the form: ' + frm_elements);
+
+    for (var i = 0; i < frm_elements.length; i++)
+    {
+        var field_type = frm_elements[i].type.toLowerCase();
+        switch (field_type)
+        {
+        case "text":
+        case "password":
+        case "textarea":
+        case "hidden":
+            frm_elements[i].value = "";
+            break;
+        case "radio":
+        case "checkbox":
+            if (frm_elements[i].checked)
+            {
+                frm_elements[i].checked = false;
+            }
+            break;
+        case "select-one":
+        case "select-multi":
+            frm_elements[i].selectedIndex = -1;
+            break;
+        default:
+            break;
+        }
+    }
+
+  }
+
+  app.finishSignIn = function (){
+
+    if(typeof app.views.mycellarView == 'undefined'){
+        console.log('creating mycellarView');
+        app.views.mycellarView = new app.MyCellarView();
+      }
+
+    /*if(typeof app.views.profileView == 'undefined'){
+      console.log('creating profileView');
+      app.views.profileView = new app.ProfileView();
+      if(app.user.attributes.roles.indexOf('0,') != -1){
+        app.views.adminView = new app.AdminView();
+      }
+    }*/
+
+    /*if(typeof app.views.adminView == 'undefined'){
+      
+      if(app.user.attributes.roles.indexOf('0,') != -1){
+        app.views.adminView = new app.AdminView();
+      }
+    }*/
+
+    console.log('finishSignIn');
+    $('.form-control').attr('disabled', false);
+    $('#doSignIn').attr('disabled', false);
+    $('#doSignUp').attr('disabled', false);
+    $('#signinupDropdown').attr('disabled', false);
+    $('.dropdown-menu').attr('disabled', false);
+    $('#signStatus').css("display", "none");
+
+    //change button to username
+    var loggedInBtn = '<button id="signedinDropdown" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">';
+    loggedInBtn += '<span class="fa fa-user"></span> ' + app.user.attributes.username + ' <span class="caret"></span></button>';
+    loggedInBtn += '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="signedinDropdown">';
+    loggedInBtn += '<li><a id="bprofile" href="#">Profile</a></li>';
+    if(app.user.attributes.roles.indexOf('0,') != -1){  //if they have admin role
+      loggedInBtn += '<li><a id="badmin" href="#">Administer</a></li>';
+    }
+    loggedInBtn += '<li><a id="signout" href="http://www.sidandsven.com/logout/">Sign Out</a></li>';
+    loggedInBtn += '</ul>';
+
+    $('div.dropdown').html(loggedInBtn);
+    $('.dropdown-toggle').dropdown('toggle');
+
+    //move to cellar
+    app.showView(app.views.cellarView);
+
+  }
+
+  app.getUrlParameter = function (sParam){
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+  }      
+
+  app.showView = function (view){
+    console.log('showView: ');
+    console.dir(view.el);
+
+    if (view != app.views.resetView) { //If user clicks away from reset page, remove url params
+      if (typeof app.getUrlParameter('u') != 'undefined'){
+        window.history.replaceState( {} , 'Sid is awake.', 'http://www.sidandsven.com' );
+      } else if (typeof app.getUrlParameter('t') != 'undefined'){
+        window.history.replaceState( {} , 'Sid is awake.', 'http://www.sidandsven.com' );
+      }
+    }
+
+    if(view == app.views.cellarView && typeof app.user != 'undefined' && app.user.attributes.username != "") { //If user logged in, change cellarView
+      console.log('showView: user logged in and requested cellarView');
+      
+      view = app.views.mycellarView;
+    }
+
+    if(app.views.current != undefined){
+        $(app.views.current.el).hide();
+    }
+    app.views.current = view;
+    $(app.views.current.el).show();
+  };
+
+  /////////////////////////////////////////////////////////////
+  //*********************************************************//
+  /////////////////////////////////////////////////////////////
 
 }());
