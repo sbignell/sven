@@ -131,7 +131,7 @@
     el: '#cellar',
     template: _.template(JST["assets/views/cellar/tmpl-cellar.html"]()), //We need to jade this and pass data
     events: {
-      //'click #add-wine': 'addWine',
+      'click #add-wine': 'addWine',
       'click #submit-wine': 'submitWine',
       'click #cancel-wine': 'cancelWine',
       'click .delete-wine': 'deleteWine'
@@ -175,8 +175,8 @@
       this.$el.html(this.template());
 
       //Add + button
-      $('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-toggle="modal" data-target="#wine-modal" data-backdrop="false"><span class="fa fa-plus"></span></button>');
-      //$('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-backdrop="false"><span class="fa fa-plus"></span></button>');
+      //$('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-toggle="modal" data-target="#wine-modal" data-backdrop="false"><span class="fa fa-plus"></span></button>');
+      $('#cellar .btn-group').append('<button id="add-wine" class="btn btn-default btn-sm" data-backdrop="false"><span class="fa fa-plus"></span></button>');
       //Add the delete heading
       $('#cellar .table thead tr').prepend('<th><span class="fa fa-trash-o"></span></th>');
 
@@ -219,43 +219,10 @@
       e.preventDefault();
       console.log('add wine');
       
-      //show modal - only add 100 wines
+      //show form - only add 100 wines
       if(this.collection.length < 101){
-        $('#wine-modal').modal('show'); 
+        app.views.detailsView.doShowDetails();
       }
-    },
-    submitWine: function(e){
-      console.log('submit wine');
-      var self = this;
-
-      var newWine = new app.Record();
-
-      newWine.save({
-        grape: this.$el.find('.modal #wineGrape').val(),
-        estate: this.$el.find('.modal #wineEstate').val(),
-        name: this.$el.find('.modal #wineName').val(),
-        notes: this.$el.find('.modal #wineNotes').val(),
-        rating: this.$el.find('.modal #wineRating').val(),
-        createdById: app.user.attributes.id,
-        createdByName: app.user.attributes.username
-      }, {
-      success: function (model, response) {
-        console.log("success");
-        //console.dir(model);
-        $('#wine-modal').modal('hide');
-        self.collection.add(model);
-      },
-      error: function (model, response) {
-          console.log("error");
-      }
-      });
-
-    },
-    cancelWine: function(e){
-      console.log('cancel wine');
-
-      $('#wine-modal').modal('hide');
-
     },
     deleteWine: function(e){
       console.log('delete wine');
@@ -277,9 +244,7 @@
           self.collection.fetch();
         });
 
-      
       //this.collection.remove(removeWine);
-
     }
   });
 
@@ -287,10 +252,11 @@
     tagName: 'tr',
     //template: _.template(JST["assets/views/cellar/wines/tmpl-wines.html"]()),
     events: {
-      //'click .btn-details': 'viewDetails'
+      'click td.name': 'viewDetails'
     },
     viewDetails: function() {
-      location.href = this.model.url();
+      //location.href = this.model.url();
+      app.views.detailsView.doShowDetails(this.model);
     },
     render: function() {
       console.log('ResultsRowView: render');
@@ -300,6 +266,130 @@
       this.$el.html(_.template(JST["assets/views/cellar/wines/tmpl-wines.html"](this.model)));
 
       return this;
+    }
+  });
+
+  app.DetailsRowView = Backbone.View.extend({
+    el: '#item-details',
+    //model: new app.Record(),
+    template: _.template(JST["assets/views/cellar/wines/tmpl-wine-details.html"]()),
+    events: {
+      'click #cancel': 'doCancelButton',
+      'click #save': 'doSaveButton'
+    },
+    initialize: function() {
+      console.log('detailsView loaded.');
+      this.render();
+    },
+    render: function() {
+      console.log('DetailsRowView: render');
+      this.$el.html(this.template());
+      
+      return this;
+    },
+    doShowDetails: function(model){
+      console.log('doShowView: ');
+      if(model != undefined){
+        //existing wine clicked from list
+        console.dir(model);        
+        $('#wineID').val(model.attributes.id);
+        $('#wineGrape').val(model.attributes.grape);
+        $('#wineEstate').val(model.attributes.estate);
+        $('#wineName').val(model.attributes.name);
+        $('#wineNotes').val(model.attributes.notes);
+        $('#wineRating').val(model.attributes.rating);
+      } else {
+        //new entry
+        console.log('no model');
+      }
+
+      app.showView(app.views.detailsView);
+
+    },
+    doSaveButton: function() {
+      var data = [];
+      console.log('Save clicked, new data: ');
+      //do something then return
+      $.each($('#add-edit-wine :input'), function(i, item) {
+        data[item.id] = item.value;
+      });
+
+      //save the data
+      if(data.wineID){
+        console.log('existing wine updated, id:' + data.wineID);
+
+        //update existing wine - find model and update it?
+        //app.views.mycellarView
+        app.views.mycellarView.collection.each(function(record) {
+        console.log('Wine id is: ' + record.attributes.id);
+        if(record.attributes.id == data.wineID) {
+          console.log('match found: ' + data.wineID);
+          //console.dir(data);
+          
+          record.save({
+            grape: data.wineGrape,
+            estate: data.wineEstate,
+            name: data.wineName,
+            notes: data.wineNotes,
+            rating: data.wineRating
+            //createdById: app.user.attributes.id,
+            //createdByName: app.user.attributes.username
+          }, {
+            success: function (model, response) {
+              console.log("success");
+              console.dir(model);
+             
+              app.views.mycellarView.collection.fetch(); 
+              app.views.mycellarView.render(); 
+              //this doesnt work it needs to re-render the model update in myCellar
+
+              app.showView(app.views.mycellarView);
+            },
+            error: function (model, response) {
+                console.log("error");
+            }
+          });
+
+        }
+        
+      }, app.views.mycellarView);
+
+        app.showView(app.views.mycellarView);
+
+      } else {
+        console.log('new wine added');
+
+        var newWine = new app.Record();
+
+        newWine.save({
+          grape: this.$el.find('#add-edit-wine #wineGrape').val(),
+          estate: this.$el.find('#add-edit-wine #wineEstate').val(),
+          name: this.$el.find('#add-edit-wine #wineName').val(),
+          notes: this.$el.find('#add-edit-wine #wineNotes').val(),
+          rating: this.$el.find('#add-edit-wine #wineRating').val(),
+          createdById: app.user.attributes.id,
+          createdByName: app.user.attributes.username
+        }, {
+          success: function (model, response) {
+            console.log("success");
+            //console.dir(model);
+            //$('#wine-modal').modal('hide');
+            app.views.mycellarView.collection.add(model);
+
+            app.showView(app.views.mycellarView);
+          },
+          error: function (model, response) {
+              console.log("error");
+          }
+        });
+
+      }
+
+    },
+    doCancelButton: function() {
+      console.log('Cancel clicked');
+      console.dir(this.model);
+      app.showView(app.views.mycellarView);
     }
   });
 
@@ -1118,8 +1208,11 @@
 
     if(typeof app.views.mycellarView == 'undefined'){
         console.log('creating mycellarView');
+        var initialization = true;
         app.views.mycellarView = new app.MyCellarView();
-      }
+        app.views.detailsView = new app.DetailsRowView();
+
+      } 
 
     /*if(typeof app.views.profileView == 'undefined'){
       console.log('creating profileView');
@@ -1160,6 +1253,7 @@
 
     //move to cellar
     app.showView(app.views.cellarView);
+    $(app.views.detailsView.el).hide(); 
 
   }
 
@@ -1176,9 +1270,16 @@
     }
   }      
 
-  app.showView = function (view){
+  app.showView = function (view, model){
     console.log('showView: ');
     console.dir(view.el);
+
+    //If user has clicked on a wine to open the details
+    if(view == app.views.detailsView && typeof model != 'undefined'){
+      console.log('The model is: ');
+      console.dir(model);
+      view.model = model;
+    }
 
     if (view != app.views.resetView) { //If user clicks away from reset page, remove url params
       if (typeof app.getUrlParameter('u') != 'undefined'){
@@ -1199,6 +1300,7 @@
     }
     app.views.current = view;
     $(app.views.current.el).show();
+
   };
 
   /////////////////////////////////////////////////////////////
